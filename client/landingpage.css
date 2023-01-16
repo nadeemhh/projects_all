@@ -42,6 +42,8 @@ transform: scale(0);}
 
 .contant,.contant2{display: flex;margin-top: 2%;justify-content: space-between;padding: 30px;gap: 10px;}
 
+
+
 .contant2{display: flex;margin-top: 2%;justify-content: space-between;gap: 10px;}
 .inside-features-deatels{display: flex;gap: 20px;}
 
