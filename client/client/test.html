@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./index.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root">
+      <div class="Navbar-container"></div>
+      <div class="others-container">
+        <div class="sidebar"></div>
+        <div class="main">
+            <div  style="height:29.7cm;width:21cm; margin-bottom: 15px;margin-left: auto;margin-right: auto;page-break-before: always;display: flex;flex-direction: column;justify-content: space-between;background-color: rgb(255, 255, 255);" class='reporttemplate'>
+                <div class='Reportheader'>
+                <div class="headerlogo-container">
+                
+                <img style="width: 320px;height: 200px;transform: translateX(-4%);margin-top: -10px;" src="./fq.png" alt="logo">
+                
+                </div>
+                <div class="patient-details-container">
+                <div class="patient-details">
+                <div class="patient-details1">
+                
+                <div class="patient-details1-1">
+                <p class="p-patient-details1 mp">Patient Name</p>
+                <p class="p-patient-details2 mp">Age/Sex</p>
+                <p class="p-patient-details3 mp">Ref: Lab</p>
+                <p class="p-patient-details5 mp">Specimen</p>
+                </div>
+                <div class="patient-details1-2">
+                <p class="pp-patient-details1 mp">MRS.GEETA</p>
+                <p class="pp-patient-details2 mp"><span>22 </span><span>YRS </span><span>FEMALE </span></p>
+                <p class="pp-patient-details3 mp">mat labs</p>
+                <p class="pp-patient-details5 mp">WB-EDTA</p>
+                </div>
+                
+                </div>
+                <div class="patient-details2">
+                
+                <div class="patient-details2-1">
+                <p class="p-patient-details1 mp">Ref. By</p>
+                <p class="p-patient-details1 mp">Registration ID</p>
+                <p class="p-patient-details2 mp">Registration Date </p>
+                
+                </div>
+                <div class="patient-details2-2">
+                <p class="pp-patient-details1 mp">dr.roy</p>
+                <p class="pp-patient-details1 mp">46574453</p>
+                <p class="pp-patient-details2 mp">17/10/2022 13:19:52</p>
+                
+                </div>
+                
+                </div>
+                </div>
+                
+                </div>
+                </div>
+                <div class='PatienttestPatienttestprovider'>
+                <div class="all-test-container ">
+
+                    <div class='Patienttest'>
+                        <p class="testName">Test Name</p>
+                        <p class="result">Value</p>
+                        <p class="unit U1">Unit</p>
+                        <p class="U1 normalRange">Biological Ref. Interval</p>
+                     </div>
+
+                    <div class='Patienttest'>
+                       <p class="testNamevalue"  style="transform: translateX(-0px);">Urea (Blood)</p>
+                       <p class="resultvalue" style="transform: translateX(-39.234375px);">44</p>
+                       <p class="unitvalue" style="transform: translateX(-43.234375px);">mg/dl</p>
+                       <p class="normalRangevalue" style="transform: translateX(-81.578125px);"> <span>16.6 - 48.5</span> <br> <span>16.6 - 48.5</span> </p>
+                    </div>
+                    
+                </div>
+                </div>
+                <div class='Reportfotter'>
+                
+                  <div class="doctor-name-container">
+                    <div style="height: 100%; width: 250px;float: right;">
+                      <div style="height: 50%; width: 250px;display: flex;flex-direction: column; justify-content: flex-end;">
+                      <img src="./doctorSign.jpg" style="height: 40px;width: 80px;" alt=""></div>
+                      <div style="height: 50%; width: 250px;">
+                      <p style="font-size: 12px;">DR.A.S JAIN<br>
+                        Consultant Pathologist
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                <div>
+                <img style="height: 100%; width: 100%;transform: translateY(-18%);" src="./ins.png" alt="">
+                </div>
+                </div>
+                </div>
+         
+        </div>
+        <div class="sidebar2"></div>
+      </div>
+    </div>
+
+
+    <script>
+        console.log(document.querySelector('.normalRangevalue').getBoundingClientRect().x-document.querySelector('.normalRange').getBoundingClientRect().x)
+
+        console.log(document.querySelector('.unit').getBoundingClientRect().x-document.querySelector('.unitvalue').getBoundingClientRect().x)
+
+        console.log(document.querySelector('.result').getBoundingClientRect().x-document.querySelector('.resultvalue').getBoundingClientRect().x)
+
+ console.log(document.querySelector('.testName').getBoundingClientRect().x-document.querySelector('.testNamevalue').getBoundingClientRect().x)
+ 
+   
+
+    </script>
+  </body>
+</html>
