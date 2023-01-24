@@ -35,6 +35,11 @@ body {
     }
     .report{margin-top: 13px;box-shadow: 0px 0px #ffffff54 !important;}
     
+    .Navbar-container,.sidebar,.sidebar2,.Patientreportcount{display: none !important;}
+
+    .main{width: 100vw !important;visibility: hidden;overflow-y: visible !important;}
+    .reporttemplate{visibility: visible;box-shadow:none !important;}
+    .translatepoaitive{transform: translateY(20%) !important;}
      }
 
      
@@ -54,17 +59,18 @@ body {
       .Navbar-container{height: 10vh;width: 100%;background-color: rgba(47, 84, 248, 0.979);position: sticky;top: 0; }
       
        .others-container{display: flex;justify-content: space-between;} 
-       
       
       
-       .main{height: 90vh;width: 80vw;background-color: rgba(219, 143, 181, 0.979);overflow-y: scroll;overflow-x: scroll; position: relative;box-sizing: border-box;}
+      
+       .main{height: 90vh;width: 80vw;background-image: url('./back.svg');background-repeat: no-repeat; background-size: cover;background-position: center; overflow-y: scroll;position: relative;box-sizing: border-box;}
 
-       
+       .reporttemplate{ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 3), 0 6px 20px 0 rgba(0, 0, 0, 3);}
+
        .sidebar{height: 90vh;width: 10vw;background-color: rgba(0, 0, 0, 0.979);position: fixed;z-index: 0;}
        .sidebar2{height: 90vh;width: 20vw;background-color: rgba(248, 47, 148, 0.979);}
 
 
-       .Patientreportcount{height: 40px;width: 100%;background-color: rgb(206, 204, 69);margin-bottom: 15px;position: sticky;top: 0;box-shadow: 0px 5px #41404054;display: flex;align-items: center;z-index: 5;}
+       .Patientreportcount{height: 40px;width: 100%;  background-image: linear-gradient(to right, rgb(250, 93, 93) , rgb(243, 133, 133));margin-bottom: 15px;position: sticky;top: 0;box-shadow: 0px 5px #41404054;display: flex;align-items: center;z-index: 5;}
 
 
        .report{ height:29.7cm;width:21cm; margin-bottom: 15px;margin-left: auto;margin-right: auto;page-break-before: always;display: flex;flex-direction: column;justify-content: space-between; box-shadow: 5px 5px #41404054;}
@@ -118,7 +124,7 @@ body {
 a{text-decoration: none;}
 button{padding: 8px;padding-left: 10px;padding-right: 10px;}
 
-
+.testname22{width: 100%;font-weight: 600;padding-left: 20px;margin-bottom: 10px;}
  /*///////// test style  end ///////////*/ 
 
 

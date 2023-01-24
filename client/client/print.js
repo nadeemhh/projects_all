@@ -11,11 +11,10 @@ function randomNumBetween(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
 function addReportTemplate() {
-    
+
 
 for (let i = 0; i < arr.length; i++) {
     
-       
     let className = randomNumBetween(1, 9000);
     let className2 = 'template'+randomNumBetween(1, 6000);
     let div = document.querySelector("#root");
