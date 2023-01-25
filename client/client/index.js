@@ -7,11 +7,14 @@ let leftTest={count:0};
 let openPrintPopup=0;
 let testnameaddonlyonetime=0;
 let Patientreportcount=0;
+
+let classNameForInputAndValue=0;
 function randomNumBetween(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
 function addReportTemplate(arr,testNameForFew=undefined) {
 console.log(arr)
+
 
 if(location.pathname == '/client/index.html'){
 
@@ -26,7 +29,7 @@ Patientreportcount=1;
 
 }
 
-console.log(openPrintPopup)
+
 if(openPrintPopup==0){
 document.querySelector('.printreport').addEventListener('click',function () {
 
@@ -125,19 +128,19 @@ div.insertAdjacentHTML('beforeend', ReportTemplate);
 
 let deparmentarray = [];
 
-console.log('jj',arr)
+
 for (let ii = leftTest.count; ii < arr.length; ii++) {
-  console.log('aa',arr[ii])
+
 
   if(deparmentarray.includes(arr[ii].department)==false){
-    console.log('bb',arr[ii])
+  
   deparmentarray.push(arr[ii].department)
   testAddToTemplate(arr,className,ii,0,testNameForFew)
   if(deparmentarray.length>1){deparmentarray.shift()}
 
   }
   else{ 
-    console.log('cc',arr[ii])
+   
     testAddToTemplate(arr,className,ii,1,testNameForFew)}
  
 
@@ -167,7 +170,7 @@ for (let ii = leftTest.count; ii < arr.length; ii++) {
         
   }
 }
-console.log(deparmentarray)
+
 if(leftTest.count == arr.length-1){break;}
 }
 }
@@ -195,7 +198,7 @@ if(location.pathname == '/client/print.html'){
 
 function alignMaker(fclassname,sclassname) {
 
- 
+ console.log(document.querySelector(`.${fclassname}`))
   let minus=document.querySelector(`.${fclassname}`).getBoundingClientRect().x-document.querySelector(`.${sclassname}`).getBoundingClientRect().x;
 
 
@@ -207,14 +210,11 @@ function alignMaker(fclassname,sclassname) {
 
 
 let testToPerform=[];
-console.log(testToPerform)
-// for (let i = 0; i < array.length; i++) {
 
-  
-// }
+
 
 let choosetest=document.querySelector('.avltest').children;
-console.log(choosetest)
+
 
 
 for (let i = 0; i < choosetest.length; i++) {
@@ -270,11 +270,11 @@ else{
   let repo={sepratePageReport:sepratePageReport}
 
  
-console.log(repo.sepratePageReport,'createReport => ',createReport)
+
 if(repo.sepratePageReport.length !== 0){
   let totaldepartment=[];
 for (let t = 0; t < repo.sepratePageReport.length; t++) {
-console.log(repo.sepratePageReport[t].department)
+
  if(totaldepartment.includes(repo.sepratePageReport[t].Partof) === false){
   totaldepartment.push(repo.sepratePageReport[t].Partof)
 
@@ -308,7 +308,7 @@ for (let tt = 0; tt < repo.sepratePageReport.length; tt++) {
   }
 }
 
-console.log(totalTest)
+
 addReportTemplate(totalTest,testNameToAdd)
 testnameaddonlyonetime=0;
 testNameToAdd=undefined;
@@ -324,8 +324,8 @@ addReportTemplate(createReport)
 testToPerform=[];
 leftTest.count=0;
 
-console.log('testnameaddonlyonetime',testnameaddonlyonetime)
-//addReportTemplate(createReport[0].sepratePageReport)
+
+
 }
 
 
@@ -343,39 +343,102 @@ divdep.insertAdjacentHTML('beforeend', deparment);}
 ////////add test name
 
 if(testNameForFew !== undefined){
-  console.log(testnameaddonlyonetime,testNameForFew)
+
   if(testnameaddonlyonetime==0){
 
 let divtestname = document.querySelector(`.all-test-container${className}`);  
 let testname =`<div class="testname22"><p>${testNameForFew}</p></div>`;
 divtestname.insertAdjacentHTML('beforeend', testname);
-}
-}
 testnameaddonlyonetime=1;
+}
+}
+
 ////////////////////////////
 let alphabet=['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+
+////////////////////////////
 let classtestNamevalue=ii+alphabet[randomNumBetween(0,25)]+randomNumBetween(1, 100000)+alphabet[randomNumBetween(0,25)];
 let classresultvalue=ii+alphabet[randomNumBetween(0,25)]+randomNumBetween(1, 100000)+alphabet[randomNumBetween(0,25)];
 let classunitvalue=ii+alphabet[randomNumBetween(0,25)]+randomNumBetween(1, 100000)+alphabet[randomNumBetween(0,25)];
 let classnormalRangevalue=ii+alphabet[randomNumBetween(0,25)]+randomNumBetween(1, 100000)+alphabet[randomNumBetween(0,25)];
 
+////////////////////////////
+classNameForInputAndValue++
+
   let testdiv = document.querySelector(`.all-test-container${className}`);  
   let tests =` <div class='Patienttest'>
 <p class="testNamevalue testNamevalue${classtestNamevalue}">${arr[ii].testName}</p>
-<p class="resultvalue resultvalue${classresultvalue}">${arr[ii].value}</p>
+<div class="resultvalue resultvalue${classresultvalue}">
+<p class="b${classNameForInputAndValue} para">${arr[ii].value}</p>
+  <input class="textarea hide a${classNameForInputAndValue} input" type="text">
+</div>
 <p class="unitvalue unitvalue${classunitvalue}">${arr[ii].unit}</p>
 <p class="normalRangevalue normalRangevalue${classnormalRangevalue}">${arr[ii].normalRange}</p>`;
   testdiv.insertAdjacentHTML('beforeend', tests);
+
+
 
   alignMaker(`testNamevalue${classtestNamevalue}`,`testName`)
   alignMaker(`resultvalue${classresultvalue}`,`result`)
   alignMaker(`unitvalue${classunitvalue}`,`unit`)
   alignMaker(`normalRangevalue${classnormalRangevalue}`,`normalRange`)
+
+  //console.log(document.querySelector(`.resultvalue${classresultvalue}`).children)
+
+  document.querySelector(`.resultvalue${classresultvalue}`).addEventListener('click',function () {
+    
+    console.log(document.querySelector(`.resultvalue${classresultvalue}`).children)
+    document.querySelector(`.resultvalue${classresultvalue}`).children[1].classList.remove('hide')
+    document.querySelector(`.resultvalue${classresultvalue}`).children[0].classList.add('hide')
+    document.querySelector(`.resultvalue${classresultvalue}`).children[1].focus()
+  })
+
+  document.querySelector(`.resultvalue${classresultvalue}`).addEventListener('keypress',function (event) {
+    let key = event.key;
+   
+    //console.log(document.querySelector(`.resultvalue${classresultvalue}`).children)
+    if (key == "Enter") {
+    console.log(  document.querySelector(`.resultvalue${classresultvalue}`).children[1].value)
+
+    document.querySelector(`.resultvalue${classresultvalue}`).children[1].classList.add('hide')
+    document.querySelector(`.resultvalue${classresultvalue}`).children[0].classList.remove('hide')
+
+    let text=document.querySelector(`.resultvalue${classresultvalue}`).children[1].value;
+    document.querySelector(`.resultvalue${classresultvalue}`).children[0].textContent=text;
+
+    let nextclassfirstcher=document.querySelector(`.resultvalue${classresultvalue}`).children[1].classList[1][0];
+
+    let nextclasssecondcher=parseFloat(document.querySelector(`.resultvalue${classresultvalue}`).children[1].classList[1].substring(1))+1;
+
+    let nextclass=nextclassfirstcher+nextclasssecondcher
+    let lastclass=parseFloat(document.querySelectorAll(`.input`)[document.querySelectorAll(`.input`).length-1].classList[2].substring(1))
+    console.log(nextclasssecondcher,lastclass)
+if(nextclasssecondcher <= lastclass){
+    document.querySelector(`.b${nextclasssecondcher}`).classList.add('hide')
+    document.querySelector(`.a${nextclasssecondcher}`).classList.remove('hide')
+    document.querySelector(`.${nextclass}`).focus()
+    }
+
+
+  }
+    
+    //document.querySelector(`.resultvalue${classresultvalue}`).children[1].focus()
+  })
+
+
+//   document.querySelector(`.input${classresultvalue}`).addEventListener('keypress',function (event) {
+//     let key = event.key;
+   
+//   if (key == "Enter") {
+//  console.log('pp',document.querySelector(`.input${classresultvalue}`))
+//  let value=document.querySelector(`.input${classresultvalue}`).value;
+//  document.querySelector(`.resultvalue${classresultvalue}`).textContent=value;
+//  document.querySelector(`.input${classresultvalue}`).style.display='none';
+
+//  alignMaker(`resultvalue${classresultvalue}`,`result`)
+ 
+
+//   }
+//   })
 }
 
-// let are =[{jk:'kk',score:9},{jk:'kk',score:4},{jk:'kk',score:3},{jk:'kk',score:1},{jk:'kk',score:5},{jk:'kk',score:10},];
-// are.sort(function(a, b) { 
-//   console.log(a,'----',b)
-//   return a.score - b.score;
-//  });
-// console.log(are)
