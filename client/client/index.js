@@ -357,6 +357,7 @@ testnameaddonlyonetime=1;
 let alphabet=['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
 
 ////////////////////////////
+let classPatienttest=ii+alphabet[randomNumBetween(0,25)]+randomNumBetween(1, 100000)+alphabet[randomNumBetween(0,25)];
 let classtestNamevalue=ii+alphabet[randomNumBetween(0,25)]+randomNumBetween(1, 100000)+alphabet[randomNumBetween(0,25)];
 let classresultvalue=ii+alphabet[randomNumBetween(0,25)]+randomNumBetween(1, 100000)+alphabet[randomNumBetween(0,25)];
 let classunitvalue=ii+alphabet[randomNumBetween(0,25)]+randomNumBetween(1, 100000)+alphabet[randomNumBetween(0,25)];
@@ -366,11 +367,11 @@ let classnormalRangevalue=ii+alphabet[randomNumBetween(0,25)]+randomNumBetween(1
 classNameForInputAndValue++
 
   let testdiv = document.querySelector(`.all-test-container${className}`);  
-  let tests =` <div class='Patienttest'>
+  let tests =` <div class='Patienttest Patienttest${classPatienttest}'>
 <p class="testNamevalue testNamevalue${classtestNamevalue}">${arr[ii].testName}</p>
 <div class="resultvalue resultvalue${classresultvalue}">
 <p class="b${classNameForInputAndValue} para">${arr[ii].value}</p>
-  <input class="textarea hide a${classNameForInputAndValue} input" type="text">
+  <input class="a${classNameForInputAndValue} textarea hide input" type="text">
 </div>
 <p class="unitvalue unitvalue${classunitvalue}">${arr[ii].unit}</p>
 <p class="normalRangevalue normalRangevalue${classnormalRangevalue}">${arr[ii].normalRange}</p>`;
@@ -385,12 +386,44 @@ classNameForInputAndValue++
 
   //console.log(document.querySelector(`.resultvalue${classresultvalue}`).children)
 
+  document.querySelector(`.Patienttest${classPatienttest}`).addEventListener('click',function (e) {
+
+    let target= document.querySelector(`.Patienttest${classPatienttest}`);
+  
+    let clasexistornot=document.querySelector(`.Patienttest${classPatienttest}`).children[1].children[1].classList.contains('hide');
+
+if(e.target==target){
+    if(clasexistornot == false){
+
+      let text=document.querySelector(`.Patienttest${classPatienttest}`).children[1].children[1].value;
+
+    
+      document.querySelector(`.Patienttest${classPatienttest}`).children[1].children[1].classList.add('hide')
+
+      document.querySelector(`.Patienttest${classPatienttest}`).children[1].children[0].classList.remove('hide')
+
+      document.querySelector(`.Patienttest${classPatienttest}`).children[1].children[0].textContent=text;
+
+    }
+  }
+  })
+
   document.querySelector(`.resultvalue${classresultvalue}`).addEventListener('click',function () {
     
-    console.log(document.querySelector(`.resultvalue${classresultvalue}`).children)
+    
+   let allinput= document.querySelectorAll(`.input`); 
+ 
+   for (let i = 0; i < allinput.length; i++) {
+    document.querySelectorAll(`.input`)[i].classList.add('hide')
+    
+   }
+   let text=document.querySelector(`.resultvalue${classresultvalue}`).children[0].textContent;
     document.querySelector(`.resultvalue${classresultvalue}`).children[1].classList.remove('hide')
+    document.querySelector(`.resultvalue${classresultvalue}`).children[1].value=text;
+    document.querySelector(`.resultvalue${classresultvalue}`).children[1].select()
     document.querySelector(`.resultvalue${classresultvalue}`).children[0].classList.add('hide')
     document.querySelector(`.resultvalue${classresultvalue}`).children[1].focus()
+
   })
 
   document.querySelector(`.resultvalue${classresultvalue}`).addEventListener('keypress',function (event) {
@@ -398,7 +431,8 @@ classNameForInputAndValue++
    
     //console.log(document.querySelector(`.resultvalue${classresultvalue}`).children)
     if (key == "Enter") {
-    console.log(  document.querySelector(`.resultvalue${classresultvalue}`).children[1].value)
+   
+
 
     document.querySelector(`.resultvalue${classresultvalue}`).children[1].classList.add('hide')
     document.querySelector(`.resultvalue${classresultvalue}`).children[0].classList.remove('hide')
@@ -406,13 +440,13 @@ classNameForInputAndValue++
     let text=document.querySelector(`.resultvalue${classresultvalue}`).children[1].value;
     document.querySelector(`.resultvalue${classresultvalue}`).children[0].textContent=text;
 
-    let nextclassfirstcher=document.querySelector(`.resultvalue${classresultvalue}`).children[1].classList[1][0];
+    let nextclassfirstcher=document.querySelector(`.resultvalue${classresultvalue}`).children[1].classList[0][0];
 
-    let nextclasssecondcher=parseFloat(document.querySelector(`.resultvalue${classresultvalue}`).children[1].classList[1].substring(1))+1;
+    let nextclasssecondcher=parseFloat(document.querySelector(`.resultvalue${classresultvalue}`).children[1].classList[0].substring(1))+1;
 
     let nextclass=nextclassfirstcher+nextclasssecondcher
-    let lastclass=parseFloat(document.querySelectorAll(`.input`)[document.querySelectorAll(`.input`).length-1].classList[2].substring(1))
-    console.log(nextclasssecondcher,lastclass)
+    let lastclass=parseFloat(document.querySelectorAll(`.input`)[document.querySelectorAll(`.input`).length-1].classList[0].substring(1))
+    
 if(nextclasssecondcher <= lastclass){
     document.querySelector(`.b${nextclasssecondcher}`).classList.add('hide')
     document.querySelector(`.a${nextclasssecondcher}`).classList.remove('hide')
@@ -422,23 +456,8 @@ if(nextclasssecondcher <= lastclass){
 
   }
     
-    //document.querySelector(`.resultvalue${classresultvalue}`).children[1].focus()
+   
   })
 
-
-//   document.querySelector(`.input${classresultvalue}`).addEventListener('keypress',function (event) {
-//     let key = event.key;
-   
-//   if (key == "Enter") {
-//  console.log('pp',document.querySelector(`.input${classresultvalue}`))
-//  let value=document.querySelector(`.input${classresultvalue}`).value;
-//  document.querySelector(`.resultvalue${classresultvalue}`).textContent=value;
-//  document.querySelector(`.input${classresultvalue}`).style.display='none';
-
-//  alignMaker(`resultvalue${classresultvalue}`,`result`)
- 
-
-//   }
-//   })
 }
 
