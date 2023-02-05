@@ -7,7 +7,7 @@ let leftTest={count:0};
 let openPrintPopup=0;
 let testnameaddonlyonetime=0;
 let Patientreportcount=0;
-
+let patientReportToSave=[];
 let classNameForInputAndValue=0;
 function randomNumBetween(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
@@ -21,7 +21,7 @@ if(location.pathname == '/client/index.html'){
   if(Patientreportcount ==0){
     let select = document.querySelector(".main");
 let totalReportCounter = ` <div class="Patientreportcount">
-<button class='printreport'>print</button>
+<img class='printreport' src="./printer-print-svgrepo-com.svg" width="30px" alt="">
 </div>`;
 select.insertAdjacentHTML("afterbegin", totalReportCounter);
 Patientreportcount=1;
@@ -198,7 +198,7 @@ if(location.pathname == '/client/print.html'){
 
 function alignMaker(fclassname,sclassname) {
 
- console.log(document.querySelector(`.${fclassname}`))
+
   let minus=document.querySelector(`.${fclassname}`).getBoundingClientRect().x-document.querySelector(`.${sclassname}`).getBoundingClientRect().x;
 
 
@@ -220,12 +220,23 @@ let choosetest=document.querySelector('.avltest').children;
 for (let i = 0; i < choosetest.length; i++) {
   choosetest[i].addEventListener('click',function() {
   console.log(choosetest[i].textContent)
-  
+  console.log( choosetest[i].classList.contains('secleted'))
+ 
 
+  if(choosetest[i].classList.contains('secleted')==false){
 
   choosetest[i].getAttribute('Partof') === null ? testToPerform.push({testName:choosetest[i].textContent,departments:choosetest[i].getAttribute('departments')}):testToPerform.push({testName:choosetest[i].textContent,departments:choosetest[i].getAttribute('departments'),Partof:choosetest[i].getAttribute('Partof')})
-
-  //console.log(testToPerform)
+  choosetest[i].classList.add('secleted')
+  }
+  else{
+    testToPerform = testToPerform.filter(object => {
+  return object.testName !== choosetest[i].textContent;
+});
+console.log(choosetest[i])
+ choosetest[i].classList.remove('secleted')
+  }
+ 
+  console.log(testToPerform)
   //console.log(choosetest[i].getAttribute('departments'),choosetest[i].getAttribute('Partof'))
   })
   
@@ -233,7 +244,19 @@ for (let i = 0; i < choosetest.length; i++) {
 
 
 function performTest() {
-  console.log('testToPerform',testToPerform)
+
+  for (let i = 0; i < choosetest.length; i++) {
+
+    choosetest[i].classList.remove('secleted')
+    
+  }
+
+  console.log('testToPerform',testToPerform.length)
+
+  if(testToPerform.length==0){
+    alert('apne koi test select nahi kiya hai')
+    return;
+  }
   // console.log(availableTest.departments[testToPerform[0].departments])
   let createReport=[];
 let sepratePageReport=[];
@@ -268,9 +291,9 @@ else{
   }
 
   let repo={sepratePageReport:sepratePageReport}
+console.log(repo)
 
- 
-
+patientReportToSave.push(repo)
 if(repo.sepratePageReport.length !== 0){
   let totaldepartment=[];
 for (let t = 0; t < repo.sepratePageReport.length; t++) {
@@ -318,14 +341,14 @@ totalTest=[];
 console.log(totaldepartment)
 }
 
-
+console.log(createReport)
 addReportTemplate(createReport)
-
+patientReportToSave.push(createReport)
 testToPerform=[];
 leftTest.count=0;
 
 
-
+console.log(patientReportToSave)
 }
 
 
