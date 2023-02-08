@@ -2,7 +2,7 @@ console.log('hello')
 
 console.log(availableTest)
 
-
+let alphabet=['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
 let leftTest={count:0};
 let openPrintPopup=0;
 let testnameaddonlyonetime=0;
@@ -12,6 +12,7 @@ let classNameForInputAndValue=0;
 function randomNumBetween(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
+
 function addReportTemplate(arr,testNameForFew=undefined) {
 console.log(arr)
 
@@ -21,7 +22,7 @@ if(location.pathname == '/client/index.html'){
   if(Patientreportcount ==0){
     let select = document.querySelector(".main");
 let totalReportCounter = ` <div class="Patientreportcount">
-<img class='printreport' src="./printer-print-svgrepo-com.svg" width="30px" alt="">
+<img class='printreport' src="./printer-print-svgrepo-com.svg" width="25px" alt="">
 </div>`;
 select.insertAdjacentHTML("afterbegin", totalReportCounter);
 Patientreportcount=1;
@@ -244,7 +245,10 @@ console.log(choosetest[i])
 
 
 function performTest() {
-
+  document.querySelector(".add-patient-container").style.display='flex';
+  document.querySelector(".form").style.display='none';
+document.querySelector(".avltest").style.display='none';
+document.querySelector(".makereport").style.display='none';
   for (let i = 0; i < choosetest.length; i++) {
 
     choosetest[i].classList.remove('secleted')
@@ -292,8 +296,20 @@ else{
 
   let repo={sepratePageReport:sepratePageReport}
 console.log(repo)
+let numID=randomNumBetween(1,1000);
+let alphabetId=alphabet[randomNumBetween(0,25)];
+let uniqueIdForPatient=numID+alphabetId;
 
-patientReportToSave.push(repo)
+ let patientDeatels={patientId:uniqueIdForPatient};
+console.log(patientDeatels)
+
+patientReportToSave.push({repo,createReport,patientDeatels})
+
+let user = {repo,createReport,patientDeatels};
+
+sessionStorage.setItem(uniqueIdForPatient, JSON.stringify(user));
+
+
 if(repo.sepratePageReport.length !== 0){
   let totaldepartment=[];
 for (let t = 0; t < repo.sepratePageReport.length; t++) {
@@ -342,12 +358,15 @@ console.log(totaldepartment)
 }
 
 console.log(createReport)
+
 addReportTemplate(createReport)
-patientReportToSave.push(createReport)
+
 testToPerform=[];
 leftTest.count=0;
 
 
+console.log(patientReportToSave)
+//patientReportToSave.pop()
 console.log(patientReportToSave)
 }
 
@@ -377,7 +396,7 @@ testnameaddonlyonetime=1;
 }
 
 ////////////////////////////
-let alphabet=['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+
 
 ////////////////////////////
 let classPatienttest=ii+alphabet[randomNumBetween(0,25)]+randomNumBetween(1, 100000)+alphabet[randomNumBetween(0,25)];
@@ -389,19 +408,27 @@ let classnormalRangevalue=ii+alphabet[randomNumBetween(0,25)]+randomNumBetween(1
 ////////////////////////////
 classNameForInputAndValue++
 
+console.log(patientReportToSave[patientReportToSave.length-1].patientDeatels.patientId)
+let patientRefferance=patientReportToSave[patientReportToSave.length-1].patientDeatels.patientId;
+
   let testdiv = document.querySelector(`.all-test-container${className}`);  
-  let tests =` <div class='Patienttest Patienttest${classPatienttest}'>
+  let tests =`<div class='Patienttest Patienttest${classPatienttest}'>
 <p class="testNamevalue testNamevalue${classtestNamevalue}">${arr[ii].testName}</p>
 <div class="resultvalue resultvalue${classresultvalue}">
 <p class="b${classNameForInputAndValue} para">${arr[ii].value}</p>
   <input class="a${classNameForInputAndValue} textarea hide input" type="text">
 </div>
 <p class="unitvalue unitvalue${classunitvalue}">${arr[ii].unit}</p>
-<p class="normalRangevalue normalRangevalue${classnormalRangevalue}">${arr[ii].normalRange}</p>`;
+<p class="normalRangevalue normalRangevalue${classnormalRangevalue}">${arr[ii].normalRange.replace('$','')}</p></div>`;
   testdiv.insertAdjacentHTML('beforeend', tests);
 
 
+let tn=arr[ii].testName;
 
+
+
+
+///////////////////
   alignMaker(`testNamevalue${classtestNamevalue}`,`testName`)
   alignMaker(`resultvalue${classresultvalue}`,`result`)
   alignMaker(`unitvalue${classunitvalue}`,`unit`)
@@ -418,14 +445,70 @@ classNameForInputAndValue++
 if(e.target==target){
     if(clasexistornot == false){
 
-      let text=document.querySelector(`.Patienttest${classPatienttest}`).children[1].children[1].value;
+      let text=document.querySelector(`.Patienttest${classPatienttest}`).children[1].children[1].value.replaceAll(' ','');
+     
 
-    
       document.querySelector(`.Patienttest${classPatienttest}`).children[1].children[1].classList.add('hide')
 
       document.querySelector(`.Patienttest${classPatienttest}`).children[1].children[0].classList.remove('hide')
 
       document.querySelector(`.Patienttest${classPatienttest}`).children[1].children[0].textContent=text;
+
+     
+///////////save report in database
+console.log(patientReportToSave)
+let patientReportDataToSave = JSON.parse(sessionStorage[patientRefferance]);
+console.log(patientReportDataToSave)
+
+
+
+console.log(tn)
+
+for (let i = 0; i < 1; i++) {
+let found=0;
+
+  for (let ii = 0; ii < patientReportDataToSave.createReport.length; ii++){
+
+    if(patientReportDataToSave.createReport[ii].testName==tn){
+      console.log('it is')
+      patientReportDataToSave.createReport[ii].value=text;
+      found=1;
+      break;
+    }
+  } 
+
+  if(found==0){
+  for (let ii = 0; ii < patientReportDataToSave.repo.sepratePageReport.length; ii++){
+
+    if(patientReportDataToSave.repo.sepratePageReport[ii].testName==tn){
+      console.log('it is')
+      patientReportDataToSave.repo.sepratePageReport[ii].value=text;
+      break;
+    }
+  }
+}
+// console.log(patientReportToSave)
+
+}
+sessionStorage.setItem(patientRefferance, JSON.stringify(patientReportDataToSave));
+////////////////////////////////////
+
+
+if(arr[ii].normalRange[0] != '$'){
+  let normalRangeForTest=arr[ii].normalRange.replaceAll(' ','').split('-');
+
+  let checkNormalRangeOfValue=checkNormalRange(text,normalRangeForTest);
+console.log(text,normalRangeForTest,checkNormalRangeOfValue)
+
+
+if(checkNormalRangeOfValue=='abnomalValue'){
+  document.querySelector(`.Patienttest${classPatienttest}`).children[1].children[0].classList.add(checkNormalRangeOfValue)
+}
+else{
+  document.querySelector(`.Patienttest${classPatienttest}`).children[1].children[0].classList.remove('abnomalValue')
+}
+}
+
 
     }
   }
@@ -446,6 +529,7 @@ if(e.target==target){
     document.querySelector(`.resultvalue${classresultvalue}`).children[1].select()
     document.querySelector(`.resultvalue${classresultvalue}`).children[0].classList.add('hide')
     document.querySelector(`.resultvalue${classresultvalue}`).children[1].focus()
+    
 
   })
 
@@ -463,6 +547,7 @@ if(e.target==target){
     let text=document.querySelector(`.resultvalue${classresultvalue}`).children[1].value;
     document.querySelector(`.resultvalue${classresultvalue}`).children[0].textContent=text;
 
+    
     let nextclassfirstcher=document.querySelector(`.resultvalue${classresultvalue}`).children[1].classList[0][0];
 
     let nextclasssecondcher=parseFloat(document.querySelector(`.resultvalue${classresultvalue}`).children[1].classList[0].substring(1))+1;
@@ -474,13 +559,118 @@ if(nextclasssecondcher <= lastclass){
     document.querySelector(`.b${nextclasssecondcher}`).classList.add('hide')
     document.querySelector(`.a${nextclasssecondcher}`).classList.remove('hide')
     document.querySelector(`.${nextclass}`).focus()
+
     }
 
 
+///////////save report in database
+console.log(patientReportToSave)
+let patientReportDataToSave = JSON.parse(sessionStorage[patientRefferance]);
+console.log(patientReportDataToSave)
+
+
+
+console.log(tn)
+
+for (let i = 0; i < 1; i++) {
+let found=0;
+
+  for (let ii = 0; ii < patientReportDataToSave.createReport.length; ii++){
+
+    if(patientReportDataToSave.createReport[ii].testName==tn){
+      console.log('it is')
+      patientReportDataToSave.createReport[ii].value=text;
+      found=1;
+      break;
+    }
+  } 
+
+  if(found==0){
+  for (let ii = 0; ii < patientReportDataToSave.repo.sepratePageReport.length; ii++){
+
+    if(patientReportDataToSave.repo.sepratePageReport[ii].testName==tn){
+      console.log('it is')
+      patientReportDataToSave.repo.sepratePageReport[ii].value=text;
+      break;
+    }
+  }
+}
+// console.log(patientReportToSave)
+
+}
+sessionStorage.setItem(patientRefferance, JSON.stringify(patientReportDataToSave));
+////////////////////////////////////
+
+if(arr[ii].normalRange[0] != '$'){
+  let normalRangeForTest=arr[ii].normalRange.replaceAll(' ','').split('-');
+
+  let checkNormalRangeOfValue=checkNormalRange(text,normalRangeForTest);
+console.log(text,normalRangeForTest,checkNormalRangeOfValue)
+
+
+if(checkNormalRangeOfValue=='abnomalValue'){
+  document.querySelector(`.Patienttest${classPatienttest}`).children[1].children[0].classList.add(checkNormalRangeOfValue)
+}
+else{
+  document.querySelector(`.Patienttest${classPatienttest}`).children[1].children[0].classList.remove('abnomalValue')
+}
+}
   }
     
    
   })
 
 }
+
+function checkNormalRange(value,normalRangeForTest) {
+  if(parseFloat(value) >= parseFloat(normalRangeForTest[0]) && parseFloat(value) <= parseFloat(normalRangeForTest[1])){
+    return 'normalValue';
+  }
+  return 'abnomalValue';
+}
+
+
+//////////////patient form programming
+
+let x = document.getElementById("optionList");
+
+let value = x.options[x.selectedIndex].text; 
+console.log(value)
+
+
+let sampleCollectionDate=new Date().toLocaleString();
+
+document.querySelector(".date").value=sampleCollectionDate;
+
+
+document.querySelector(".name").addEventListener('input',function () {
+
+let value=document.querySelector(".name").value;
+
+console.log(value)
+
+if(value=='Mrs.'||value=='mrs.'||value=='MRS.'||value=='MS.'||value=='Ms.'||value=='ms.'){
+
+  x.options.selectedIndex=1;
+}
+
+if(value=='Mr.'||value=='mr.'||value=='MR.'){ 
+
+  x.options.selectedIndex=0;
+
+}
+
+
+})
+
+
+
+
+
+document.querySelector(".add-patient-container").addEventListener('click',function () {
+document.querySelector(".form").style.display='flex';
+document.querySelector(".avltest").style.display='flex';
+document.querySelector(".makereport").style.display='block';
+document.querySelector(".add-patient-container").style.display='none';
+})
 

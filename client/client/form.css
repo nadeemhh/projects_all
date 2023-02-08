@@ -1,0 +1,11 @@
+.form{padding: 10px;display: flex;flex-direction: column;align-items: center;display: none;}
+.input-label-container{display: flex; justify-content: center;}
+
+.label-container{display: flex;flex-direction: column;justify-content: space-evenly;margin-right: 5px;gap: 4px;font-weight: 500;}
+.input-container{display: flex;flex-direction: column;justify-content: space-evenly;margin-left: 5px;gap: 4px;}
+.label{font-size: 17px;}
+.input{padding: 4px;border-radius: 10px;border: none;}
+
+.add-patient-container{display: flex;gap: 10px;background-color:yellow;padding: 5px;border-radius: 20px;margin-top: 10px;font-weight: 500;cursor: pointer;}
+.add-patient-container:active{transform: scale(0.97);}
+

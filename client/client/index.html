@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./index.css" />
+    <link rel="stylesheet" href="./form.css">
     <title>Document</title>
   </head>
   <body>
@@ -17,6 +18,39 @@
          
         </div>
         <div class="sidebar2">
+          
+          <div class="add-patient-container">
+            <p>Add Patient</p>
+            <img src="./add.svg" width="25px" alt="">
+          </div>
+          
+<div class="form">
+
+  <div class="input-label-container">
+
+    <div class="label-container">
+      <p class="label">Name</p>
+      <p class="label">age</p> 
+      <p class="label">date</p> 
+    </div>
+
+    <div class="input-container">
+      <input type="text" class="input name" placeholder="Enter Name">
+      <input type="text" class="input age" placeholder="Enter age">  
+      <input type="text" class="input date" placeholder="Enter date"> 
+    </div>
+
+  </div>
+
+  <div class="options-container">
+    <select name="" id="optionList" onchange="test()">
+      <option value="">Male</option>
+      <option value="">Female</option>
+      <option value="">Individuals</option>
+    </select>
+  </div>
+</div>
+
 <div class="avltest">
   <button class="but" departments="BIOCHEMISTRY">SGOT</button>
   <button class="but" departments="BIOCHEMISTRY">SGPT</button>
