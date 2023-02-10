@@ -1,12 +1,11 @@
-.form{padding: 10px;display: flex;flex-direction: column;align-items: center;display: none;  background-image: linear-gradient(to right, rgb(94, 158, 161) , rgb(248, 248, 115));
-    margin-top: 10px;border: 1px groove rgb(2, 4, 122);}
+.form{padding: 10px;display: flex;flex-direction: column;align-items: center;display: none;background-color: #2C74B3;margin-top: 10px;border-radius: 4px;}
 .input-label-container{display: flex; justify-content: center;}
 
 .label-container{display: flex;flex-direction: column;justify-content: space-evenly;margin-right: 5px;gap: 4px;font-weight: 500;}
 .input-container{display: flex;flex-direction: column;justify-content: space-evenly;margin-left: 5px;gap: 4px;}
-.label{font-size: 17px;color: rgb(0, 0, 0);}
-.forminput{padding: 2px;border-radius: 2px;border: 1px solid rgb(0, 0, 0);}
+.label{font-size: 17px;color: #ffffff;}
+.forminput{padding: 2px;border-radius: 2px;border: 1px solid rgb(0, 0, 0);background-color: #fceaea;}
 
-.add-patient-container{display: flex;gap: 10px;background-color:rgb(241, 241, 56);padding: 5px;border-radius: 20px;margin-top: 10px;font-weight: 500;cursor: pointer;}
+.add-patient-container{display: flex;gap: 10px;background-color:#FBC252;padding: 5px;border-radius: 20px;margin-top: 10px;font-weight: 500;cursor: pointer;}
 .add-patient-container:active{transform: scale(0.97);}
 

@@ -741,7 +741,7 @@ for(let i = 0; i <departments.length; i++) {
   div.insertAdjacentHTML("beforeend", html);
   
 let testToPrint=availableTest.departments[departments[i]];
-console.log(testToPrint)
+
 
 let Partof=[];
 

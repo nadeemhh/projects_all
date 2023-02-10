@@ -56,7 +56,7 @@ body {
       
       
       
-      .Navbar-container{height: 10vh;width: 100%;background-color: rgba(47, 84, 248, 0.979);position: sticky;top: 0; }
+      .Navbar-container{height: 10vh;width: 100%;background-color: #495579;position: sticky;top: 0; }
       
        .others-container{display: flex;justify-content: space-between;} 
       
@@ -67,7 +67,7 @@ body {
        .reporttemplate{ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 3), 0 6px 20px 0 rgba(0, 0, 0, 3);}
 
        .sidebar{height: 90vh;width: 10vw;background-color: rgba(0, 0, 0, 0.979);position: fixed;z-index: 0;}
-       .sidebar2{height: 90vh;width: 20vw;background-color: rgba(248, 47, 148, 0.979);display: flex;flex-direction: column; align-items: center;overflow-y: scroll;}
+       .sidebar2{height: 90vh;width: 20vw;background-color: #263159;display: flex;flex-direction: column; align-items: center;overflow-y: scroll;}
 
 
        .Patientreportcount{height: 40px;width: 100%;  background-image: linear-gradient(to right, rgb(250, 93, 93) , rgb(243, 133, 133));margin-bottom: 15px;position: sticky;top: 0;box-shadow: 0px 5px #41404054;display: flex;align-items: center;z-index: 5;}
