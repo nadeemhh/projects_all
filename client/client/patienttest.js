@@ -274,28 +274,28 @@ let availableTest={departments:{
     value:'0.0'
     }],
     IMMUNOLOGYCHEMI:[{
-        testName:'T3 (Trilodothyronine)',
+        testName:'T3',
         shortName:'t3',
         unit:'ng/dL',
         normalRange:'80.0 - 200.0',
-        Partof:'thyroid profile',
-        department:'IMMUNOLOGY - CHEMI',
+        Partof:'thyroidprofile',
+        department:'IMMUNOLOGY-CHEMI',
         value:'0.0'
         },{
-        testName:'T4 (Thyroxine)',
+        testName:'T4',
         shortName:'t4',
         unit:'ug/dL',
         normalRange:'4.6 - 12.0',
-        Partof:'thyroid profile',
-        department:'IMMUNOLOGY - CHEMI',
+        Partof:'thyroidprofile',
+        department:'IMMUNOLOGY-CHEMI',
         value:'0.0'
         },{
-        testName:'TSH (Thyroid Stimulating Hormone) ',
+        testName:'TSH',
         shortName:'tsh',
         unit:'uIU/mL',
         normalRange:'0.27 - 5.50',
-        Partof:'thyroid profile',
-        department:'IMMUNOLOGY - CHEMI',
+        Partof:'thyroidprofile',
+        department:'IMMUNOLOGY-CHEMI',
         value:'0.0'
         }],
     SEROLOGY:[{

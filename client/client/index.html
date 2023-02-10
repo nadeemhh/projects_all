@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./index.css" />
     <link rel="stylesheet" href="./form.css">
+    <link rel="stylesheet" href="./patienttest.css">
     <title>Document</title>
   </head>
   <body>
@@ -30,20 +31,22 @@
 
     <div class="label-container">
       <p class="label">Name</p>
-      <p class="label">age</p> 
-      <p class="label">date</p> 
+      <p class="label">Age</p> 
+      <p class="label">Date</p> 
+      <p class="label">ID</p> 
     </div>
 
     <div class="input-container">
-      <input type="text" class="input name" placeholder="Enter Name">
-      <input type="text" class="input age" placeholder="Enter age">  
-      <input type="text" class="input date" placeholder="Enter date"> 
+      <input type="text" class="forminput name" placeholder="Enter Name">
+      <input type="text" class="forminput age" placeholder="Enter age">  
+      <input type="text" class="forminput date" placeholder="Enter date"> 
+      <input type="text" class="forminput patientID" placeholder="patient ID">
     </div>
 
   </div>
 
   <div class="options-container">
-    <select name="" id="optionList" onchange="test()">
+    <select name="" id="optionList">
       <option value="">Male</option>
       <option value="">Female</option>
       <option value="">Individuals</option>
@@ -51,7 +54,7 @@
   </div>
 </div>
 
-<div class="avltest">
+<!-- <div class="avltest">
   <button class="but" departments="BIOCHEMISTRY">SGOT</button>
   <button class="but" departments="BIOCHEMISTRY">SGPT</button>
   <button class="but" departments="BIOCHEMISTRY" Partof="kft">kft</button>
@@ -60,9 +63,13 @@
   <button class="but" departments="SEROLOGY">HBsAg</button>
   <button class="but" departments="SEROLOGY">Anti HCV (Rapid)</button>
 
-</div>
+</div> -->
           
+<div class="available-department-container"></div>
+
           <button class="makereport" onclick="performTest()" class="add">create report</button>
+
+          
         </div>
       </div>
     </div>

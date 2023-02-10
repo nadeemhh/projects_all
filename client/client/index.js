@@ -9,12 +9,13 @@ let testnameaddonlyonetime=0;
 let Patientreportcount=0;
 let patientReportToSave=[];
 let classNameForInputAndValue=0;
+let notRun=0;
 function randomNumBetween(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
-function addReportTemplate(arr,testNameForFew=undefined) {
-console.log(arr)
+function addReportTemplate(arr,testNameForFew=undefined,patientInfo) {
+console.log(arr,patientInfo)
 
 
 if(location.pathname == '/client/index.html'){
@@ -66,8 +67,8 @@ let ReportTemplate =`<div  style="height:29.7cm;width:21cm; margin-bottom: 15px;
 <p class="p-patient-details5 mp">Specimen</p>
 </div>
 <div class="patient-details1-2">
-<p class="pp-patient-details1 mp">MRS.GEETA</p>
-<p class="pp-patient-details2 mp"><span>22 </span><span>YRS </span><span>FEMALE </span></p>
+<p class="pp-patient-details1 mp">${patientInfo.Patientname}</p>
+<p class="pp-patient-details2 mp"><span>${patientInfo.Patientage} </span><span>YRS </span><span>${patientInfo.gender}</span></p>
 <p class="pp-patient-details3 mp">mat labs</p>
 <p class="pp-patient-details5 mp">WB-EDTA</p>
 </div>
@@ -83,8 +84,8 @@ let ReportTemplate =`<div  style="height:29.7cm;width:21cm; margin-bottom: 15px;
 </div>
 <div class="patient-details2-2">
 <p class="pp-patient-details1 mp">dr.roy</p>
-<p class="pp-patient-details1 mp">46574453</p>
-<p class="pp-patient-details2 mp">17/10/2022 13:19:52</p>
+<p class="pp-patient-details1 mp">${patientInfo.patientId}</p>
+<p class="pp-patient-details2 mp">${patientInfo.registrationDate}</p>
 
 </div>
 
@@ -214,10 +215,12 @@ let testToPerform=[];
 
 
 
-let choosetest=document.querySelector('.avltest').children;
+let choosetest=[];
 
+console.log(choosetest)
 
-
+function alltests() {
+  
 for (let i = 0; i < choosetest.length; i++) {
   choosetest[i].addEventListener('click',function() {
   console.log(choosetest[i].textContent)
@@ -242,12 +245,35 @@ console.log(choosetest[i])
   })
   
 }
+}
 
 
 function performTest() {
-  document.querySelector(".add-patient-container").style.display='flex';
-  document.querySelector(".form").style.display='none';
-document.querySelector(".avltest").style.display='none';
+
+  if(testToPerform.length==0){
+    alert('apne koi test select nahi kiya hai')
+    return;
+  }
+
+
+let x = document.getElementById("optionList");
+let Patientname=document.querySelector(".name").value.toUpperCase();
+let Patientage=document.querySelector(".age").value;
+let gender = x.options[x.selectedIndex].text.toUpperCase(); 
+let registrationDate =document.querySelector(".date").value;
+let patientID =document.querySelector(".patientID").value;
+
+/////empty value of input tag
+document.querySelector(".name").value='';
+document.querySelector(".age").value='';
+document.querySelector(".date").value='';
+document.querySelector(".patientID").value='';
+//////
+
+console.log(Patientname,Patientage,registrationDate,patientID)
+
+document.querySelector(".add-patient-container").style.display='flex';
+document.querySelector(".form").style.display='none';
 document.querySelector(".makereport").style.display='none';
   for (let i = 0; i < choosetest.length; i++) {
 
@@ -257,17 +283,14 @@ document.querySelector(".makereport").style.display='none';
 
   console.log('testToPerform',testToPerform.length)
 
-  if(testToPerform.length==0){
-    alert('apne koi test select nahi kiya hai')
-    return;
-  }
+  
   // console.log(availableTest.departments[testToPerform[0].departments])
   let createReport=[];
 let sepratePageReport=[];
   for (let i = 0; i < testToPerform.length; i++) {
 
    // console.log(availableTest.departments[testToPerform[i].departments])
-    let department = availableTest.departments[testToPerform[i].departments];
+    let department = availableTest.departments[testToPerform[i].departments.replace('-','')];
 
 for (let ii = 0; ii < department.length; ii++) {
 
@@ -296,18 +319,16 @@ else{
 
   let repo={sepratePageReport:sepratePageReport}
 console.log(repo)
-let numID=randomNumBetween(1,1000);
-let alphabetId=alphabet[randomNumBetween(0,25)];
-let uniqueIdForPatient=numID+alphabetId;
 
- let patientDeatels={patientId:uniqueIdForPatient};
+
+ let patientDeatels={Patientname:Patientname,Patientage:Patientage,registrationDate:registrationDate,gender:gender,patientId:patientID};
 console.log(patientDeatels)
 
 patientReportToSave.push({repo,createReport,patientDeatels})
 
 let user = {repo,createReport,patientDeatels};
 
-sessionStorage.setItem(uniqueIdForPatient, JSON.stringify(user));
+sessionStorage.setItem(patientDeatels.patientId, JSON.stringify(user));
 
 
 if(repo.sepratePageReport.length !== 0){
@@ -334,7 +355,9 @@ for (let t = 0; t < totaldepartment.length; t++) {
     case 'lft':
        testNameToAdd = "Liver Function Test (LFT)";
       break;
-
+      case 'thyroidprofile':
+        testNameToAdd = "thyroid profile";
+       break;
   }
 
 
@@ -348,7 +371,7 @@ for (let tt = 0; tt < repo.sepratePageReport.length; tt++) {
 }
 
 
-addReportTemplate(totalTest,testNameToAdd)
+addReportTemplate(totalTest,testNameToAdd,patientDeatels)
 testnameaddonlyonetime=0;
 testNameToAdd=undefined;
 leftTest.count=0;
@@ -359,7 +382,8 @@ console.log(totaldepartment)
 
 console.log(createReport)
 
-addReportTemplate(createReport)
+
+addReportTemplate(createReport,undefined,patientDeatels)
 
 testToPerform=[];
 leftTest.count=0;
@@ -422,11 +446,7 @@ let patientRefferance=patientReportToSave[patientReportToSave.length-1].patientD
 <p class="normalRangevalue normalRangevalue${classnormalRangevalue}">${arr[ii].normalRange.replace('$','')}</p></div>`;
   testdiv.insertAdjacentHTML('beforeend', tests);
 
-
 let tn=arr[ii].testName;
-
-
-
 
 ///////////////////
   alignMaker(`testNamevalue${classtestNamevalue}`,`testName`)
@@ -540,7 +560,6 @@ else{
     if (key == "Enter") {
    
 
-
     document.querySelector(`.resultvalue${classresultvalue}`).children[1].classList.add('hide')
     document.querySelector(`.resultvalue${classresultvalue}`).children[0].classList.remove('hide')
 
@@ -553,15 +572,19 @@ else{
     let nextclasssecondcher=parseFloat(document.querySelector(`.resultvalue${classresultvalue}`).children[1].classList[0].substring(1))+1;
 
     let nextclass=nextclassfirstcher+nextclasssecondcher
-    let lastclass=parseFloat(document.querySelectorAll(`.input`)[document.querySelectorAll(`.input`).length-1].classList[0].substring(1))
     
-if(nextclasssecondcher <= lastclass){
+    
+    console.log(nextclassfirstcher,'  ',nextclasssecondcher,'  ',nextclass,'  ')
+   
+try{
     document.querySelector(`.b${nextclasssecondcher}`).classList.add('hide')
     document.querySelector(`.a${nextclasssecondcher}`).classList.remove('hide')
     document.querySelector(`.${nextclass}`).focus()
 
+    }catch(err){
+      console.log('last input')
     }
-
+   
 
 ///////////save report in database
 console.log(patientReportToSave)
@@ -632,36 +655,8 @@ function checkNormalRange(value,normalRangeForTest) {
 
 //////////////patient form programming
 
-let x = document.getElementById("optionList");
-
-let value = x.options[x.selectedIndex].text; 
-console.log(value)
 
 
-let sampleCollectionDate=new Date().toLocaleString();
-
-document.querySelector(".date").value=sampleCollectionDate;
-
-
-document.querySelector(".name").addEventListener('input',function () {
-
-let value=document.querySelector(".name").value;
-
-console.log(value)
-
-if(value=='Mrs.'||value=='mrs.'||value=='MRS.'||value=='MS.'||value=='Ms.'||value=='ms.'){
-
-  x.options.selectedIndex=1;
-}
-
-if(value=='Mr.'||value=='mr.'||value=='MR.'){ 
-
-  x.options.selectedIndex=0;
-
-}
-
-
-})
 
 
 
@@ -669,8 +664,123 @@ if(value=='Mr.'||value=='mr.'||value=='MR.'){
 
 document.querySelector(".add-patient-container").addEventListener('click',function () {
 document.querySelector(".form").style.display='flex';
-document.querySelector(".avltest").style.display='flex';
 document.querySelector(".makereport").style.display='block';
 document.querySelector(".add-patient-container").style.display='none';
+
+let x = document.getElementById("optionList");
+
+
+
+let sampleCollectionDate=new Date().toLocaleString();
+
+document.querySelector(".date").value=sampleCollectionDate;
+
+let alphabetId=alphabet[randomNumBetween(0,25)];
+document.querySelector(".patientID").value=`${alphabetId}${randomNumBetween(1000,10000)}${randomNumBetween(1000,10000)}`;
+
+
+document.querySelector(".name").addEventListener('input',function () {
+
+  let value=document.querySelector(".name").value;
+  
+  console.log(value)
+  
+  if(value=='Mrs.'||value=='mrs.'||value=='MRS.'||value=='MS.'||value=='Ms.'||value=='ms.'){
+  
+    x.options.selectedIndex=1;
+  }
+  
+  if(value=='Mr.'||value=='mr.'||value=='MR.'){ 
+  
+    x.options.selectedIndex=0;
+  
+  }
+  
+  
+  })
+
 })
 
+
+function visible(i){
+document.querySelector(`.available-tests${i}`).style.display='block';
+document.querySelector(`.hidden66${i}`).style.display= 'flex';
+document.querySelector(`.department-name${i}>img`).style.transition='0.5s';
+document.querySelector(`.department-name${i}>img`).style.transform='rotate(180deg)';
+
+}
+
+function visiblityHide(i){
+  document.querySelector(`.available-tests${i}`).style.display='none';
+  document.querySelector(`.hidden66${i}`).style.display='none';
+  document.querySelector(`.department-name${i}>img`).style.transition='0.5s';
+  document.querySelector(`.department-name${i}>img`).style.transform='rotate(0deg)';
+  }
+
+
+function pritnDepartmentAndtests(){
+
+let departments=Object.keys(availableTest.departments);
+
+for(let i = 0; i <departments.length; i++) {
+
+
+  let div = document.querySelector(`.available-department-container`);
+  let html = `<div class="available-department">
+  <div class="hidden66  hidden66${i}" onclick="visiblityHide(${i})">
+
+  </div>
+  <div class="department-name department-name${i}" onclick="visible(${i})">
+    <p>${departments[i]}</p>
+    <img src="./up-arrow-svgrepo-com.svg" width="20px" alt="">
+  </div>
+  
+  <div class="available-tests  available-tests${i}">
+  </div>
+</div>`;
+  div.insertAdjacentHTML("beforeend", html);
+  
+let testToPrint=availableTest.departments[departments[i]];
+console.log(testToPrint)
+
+let Partof=[];
+
+for(let ii = 0; ii <testToPrint.length; ii++){
+if(testToPrint[ii].Partof != 'none'){
+  Partof.push(testToPrint[ii].Partof.replaceAll(' ',''))
+}
+}
+
+function removeDuplicates(arr) {
+  return [...new Set(arr)];
+}
+Partof=removeDuplicates(Partof);
+
+
+
+for(let ii = 0; ii <Partof.length; ii++){
+
+  let div = document.querySelector(`.available-tests${i}`);
+  let html = ` <button class="but" departments=${testToPrint[ii].department}  Partof=${Partof[ii]}>${Partof[ii]}</button>`;
+  div.insertAdjacentHTML("beforeend", html);
+  choosetest.push(document.querySelector(`.available-tests${i}`).children[ii])
+}
+
+for(let ii = 0; ii < testToPrint.length; ii++){
+
+  let div = document.querySelector(`.available-tests${i}`);
+
+  let html = ` <button class="but" departments=${testToPrint[ii].department}>${testToPrint[ii].testName}</button>`;
+
+  div.insertAdjacentHTML("beforeend", html);
+
+  choosetest.push(document.querySelector(`.available-tests${i}`).children[ii+Partof.length])
+
+}
+
+
+}
+}
+
+pritnDepartmentAndtests()
+alltests()

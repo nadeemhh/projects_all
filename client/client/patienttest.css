@@ -1,0 +1,15 @@
+.available-department-container{width: 100%;margin-top: 10px;}
+.available-department{width: 100%;position: relative;}
+
+.department-name{background-color: lightseagreen;width: 100%;display: flex; align-items: center;justify-content: space-between; height: 30px;color: #292929;font-weight: 500;margin-top: 2px;}
+
+
+.department-name>p{margin-left: 5px;}
+.department-name>img{margin-right: 5px;}
+
+
+.hidden66{ width: 100%;display: none;flex-direction: column; align-items: flex-start;justify-content: center; height: 30px;position: absolute;}
+
+.available-tests{background-color: brown;width: 100%;overflow-y: scroll;display: none;padding: 5px;}
+
+
