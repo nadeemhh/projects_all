@@ -10,17 +10,17 @@ let Patientreportcount=0;
 let patientReportToSave=[];
 let classNameForInputAndValue=0;
 let notRun=0;
+let uniqueIdForPage={count:0};
 function randomNumBetween(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
 function addReportTemplate(arr,testNameForFew=undefined,patientInfo) {
-console.log(arr,patientInfo)
+console.log(arr,patientInfo,location.pathname)
 
 
-if(location.pathname == '/client/index.html'){
 
-  if(Patientreportcount ==0){
+  if(Patientreportcount == 0){
     let select = document.querySelector(".main");
 let totalReportCounter = ` <div class="Patientreportcount">
 <img class='printreport' src="./printer-print-svgrepo-com.svg" width="25px" alt="">
@@ -29,7 +29,7 @@ select.insertAdjacentHTML("afterbegin", totalReportCounter);
 Patientreportcount=1;
 }
 
-}
+
 
 
 if(openPrintPopup==0){
@@ -40,16 +40,18 @@ document.querySelector('.printreport').addEventListener('click',function () {
 })
 }
 openPrintPopup=1;
-for (let i = 0; i < arr.length; i++) {   
-       
+for (let i = 0; i < arr.length; i++) { 
+  
+
+ 
 
     let className = randomNumBetween(1, 9000);
 
     let className2 = 'template'+randomNumBetween(1, 6000);
 
-    let div = location.pathname == '/client/index.html'? document.querySelector(".main"):document.querySelector("#root")
+    let div = document.querySelector(".main");
 
-let ReportTemplate =`<div  style="height:29.7cm;width:21cm; margin-bottom: 15px;margin-left: auto;margin-right: auto;page-break-before: always;display: flex;flex-direction: column;justify-content: space-between; background-color: rgb(255, 255, 255);" class='${className2} reporttemplate'>
+let ReportTemplate =`<div  style="height:29.7cm;width:21cm; margin-bottom: 15px;margin-left: auto;margin-right: auto;page-break-before: always;display: flex;flex-direction: column;justify-content: space-between; background-color: rgb(255, 255, 255);" class='${className2} reporttemplate' id=${uniqueIdForPage.count}>
 <div class='Reportheader'>
 <div class="headerlogo-container">
 
@@ -249,7 +251,8 @@ console.log(choosetest[i])
 
 
 function performTest() {
-
+  uniqueIdForPage.count++
+  let addIdOneTime=0;
   if(testToPerform.length==0){
     alert('apne koi test select nahi kiya hai')
     return;
@@ -372,10 +375,21 @@ for (let tt = 0; tt < repo.sepratePageReport.length; tt++) {
 
 
 addReportTemplate(totalTest,testNameToAdd,patientDeatels)
+
+if(addIdOneTime==0){
+  
+  let select = document.querySelector(".Patientreportcount");
+  let anchortag = `<button class="user-link"><a href="#${uniqueIdForPage.count}">${patientDeatels.Patientname}</a></button>`;
+  select.insertAdjacentHTML("beforeend", anchortag);
+
+}
+
+addIdOneTime=1;
 testnameaddonlyonetime=0;
 testNameToAdd=undefined;
 leftTest.count=0;
 totalTest=[];
+
 }
 console.log(totaldepartment)
 }
@@ -388,10 +402,18 @@ addReportTemplate(createReport,undefined,patientDeatels)
 testToPerform=[];
 leftTest.count=0;
 
+if(addIdOneTime==0){
+
+  let select = document.querySelector(".Patientreportcount");
+  let anchortag = `<button class="user-link"><a href="#${uniqueIdForPage.count}">${patientDeatels.Patientname}</a></button>`;
+  select.insertAdjacentHTML("beforeend", anchortag);
+
+}
 
 console.log(patientReportToSave)
 //patientReportToSave.pop()
 console.log(patientReportToSave)
+
 }
 
 
