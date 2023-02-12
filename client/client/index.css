@@ -46,12 +46,15 @@ body {
 
      ::-webkit-scrollbar {
         width: 0px;
+        height: 5px;
+       
       }
       
       /* Handle */
       ::-webkit-scrollbar-thumb {
-        background: rgba(63, 63, 63, 0.623); 
+        background: rgba(0, 0, 0, 0.993); 
         border-radius:20px;
+      
       }
       
       
@@ -70,7 +73,7 @@ body {
        .sidebar2{height: 90vh;width: 20vw;background-color: #263159;display: flex;flex-direction: column; align-items: center;overflow-y: scroll;padding: 5px;}
 
 
-       .Patientreportcount{height: 40px;width: 100%;  background-image: linear-gradient(to right, rgb(250, 93, 93) , rgb(243, 133, 133));margin-bottom: 15px;position: sticky;top: 0;box-shadow: 0px 5px #41404054;display: flex;align-items: center;z-index: 5;gap: 10px;}
+       .Patientreportcount{height: 40px;width: 100%;  background-image: linear-gradient(to right, rgb(250, 93, 93) , rgb(243, 133, 133));margin-bottom: 15px;position: sticky;top: 0;box-shadow: 0px 5px #41404054;display: flex;align-items: center;z-index: 5;gap: 10px;overflow-x: scroll;}
        .Patientreportcount>img{margin-right: 50px;}
 
        .report{ height:29.7cm;width:21cm; margin-bottom: 15px;margin-left: auto;margin-right: auto;page-break-before: always;display: flex;flex-direction: column;justify-content: space-between; box-shadow: 5px 5px #41404054;}
@@ -155,12 +158,17 @@ a{text-decoration: none;}
 
 .user-link{padding: 4px;background-color: rgb(22, 7, 122);border: none;border-radius: 2px;}
 
-.user-link>a{color: white;}
+
+
+
+
+
+.patient-button-contenier{display: flex;gap: 10px;}
+.patient-button{background-color: lightblue; display: flex;justify-content: center; gap: 4px;cursor: pointer;padding: 2px;border-radius: 1px;}
 .user-link:active{transform: scale(0.9);}
-
-
-
-
+.user-link>a{color: white;}
+.deleteicon:active{transform: scale(0.9);}
+.printicon:active{transform: scale(0.9);}
 
 
 

@@ -19,55 +19,55 @@ th {
   background-color: rgb(109, 113, 121);
 }
 
-.div{height: 1500px;width: 500px;}
+
  .div1{background-color: #9e2e2e;} 
  .div2{background-color: #9e2e2e;} 
  .div3{background-color: #9e2e2e;} 
  .div4{background-color: #9e2e2e;} 
-
+ .patient-button-contenier{display: flex;gap: 10px;}
+ .patient-button{background-color: lightblue; display: flex;justify-content: center;gap: 4px;cursor: pointer;padding: 2px;border-radius: 1px;}
+ .user-link:active{transform: scale(0.9);}
+.deleteicon:active{transform: scale(0.9);}
+.printicon:active{transform: scale(0.9);}
     </style>
     <title>Document</title>
   </head>
   <body>
-    <button></button>
-    <h1 class="location">fetching location...</h1>
-<a href="#0e">goto</a>
-    <div class="div div1">
-      <h1>div1</h1>
-    </div>
-    <div class="div div2">
-      <h1>div2</h1>
-    </div>
-    <div class="div div3" id="0">
-      <h1>div3</h1>
-    </div>
-    <div class="div div4">
-      <h1>div4</h1>
-    </div>
+<div class="patient-button-contenier">
+    <div class="patient-button">
+      <button class="user-link"><a href="#id${uniqueIdForPage.count}">${patientDeatels.Patientname}</a></button>
+    <img width="20px" class="deleteicon" src="./trash-can-svgrepo-com (1).svg" alt="">
+    <img width="20px" class="printicon" src="./printer-print-svgrepo-com.svg" alt="">
+  </div>
+
+</div>
+    <!-- <h1 style="background-color: #eb97974b; display: inline-block;" class="location">fetching location...</h1>
+   -->
+ 
     <script>
       
 
     
 
-      if (navigator.geolocation) {
-  navigator.geolocation.getCurrentPosition(function(position) {
-    var latitude = position.coords.latitude;
-    var longitude = position.coords.longitude;
-    console.log("Latitude: " + latitude + ", Longitude: " + longitude);
+//       if (navigator.geolocation) {
+//   navigator.geolocation.getCurrentPosition(function(position) {
+//     var latitude = position.coords.latitude;
+//     var longitude = position.coords.longitude;
+//     console.log("Latitude: " + latitude + ", Longitude: " + longitude);
 
-fetch("https://nominatim.openstreetmap.org/reverse?format=json&lat=" + latitude + "&lon=" + longitude)
-  .then(function(response) {
-    return response.json();
-  })
-  .then(function(data) {
-    console.log(data.display_name);
-    document.querySelector('.location').textContent=data.display_name;
-  });
+// fetch("https://nominatim.openstreetmap.org/reverse?format=json&lat=" + latitude + "&lon=" + longitude)
+//   .then(function(response) {
+//     return response.json();
+//   })
+//   .then(function(data) {
+//     console.log(data.display_name);
+//     document.querySelector('.location').textContent=data.display_name;
+//   });
 
-  });
-} else {
-  console.log("Geolocation is not supported by this browser.");
-}
+//   });
+// } else {
+//   console.log("Geolocation is not supported by this browser.");
+// }
     </script>
   </body>
 </html>

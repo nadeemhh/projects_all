@@ -24,6 +24,7 @@ console.log(arr,patientInfo,location.pathname)
     let select = document.querySelector(".main");
 let totalReportCounter = ` <div class="Patientreportcount">
 <img class='printreport' src="./printer-print-svgrepo-com.svg" width="25px" alt="">
+<div class="patient-button-contenier"></div>
 </div>`;
 select.insertAdjacentHTML("afterbegin", totalReportCounter);
 Patientreportcount=1;
@@ -34,7 +35,8 @@ Patientreportcount=1;
 
 if(openPrintPopup==0){
 document.querySelector('.printreport').addEventListener('click',function () {
-
+  let title=document.title='pn';
+console.log(title)
   window.print()
 
 })
@@ -51,7 +53,7 @@ for (let i = 0; i < arr.length; i++) {
 
     let div = document.querySelector(".main");
 
-let ReportTemplate =`<div  style="height:29.7cm;width:21cm; margin-bottom: 15px;margin-left: auto;margin-right: auto;page-break-before: always;display: flex;flex-direction: column;justify-content: space-between; background-color: rgb(255, 255, 255);" class='${className2} reporttemplate' id=${uniqueIdForPage.count}>
+let ReportTemplate =`<div  style="height:29.7cm;width:21cm; margin-bottom: 15px;margin-left: auto;margin-right: auto;page-break-before: always;display: flex;flex-direction: column;justify-content: space-between; background-color: rgb(255, 255, 255);" class='${className2} reporttemplate' id=${'id'+uniqueIdForPage.count}>
 <div class='Reportheader'>
 <div class="headerlogo-container">
 
@@ -69,10 +71,10 @@ let ReportTemplate =`<div  style="height:29.7cm;width:21cm; margin-bottom: 15px;
 <p class="p-patient-details5 mp">Specimen</p>
 </div>
 <div class="patient-details1-2">
-<p class="pp-patient-details1 mp">${patientInfo.Patientname}</p>
-<p class="pp-patient-details2 mp"><span>${patientInfo.Patientage} </span><span>YRS </span><span>${patientInfo.gender}</span></p>
-<p class="pp-patient-details3 mp">mat labs</p>
-<p class="pp-patient-details5 mp">WB-EDTA</p>
+<p style="z-index: 1;" contenteditable="true" class="pp-patient-details1 mp">${patientInfo.Patientname}</p>
+<p contenteditable="true" class="pp-patient-details2 mp"><span>${patientInfo.Patientage} </span><span>YRS </span><span>${patientInfo.gender}</span></p>
+<p contenteditable="true" class="pp-patient-details3 mp">mat labs</p>
+<p contenteditable="true" class="pp-patient-details5 mp">WB-EDTA</p>
 </div>
 
 </div>
@@ -85,9 +87,9 @@ let ReportTemplate =`<div  style="height:29.7cm;width:21cm; margin-bottom: 15px;
 
 </div>
 <div class="patient-details2-2">
-<p class="pp-patient-details1 mp">dr.roy</p>
-<p class="pp-patient-details1 mp">${patientInfo.patientId}</p>
-<p class="pp-patient-details2 mp">${patientInfo.registrationDate}</p>
+<p contenteditable="true" class="pp-patient-details1 mp">dr.roy</p>
+<p contenteditable="true" class="pp-patient-details1 mp">${patientInfo.patientId}</p>
+<p contenteditable="true" class="pp-patient-details2 mp">${patientInfo.registrationDate}</p>
 
 </div>
 
@@ -378,9 +380,45 @@ addReportTemplate(totalTest,testNameToAdd,patientDeatels)
 
 if(addIdOneTime==0){
   
-  let select = document.querySelector(".Patientreportcount");
-  let anchortag = `<button class="user-link"><a href="#${uniqueIdForPage.count}">${patientDeatels.Patientname}</a></button>`;
+  let select = document.querySelector(".patient-button-contenier");
+  let anchortag = `<div class="patient-button">
+    <button class="user-link"><a class="linkclass${uniqueIdForPage.count}" href="#id${uniqueIdForPage.count}">${patientDeatels.Patientname}</a></button>
+  <img width="20px" class="deleteicon" src="./trash-can-svgrepo-com (1).svg" alt="">
+  <img width="20px" class="printicon printicon${uniqueIdForPage.count}" src="./printer-print-svgrepo-com.svg" alt="">
+</div>`;
   select.insertAdjacentHTML("beforeend", anchortag);
+
+  let counterForClassName=uniqueIdForPage.count;
+
+document.querySelector(`.printicon${counterForClassName}`).addEventListener('click',function () {
+
+  console.log(document.querySelector(`.linkclass${counterForClassName}`),document.querySelector(`.printicon${counterForClassName}`),counterForClassName)
+
+let elementsToSave=document.querySelector(`.linkclass${counterForClassName}`).getAttribute('href').replace('#','');
+console.log(elementsToSave)
+
+let elementsToHide=document.querySelectorAll('.reporttemplate');
+
+for (let i = 0; i < elementsToHide.length; i++) {
+ 
+  
+  if(elementsToHide[i].getAttribute('id')!=elementsToSave){
+    elementsToHide[i].style.display='none';
+  }
+  
+
+}
+
+window.print()
+
+for (let i = 0; i < elementsToHide.length; i++) {
+
+  if(elementsToHide[i].getAttribute('id')!=elementsToSave){
+    elementsToHide[i].style.display='flex';
+  }
+}
+
+})
 
 }
 
@@ -404,9 +442,45 @@ leftTest.count=0;
 
 if(addIdOneTime==0){
 
-  let select = document.querySelector(".Patientreportcount");
-  let anchortag = `<button class="user-link"><a href="#${uniqueIdForPage.count}">${patientDeatels.Patientname}</a></button>`;
+  let select = document.querySelector(".patient-button-contenier");
+  let anchortag = `<div class="patient-button">
+    <button class="user-link"><a class="linkclass${uniqueIdForPage.count}" href="#id${uniqueIdForPage.count}">${patientDeatels.Patientname}</a></button>
+  <img width="20px" class="deleteicon" src="./trash-can-svgrepo-com (1).svg" alt="">
+  <img width="20px" class="printicon printicon${uniqueIdForPage.count}" src="./printer-print-svgrepo-com.svg" alt="">
+</div>`;
   select.insertAdjacentHTML("beforeend", anchortag);
+
+  let counterForClassName=uniqueIdForPage.count;
+  console.log(counterForClassName)
+document.querySelector(`.printicon${counterForClassName}`).addEventListener('click',function () {
+
+  console.log(document.querySelector(`.linkclass${counterForClassName}`),document.querySelector(`.printicon${counterForClassName}`),counterForClassName)
+
+let elementsToSave=document.querySelector(`.linkclass${counterForClassName}`).getAttribute('href').replace('#','');
+console.log(elementsToSave)
+
+let elementsToHide=document.querySelectorAll('.reporttemplate');
+
+for (let i = 0; i < elementsToHide.length; i++) {
+ 
+  console.log(elementsToHide[i].getAttribute('id'),elementsToSave)
+  if(elementsToHide[i].getAttribute('id')!=elementsToSave){
+    elementsToHide[i].style.display='none';
+  }
+  
+
+}
+
+window.print()
+console.log('excecuted')
+for (let i = 0; i < elementsToHide.length; i++) {
+
+  if(elementsToHide[i].getAttribute('id')!=elementsToSave){
+    elementsToHide[i].style.display='flex';
+  }
+}
+
+})
 
 }
 
@@ -464,8 +538,8 @@ let patientRefferance=patientReportToSave[patientReportToSave.length-1].patientD
 <p class="b${classNameForInputAndValue} para">${arr[ii].value}</p>
   <input class="a${classNameForInputAndValue} textarea hide input" type="text">
 </div>
-<p class="unitvalue unitvalue${classunitvalue}">${arr[ii].unit}</p>
-<p class="normalRangevalue normalRangevalue${classnormalRangevalue}">${arr[ii].normalRange.replace('$','')}</p></div>`;
+<p contenteditable="true" class="unitvalue unitvalue${classunitvalue}">${arr[ii].unit}</p>
+<p contenteditable="true" class="normalRangevalue normalRangevalue${classnormalRangevalue}">${arr[ii].normalRange.replace('$','')}</p></div>`;
   testdiv.insertAdjacentHTML('beforeend', tests);
 
 let tn=arr[ii].testName;
@@ -727,7 +801,7 @@ document.querySelector(".name").addEventListener('input',function () {
 function visible(i){
 document.querySelector(`.available-tests${i}`).style.display='block';
 document.querySelector(`.hidden66${i}`).style.display= 'flex';
-document.querySelector(`.department-name${i}>img`).style.transition='0.5s';
+document.querySelector(`.department-name${i}>img`).style.transition='0.2s';
 document.querySelector(`.department-name${i}>img`).style.transform='rotate(180deg)';
 
 }
@@ -735,7 +809,7 @@ document.querySelector(`.department-name${i}>img`).style.transform='rotate(180de
 function visiblityHide(i){
   document.querySelector(`.available-tests${i}`).style.display='none';
   document.querySelector(`.hidden66${i}`).style.display='none';
-  document.querySelector(`.department-name${i}>img`).style.transition='0.5s';
+  document.querySelector(`.department-name${i}>img`).style.transition='0.2s';
   document.querySelector(`.department-name${i}>img`).style.transform='rotate(0deg)';
   }
 
