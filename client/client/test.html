@@ -6,44 +6,115 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- <link rel="stylesheet" href="./index.css" /> -->
     <style>
-table {
-  border-collapse: collapse;
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+ 
 }
 
-th, td {
-  border: 1px solid rgb(189, 83, 83);
-  padding: 8px;
-}
+.widal{width: 600px;display: flex;flex-direction: column;gap: 20px;}
 
-th {
-  background-color: rgb(109, 113, 121);
-}
+.widal-test-container{display: flex;height: 150px;width: 450px;align-items: flex-end;justify-content: space-between;}
+
+ table {
+        border-collapse: collapse;
+      }
+     td {
+        
+        padding:5px;
+        padding-left: 10px;
+        text-align: left;
+        text-align: center;
+      }
+
+      .td2{  padding-left: 20px;}
 
 
- .div1{background-color: #9e2e2e;} 
- .div2{background-color: #9e2e2e;} 
- .div3{background-color: #9e2e2e;} 
- .div4{background-color: #9e2e2e;} 
- .patient-button-contenier{display: flex;gap: 10px;}
- .patient-button{background-color: lightblue; display: flex;justify-content: center;gap: 4px;cursor: pointer;padding: 2px;border-radius: 1px;}
- .user-link:active{transform: scale(0.9);}
-.deleteicon:active{transform: scale(0.9);}
-.printicon:active{transform: scale(0.9);}
+.widal-result-container{display: flex;gap: 10px;align-items: center;}
+.widal-result-container>p:nth-child(1){font-weight: 600;}
+.widal-result-container>p:nth-child(2){font-weight: 600;}
+
+
+.widal-comment-container>p:nth-child(1){display: inline-block; margin-bottom: 10px;border-bottom: 1px solid black;}
+
     </style>
     <title>Document</title>
   </head>
   <body>
-<div class="patient-button-contenier">
-    <div class="patient-button">
-      <button class="user-link"><a href="#id${uniqueIdForPage.count}">${patientDeatels.Patientname}</a></button>
-    <img width="20px" class="deleteicon" src="./trash-can-svgrepo-com (1).svg" alt="">
-    <img width="20px" class="printicon" src="./printer-print-svgrepo-com.svg" alt="">
+<div class="widal">
+    <div class="widal-test-container">
+      
+      <div>
+    <table class="widal-values">
+        <td>S Typhi 'O'</td>
+    </table>
+    <table class="widal-values">
+       <td>S Typhi 'H'</td>
+  </table>
+  <table class="widal-values">
+    <td>S ParaTyphi 'AH'</td>
+</table>
+<table class="widal-values">
+  <td>S ParaTyphi 'BH'</td> 
+</table>
+</div>
+<div>
+    <table>
+      <tr>
+        <td class="td2"  class="td2" contenteditable="true">1/20</td>
+        <td  class="td2" contenteditable="true">1/40</td>
+        <td  class="td2" contenteditable="true">1/80</td>
+        <td  class="td2" contenteditable="true">1/160</td>
+        <td  class="td2" contenteditable="true">1/320</td>
+      </tr>
+      <tr>
+        <td  class="td2" contenteditable="true">+</td>
+        <td  class="td2" contenteditable="true">+</td>
+        <td  class="td2" contenteditable="true">-</td>
+        <td  class="td2" contenteditable="true">-</td>
+        <td  class="td2" contenteditable="true">-</td>
+      </tr>
+      <tr>
+        <td  class="td2" contenteditable="true">+</td>
+        <td  class="td2" contenteditable="true">+</td>
+        <td  class="td2" contenteditable="true">-</td>
+        <td  class="td2" contenteditable="true">-</td>
+        <td  class="td2" contenteditable="true">-</td>
+      </tr>
+      <tr>
+        <td  class="td2" contenteditable="true">-</td>
+        <td  class="td2" contenteditable="true">-</td>
+        <td  class="td2" contenteditable="true">-</td>
+        <td  class="td2" contenteditable="true">-</td>
+        <td  class="td2" contenteditable="true">-</td>
+      </tr>
+      <tr>
+        <td  class="td2" contenteditable="true">-</td>
+        <td  class="td2" contenteditable="true">-</td>
+        <td  class="td2" contenteditable="true">-</td>
+        <td  class="td2" contenteditable="true">-</td>
+        <td  class="td2" contenteditable="true">-</td>
+      </tr>
+    </table>
+  </div>
+
+  </div>
+
+  <div class="widal-result-container">
+    <p>RESULT</p>
+    <p>:</p>
+    <p contenteditable="true" class="widal-result">NEGATIVE </p>
+  </div>
+
+  <div contenteditable="true" class="widal-comment-container">
+
+    <p>RESULT INTERPRETATION :</p>
+    <p>In non vaccinated persons the titre as high as 1:80 between7th or 10th day of fever is of diagnostic value and the same titre increases gradually during subsequent period. In vaccinated persons the question of anamnestic response should always be borne in mind and 'H' titre should not be taken into account for the purpose of diagnosis unless there is a rising titre of 'H' in subsequent period. </p>
   </div>
 
 </div>
-    <!-- <h1 style="background-color: #eb97974b; display: inline-block;" class="location">fetching location...</h1>
-   -->
- 
     <script>
       
 

@@ -171,111 +171,33 @@ a{text-decoration: none;}
 .printicon:active{transform: scale(0.9);}
 
 
+/* widal */
 
 
+.widal{width: 600px;display: flex;flex-direction: column;gap: 20px;}
 
+.widal-test-container{display: flex;height: 150px;width: 450px;align-items: flex-end;justify-content: space-between;}
 
+ table {
+        border-collapse: collapse;
+      }
+     td {
+        
+        padding:5px;
+        padding-left: 10px;
+        text-align: left;
+        text-align: center;
+      }
 
+      .td2{  padding-left: 20px;}
 
 
+.widal-result-container{display: flex;gap: 10px;align-items: center;}
+.widal-result-container>p:nth-child(1){font-weight: 600;}
+.widal-result-container>p:nth-child(2){font-weight: 600;}
 
 
+.widal-comment-container>p:nth-child(1){display: inline-block; margin-bottom: 10px;border-bottom: 1px solid black;}
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      
-      

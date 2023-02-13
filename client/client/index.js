@@ -35,23 +35,19 @@ Patientreportcount=1;
 
 if(openPrintPopup==0){
 document.querySelector('.printreport').addEventListener('click',function () {
-  let title=document.title='pn';
-console.log(title)
+
   window.print()
 
 })
 }
 openPrintPopup=1;
 for (let i = 0; i < arr.length; i++) { 
-  
 
- 
+let className = randomNumBetween(1, 9000);
 
-    let className = randomNumBetween(1, 9000);
+let className2 = 'template'+randomNumBetween(1, 6000);
 
-    let className2 = 'template'+randomNumBetween(1, 6000);
-
-    let div = document.querySelector(".main");
+let div = document.querySelector(".main");
 
 let ReportTemplate =`<div  style="height:29.7cm;width:21cm; margin-bottom: 15px;margin-left: auto;margin-right: auto;page-break-before: always;display: flex;flex-direction: column;justify-content: space-between; background-color: rgb(255, 255, 255);" class='${className2} reporttemplate' id=${'id'+uniqueIdForPage.count}>
 <div class='Reportheader'>
@@ -71,8 +67,8 @@ let ReportTemplate =`<div  style="height:29.7cm;width:21cm; margin-bottom: 15px;
 <p class="p-patient-details5 mp">Specimen</p>
 </div>
 <div class="patient-details1-2">
-<p style="z-index: 1;" contenteditable="true" class="pp-patient-details1 mp">${patientInfo.Patientname}</p>
-<p contenteditable="true" class="pp-patient-details2 mp"><span>${patientInfo.Patientage} </span><span>YRS </span><span>${patientInfo.gender}</span></p>
+<p style="z-index: 1;" contenteditable="true" class="pp-patient-details1 mp">${patientInfo.Patientname !== ''?patientInfo.Patientname:'dummyName'}</p>
+<p contenteditable="true" class="pp-patient-details2 mp"><span>${patientInfo.Patientage !== ''?patientInfo.Patientage:'55'} </span><span>YRS </span><span>${patientInfo.gender}</span></p>
 <p contenteditable="true" class="pp-patient-details3 mp">mat labs</p>
 <p contenteditable="true" class="pp-patient-details5 mp">WB-EDTA</p>
 </div>
@@ -409,7 +405,9 @@ for (let i = 0; i < elementsToHide.length; i++) {
 
 }
 
+document.title=`${patientDeatels.Patientname} - ${patientDeatels.patientId}`;
 window.print()
+document.title='Document';
 
 for (let i = 0; i < elementsToHide.length; i++) {
 
@@ -471,7 +469,10 @@ for (let i = 0; i < elementsToHide.length; i++) {
 
 }
 
+document.title=`${patientDeatels.Patientname} - ${patientDeatels.patientId}`;
 window.print()
+document.title='Document';
+
 console.log('excecuted')
 for (let i = 0; i < elementsToHide.length; i++) {
 

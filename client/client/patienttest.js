@@ -316,5 +316,98 @@ let availableTest={departments:{
             department:'SEROLOGY',
             value:'0.0',
             newPage:true
-            }]
+            },{
+                testName:'Widal Test ( Slide Method) *',
+                shortName:'Widal',
+                unit:'',
+                normalRange:'',
+                Partof:'none',
+                department:'SEROLOGY',
+                value:'',           
+                newPage:true,
+                values:{
+                    O:'+,+,-,-,-',
+                    H:'+,+,-,-,-',
+                    AH:'-,-,-,-,-',
+                    BH:'-,-,-,-,-',
+                },
+            newStructureReport:function name() {
+                console.log(this.values)
+                //let testdiv = document.querySelector(`.all-test-container${className}`);  
+                let tests =`<div class="widal">
+                <div class="widal-test-container">
+                  
+                  <div>
+                <table class="widal-values">
+                    <td>S Typhi 'O'</td>
+                </table>
+                <table class="widal-values">
+                   <td>S Typhi 'H'</td>
+              </table>
+              <table class="widal-values">
+                <td>S ParaTyphi 'AH'</td>
+            </table>
+            <table class="widal-values">
+              <td>S ParaTyphi 'BH'</td> 
+            </table>
+            </div>
+            <div>
+                <table>
+                  <tr>
+                    <td class="td2"  class="td2" contenteditable="true">1/20</td>
+                    <td  class="td2" contenteditable="true">1/40</td>
+                    <td  class="td2" contenteditable="true">1/80</td>
+                    <td  class="td2" contenteditable="true">1/160</td>
+                    <td  class="td2" contenteditable="true">1/320</td>
+                  </tr>
+                  <tr>
+                    <td  class="td2" contenteditable="true">+</td>
+                    <td  class="td2" contenteditable="true">+</td>
+                    <td  class="td2" contenteditable="true">-</td>
+                    <td  class="td2" contenteditable="true">-</td>
+                    <td  class="td2" contenteditable="true">-</td>
+                  </tr>
+                  <tr>
+                    <td  class="td2" contenteditable="true">+</td>
+                    <td  class="td2" contenteditable="true">+</td>
+                    <td  class="td2" contenteditable="true">-</td>
+                    <td  class="td2" contenteditable="true">-</td>
+                    <td  class="td2" contenteditable="true">-</td>
+                  </tr>
+                  <tr>
+                    <td  class="td2" contenteditable="true">-</td>
+                    <td  class="td2" contenteditable="true">-</td>
+                    <td  class="td2" contenteditable="true">-</td>
+                    <td  class="td2" contenteditable="true">-</td>
+                    <td  class="td2" contenteditable="true">-</td>
+                  </tr>
+                  <tr>
+                    <td  class="td2" contenteditable="true">-</td>
+                    <td  class="td2" contenteditable="true">-</td>
+                    <td  class="td2" contenteditable="true">-</td>
+                    <td  class="td2" contenteditable="true">-</td>
+                    <td  class="td2" contenteditable="true">-</td>
+                  </tr>
+                </table>
+              </div>
+            
+              </div>
+            
+              <div class="widal-result-container">
+                <p>RESULT</p>
+                <p>:</p>
+                <p contenteditable="true" class="widal-result">NEGATIVE </p>
+              </div>
+            
+              <div contenteditable="true" class="widal-comment-container">
+            
+                <p>RESULT INTERPRETATION :</p>
+                <p>In non vaccinated persons the titre as high as 1:80 between7th or 10th day of fever is of diagnostic value and the same titre increases gradually during subsequent period. In vaccinated persons the question of anamnestic response should always be borne in mind and 'H' titre should not be taken into account for the purpose of diagnosis unless there is a rising titre of 'H' in subsequent period. </p>
+              </div>
+            
+            </div>`;
+ // testdiv.insertAdjacentHTML('beforeend', tests);
+return tests;
+            }
+                }]
 }}
