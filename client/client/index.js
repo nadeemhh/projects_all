@@ -1,4 +1,18 @@
-// let store = createStore('myDB', 'groupedtests');
+
+import {
+  get,
+  set,
+  getMany,
+  setMany,
+  update,
+  del,
+  clear,
+  keys,
+  values,
+  entries,
+  createStore,
+} from 'https://cdn.jsdelivr.net/npm/idb-keyval@6/+esm';
+let store = createStore('myDB', 'groupedtests');
 
 //let store2 = createStore('myDB2', 'random');
 
