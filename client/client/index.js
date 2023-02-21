@@ -1,4 +1,19 @@
 
+import {
+  get,
+  set,
+  getMany,
+  setMany,
+  update,
+  del,
+  clear,
+  keys,
+  values,
+  entries,
+  createStore,
+} from 'https://cdn.jsdelivr.net/npm/idb-keyval@6/+esm';
+
+
 let store = createStore('myDB', 'groupedtests');
 
 //let store2 = createStore('myDB2', 'random');
@@ -1092,10 +1107,10 @@ for(let i = 0; i <departments.length; i++) {
 
   let div = document.querySelector(`.available-department-container`);
   let html = `<div class="available-department">
-  <div class="hidden66  hidden66${i}" onclick="visiblityHide(${i})">
+  <div class="hidden66  hidden66${i}">
 
   </div>
-  <div class="department-name department-name${i}" onclick="visible(${i})">
+  <div class="department-name department-name${i}">
     <p>${departments[i]}</p>
     <img src="./up-arrow-svgrepo-com.svg" width="20px" alt="">
   </div>
@@ -1107,7 +1122,15 @@ for(let i = 0; i <departments.length; i++) {
   
 let testToPrint=availableTest.departments[departments[i]];
 
+document.querySelector(`.department-name${i}`).addEventListener('click',function () {
+  visible(i)
 
+})
+
+document.querySelector(`.hidden66${i}`).addEventListener('click',function () {
+  visiblityHide(i)
+
+})
 let Partof=[];
 
 for(let ii = 0; ii <testToPrint.length; ii++){
@@ -1147,6 +1170,8 @@ for(let ii = 0; ii < testToPrint.length; ii++){
 
 
 }
+
+
 }
 
 pritnDepartmentAndtests()
@@ -1157,10 +1182,10 @@ alltests()
 function groupTest(i) {
   let div = document.querySelector(`.available-department-container`);
   let html = `<div class="available-department">
-  <div class="hidden66  hidden66${i}" onclick="visiblityHide(${i})">
+  <div class="hidden66  hidden66${i}">
 
   </div>
-  <div class="department-name department-name${i}" onclick="visible(${i})">
+  <div class="department-name department-name${i}">
     <p>GROUP TESTS</p>
     <img src="./up-arrow-svgrepo-com.svg" width="20px" alt="">
   </div>
@@ -1168,6 +1193,16 @@ function groupTest(i) {
   <div class="available-tests  available-tests${i}"></div>
 </div>`;
   div.insertAdjacentHTML("beforeend", html);
+
+  document.querySelector(`.department-name${i}`).addEventListener('click',function () {
+    visible(i)
+  
+  })
+  
+  document.querySelector(`.hidden66${i}`).addEventListener('click',function () {
+    visiblityHide(i)
+  
+  })
 }
 groupTest(66)
 
