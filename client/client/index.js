@@ -1,3 +1,8 @@
+let store = createStore('myDB', 'groupedtests');
+
+//let store2 = createStore('myDB2', 'random');
+
+
 console.log('hello')
 
 console.log(availableTest)
@@ -11,12 +16,17 @@ let patientReportToSave=[];
 let classNameForInputAndValue=0;
 let notRun=0;
 let uniqueIdForPage={count:0};
+let usersGroupTestCreater=undefined;
+let testsToMerge=[];
+let grouping=[];
+let groupedTests=undefined;
+let change=0;
 function randomNumBetween(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
 function addReportTemplate(arr,testNameForFew=undefined,patientInfo) {
-console.log(arr,patientInfo,location.pathname)
+console.log(arr,patientInfo)
 
 
 
@@ -63,13 +73,13 @@ let ReportTemplate =`<div  style="height:29.7cm;width:21cm; margin-bottom: 15px;
 <div class="patient-details1-1">
 <p class="p-patient-details1 mp">Patient Name</p>
 <p class="p-patient-details2 mp">Age/Sex</p>
-<p class="p-patient-details3 mp">Ref: Lab</p>
+<p class="p-patient-details3 mp">Ref:Lab</p>
 <p class="p-patient-details5 mp">Specimen</p>
 </div>
 <div class="patient-details1-2">
 <p style="z-index: 1;" contenteditable="true" class="pp-patient-details1 mp">${patientInfo.Patientname !== ''?patientInfo.Patientname:'dummyName'}</p>
 <p contenteditable="true" class="pp-patient-details2 mp"><span>${patientInfo.Patientage !== ''?patientInfo.Patientage:'55'} </span><span>YRS </span><span>${patientInfo.gender}</span></p>
-<p contenteditable="true" class="pp-patient-details3 mp">mat labs</p>
+<p contenteditable="true" class="pp-patient-details3 mp">none</p>
 <p contenteditable="true" class="pp-patient-details5 mp">WB-EDTA</p>
 </div>
 
@@ -83,7 +93,7 @@ let ReportTemplate =`<div  style="height:29.7cm;width:21cm; margin-bottom: 15px;
 
 </div>
 <div class="patient-details2-2">
-<p contenteditable="true" class="pp-patient-details1 mp">dr.roy</p>
+<p contenteditable="true" class="pp-patient-details1 mp">${patientInfo.refby}</p>
 <p contenteditable="true" class="pp-patient-details1 mp">${patientInfo.patientId}</p>
 <p contenteditable="true" class="pp-patient-details2 mp">${patientInfo.registrationDate}</p>
 
@@ -101,7 +111,7 @@ let ReportTemplate =`<div  style="height:29.7cm;width:21cm; margin-bottom: 15px;
 <p class="testName fw500">Test Name</p>
 <p class="result fw500">Value</p>
 <p class="unit fw500">Unit</p>
-<p class="normalRange fw500">Biological Ref. Interval</p>
+<p class="normalRange fw500">Normal Range&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
 </div>
 </div>
 </div>
@@ -131,19 +141,23 @@ div.insertAdjacentHTML('beforeend', ReportTemplate);
 let deparmentarray = [];
 
 
+
+document.querySelectorAll('.pp-patient-details5')[document.querySelectorAll('.pp-patient-details5').length-1].textContent=arr[0].Specimen;
+
 for (let ii = leftTest.count; ii < arr.length; ii++) {
 
-
-  if(deparmentarray.includes(arr[ii].department)==false){
   
+  if(deparmentarray.includes(arr[ii].department)==false){
+    
   deparmentarray.push(arr[ii].department)
   testAddToTemplate(arr,className,ii,0,testNameForFew)
   if(deparmentarray.length>1){deparmentarray.shift()}
 
   }
   else{ 
-   
-    testAddToTemplate(arr,className,ii,1,testNameForFew)}
+    
+    testAddToTemplate(arr,className,ii,1,testNameForFew)
+  }
  
 
     leftTest.count=ii
@@ -160,14 +174,12 @@ for (let ii = leftTest.count; ii < arr.length; ii++) {
       document.querySelectorAll(`.deparment`)[document.querySelectorAll('.deparment').length-1].remove()
       break;
     }
-    if(spaceLeft>-1){
+    console.log(spaceLeft)
+    if(spaceLeft>-10){
+console.log('triigerd1')
 
         document.querySelector(`.all-test-container${className}`).children[document.querySelector(`.all-test-container${className}`).children.length-1].remove()
 
-        
-        //console.log(document.querySelector(`.${className2}`))
-        //console.log(`no space is left for footer .${className2}`)
-        // leftTest.count++
         break;
         
   }
@@ -180,8 +192,11 @@ if(leftTest.count == arr.length-1){break;}
 
 
 function sapceCheacker(className) {
-    
+  console.log('triigerd2')
+  console.log(className,document.querySelectorAll(className)[document.querySelectorAll(className).length-1])
+
     let spaceLeft=document.querySelectorAll(className)[document.querySelectorAll(className).length-1].getBoundingClientRect().bottom-document.querySelectorAll('.Reportfotter')[document.querySelectorAll('.Reportfotter').length-1].getBoundingClientRect().top;
+
 
 return spaceLeft;
     
@@ -217,7 +232,7 @@ let testToPerform=[];
 
 let choosetest=[];
 
-console.log(choosetest)
+
 
 function alltests() {
   
@@ -241,6 +256,7 @@ console.log(choosetest[i])
   }
  
   console.log(testToPerform)
+  
   //console.log(choosetest[i].getAttribute('departments'),choosetest[i].getAttribute('Partof'))
   })
   
@@ -248,7 +264,7 @@ console.log(choosetest[i])
 }
 
 
-function performTest() {
+function performTest(out=false) {
   uniqueIdForPage.count++
   let addIdOneTime=0;
   if(testToPerform.length==0){
@@ -258,12 +274,16 @@ function performTest() {
 
 
 let x = document.getElementById("optionList");
+let x2 = document.getElementById("RefByList");
 let Patientname=document.querySelector(".name").value.toUpperCase();
 let Patientage=document.querySelector(".age").value;
 let gender = x.options[x.selectedIndex].text.toUpperCase(); 
+let refby = x2.options[x2.selectedIndex].text.toUpperCase(); 
 let registrationDate =document.querySelector(".date").value;
 let patientID =document.querySelector(".patientID").value;
-
+let mobileNo =document.querySelector(".MobileNo").value;
+const select = document.getElementById("genderList");
+select.selectedIndex = 0;
 /////empty value of input tag
 document.querySelector(".name").value='';
 document.querySelector(".age").value='';
@@ -272,6 +292,8 @@ document.querySelector(".patientID").value='';
 //////
 
 console.log(Patientname,Patientage,registrationDate,patientID)
+
+let patientDeatels={Patientname:Patientname,Patientage:Patientage,registrationDate:registrationDate,gender:gender,patientId:patientID,refby:refby,mobileNo:mobileNo};
 
 document.querySelector(".add-patient-container").style.display='flex';
 document.querySelector(".form").style.display='none';
@@ -290,7 +312,14 @@ document.querySelector(".makereport").style.display='none';
 let sepratePageReport=[];
   for (let i = 0; i < testToPerform.length; i++) {
 
-   // console.log(availableTest.departments[testToPerform[i].departments])
+    console.log(testToPerform[i])
+
+    if(testToPerform[i].Partof=="group"){
+      console.log(testToPerform[i])
+      printGTests(testToPerform[i],patientDeatels)
+      continue;
+    }
+    console.log(testToPerform[i])
     let department = availableTest.departments[testToPerform[i].departments.replace('-','')];
 
 for (let ii = 0; ii < department.length; ii++) {
@@ -319,16 +348,48 @@ else{
   }
 
   let repo={sepratePageReport:sepratePageReport}
-console.log(repo)
 
 
- let patientDeatels={Patientname:Patientname,Patientage:Patientage,registrationDate:registrationDate,gender:gender,patientId:patientID};
-console.log(patientDeatels)
+
+
+
+  console.log(sepratePageReport,createReport,patientDeatels)
+
+
 
 patientReportToSave.push({repo,createReport,patientDeatels})
 
 let user = {repo,createReport,patientDeatels};
 
+const newArray = [];
+
+///////////////create new page where newpage:true
+for (let i = 0; i < createReport.length; i++) {
+
+  if(createReport[i].newPage!=undefined && createReport[i].newPage == true){
+newArray.push(createReport[i]);
+createReport.splice(i, 1);
+i--;
+  }
+ 
+
+}
+
+console.log(newArray)
+for (let i = 0; i < newArray.length; i++) {
+
+console.log(newArray[i],patientDeatels)
+addReportTemplate([newArray[i]],newArray[i].testName[0]=='!'?newArray[i].testName.replace('!',''):undefined,patientDeatels)
+testnameaddonlyonetime=0;
+
+}
+
+//////////////////////////
+
+if(out==true){
+  usersGroupTestCreater=user;
+
+  return;}
 sessionStorage.setItem(patientDeatels.patientId, JSON.stringify(user));
 
 
@@ -358,6 +419,12 @@ for (let t = 0; t < totaldepartment.length; t++) {
       break;
       case 'thyroidprofile':
         testNameToAdd = "thyroid profile";
+       break;
+       case 'Widal':
+        testNameToAdd = "Widal Test ( Slide Method) *";
+       break;
+       case 'LipidProfile':
+        testNameToAdd = "Lipid Profile";
        break;
   }
 
@@ -428,6 +495,8 @@ totalTest=[];
 
 }
 console.log(totaldepartment)
+
+// repo.sepratePageReport.length !== 0 end
 }
 
 console.log(createReport)
@@ -492,11 +561,22 @@ console.log(patientReportToSave)
 }
 
 
+function hasAlphabets(str) {
 
+  let regex = /[a-zA-Z]/;
+  return regex.test(str);
+}
+
+function removeMatchingStrings(str) {
+  const regex = /(M|F)\s-\s/g; 
+  return str.replace(regex, '');
+}
 
 function testAddToTemplate(arr,className,ii,deparmentPrintValue,testNameForFew) {
 
+
 ////////add department
+console.log(deparmentPrintValue)
 if(deparmentPrintValue == 0){
 let divdep = document.querySelector(`.all-test-container${className}`);  
 let deparment =`<div class="deparment"><p>${arr[ii].department}</p></div>`;
@@ -508,7 +588,7 @@ divdep.insertAdjacentHTML('beforeend', deparment);}
 if(testNameForFew !== undefined){
 
   if(testnameaddonlyonetime==0){
-
+    
 let divtestname = document.querySelector(`.all-test-container${className}`);  
 let testname =`<div class="testname22"><p>${testNameForFew}</p></div>`;
 divtestname.insertAdjacentHTML('beforeend', testname);
@@ -533,19 +613,41 @@ console.log(patientReportToSave[patientReportToSave.length-1].patientDeatels.pat
 let patientRefferance=patientReportToSave[patientReportToSave.length-1].patientDeatels.patientId;
 
   let testdiv = document.querySelector(`.all-test-container${className}`);  
-  let tests =`<div class='Patienttest Patienttest${classPatienttest}'>
-<p class="testNamevalue testNamevalue${classtestNamevalue}">${arr[ii].testName}</p>
+
+  let tests;
+
+  
+if(arr[ii].testName != 'Widal'){
+  tests =`<div class='Patienttest Patienttest${classPatienttest}'>
+<p class="testNamevalue testNamevalue${classtestNamevalue}">${arr[ii].testName.replace('!','')}</p>
 <div class="resultvalue resultvalue${classresultvalue}">
 <p class="b${classNameForInputAndValue} para">${arr[ii].value}</p>
   <input class="a${classNameForInputAndValue} textarea hide input" type="text">
 </div>
 <p contenteditable="true" class="unitvalue unitvalue${classunitvalue}">${arr[ii].unit}</p>
-<p contenteditable="true" class="normalRangevalue normalRangevalue${classnormalRangevalue}">${arr[ii].normalRange.replace('$','')}</p></div>`;
+${`<p contenteditable="true" class="normalRangevalue normalRangevalue${classnormalRangevalue}">${arr[ii].normalRange.length==1?`<span>${arr[ii].normalRange[0]}</span>`:arr[ii].normalRange.map(function(value) {
+  if(value!=''){  return `<span>${value}</span><br>`;}
+})}</p>`.replaceAll(',','')}</div>`;
+}
+else{
+newStructureReport(arr[ii],`${alphabet[randomNumBetween(0,24)]}${randomNumBetween(100,100000)}`,className,classPatienttest,patientRefferance)
+  return;}
+
   testdiv.insertAdjacentHTML('beforeend', tests);
 
 let tn=arr[ii].testName;
 
+if(arr[ii].comment!=undefined){
+  console.log(arr[ii],arr[ii].comment)
+let html =`<div class="comment-for-test">
+<p class="comment-heading">${arr[ii].comment[0]}</p>
+<p class="comment-paragraph">${arr[ii].comment[1]}</p>
+</div>`
+  testdiv.insertAdjacentHTML('beforeend', html);
+}
+
 ///////////////////
+
   alignMaker(`testNamevalue${classtestNamevalue}`,`testName`)
   alignMaker(`resultvalue${classresultvalue}`,`result`)
   alignMaker(`unitvalue${classunitvalue}`,`unit`)
@@ -611,19 +713,90 @@ sessionStorage.setItem(patientRefferance, JSON.stringify(patientReportDataToSave
 ////////////////////////////////////
 
 
-if(arr[ii].normalRange[0] != '$'){
-  let normalRangeForTest=arr[ii].normalRange.replaceAll(' ','').split('-');
+console.log(hasAlphabets(text));
+console.log(arr[ii].testName)
 
-  let checkNormalRangeOfValue=checkNormalRange(text,normalRangeForTest);
+if(arr[ii].normalRange.length == 1){
+  if(hasAlphabets(text)==false){
+
+let normalRangeForTest=arr[ii].normalRange[0].replaceAll(' ','').split('-');
+let checkNormalRangeOfValue=checkNormalRange(text,normalRangeForTest);
+
 console.log(text,normalRangeForTest,checkNormalRangeOfValue)
 
 
+if(checkNormalRangeOfValue=='abnomalValue'){
+document.querySelector(`.Patienttest${classPatienttest}`).children[1].children[0].classList.add(checkNormalRangeOfValue)
+}
+else{
+document.querySelector(`.Patienttest${classPatienttest}`).children[1].children[0].classList.remove('abnomalValue')
+}
+
+}
+}
+
+if(arr[ii].testName=='Haemoglobin'){
+
+console.log(patientReportDataToSave.patientDeatels.gender)
+if(patientReportDataToSave.patientDeatels.gender=='MALE'){
+
+const originalString = arr[ii].normalRange[0];
+const newString = removeMatchingStrings(originalString);
+
+console.log(newString);
+
+let normalRangeForTest=newString.replaceAll(' ','').split('-');
+let checkNormalRangeOfValue=checkNormalRange(text,normalRangeForTest);
+if(checkNormalRangeOfValue=='abnomalValue'){
+document.querySelector(`.Patienttest${classPatienttest}`).children[1].children[0].classList.add(checkNormalRangeOfValue)
+}
+else{
+document.querySelector(`.Patienttest${classPatienttest}`).children[1].children[0].classList.remove('abnomalValue')
+}
+
+}
+
+if(patientReportDataToSave.patientDeatels.gender=='FEMALE'){
+
+const originalString = arr[ii].normalRange[1];
+const newString = removeMatchingStrings(originalString);
+
+console.log(newString);
+
+  let normalRangeForTest=newString.replaceAll(' ','').split('-');
+  let checkNormalRangeOfValue=checkNormalRange(text,normalRangeForTest);
 if(checkNormalRangeOfValue=='abnomalValue'){
   document.querySelector(`.Patienttest${classPatienttest}`).children[1].children[0].classList.add(checkNormalRangeOfValue)
 }
 else{
   document.querySelector(`.Patienttest${classPatienttest}`).children[1].children[0].classList.remove('abnomalValue')
 }
+
+}
+
+}
+
+
+if(arr[ii].testName=='Triglycerides (TG)'){
+console.log(text)
+if(parseFloat(text)>150){
+  document.querySelector(`.Patienttest${classPatienttest}`).children[1].children[0].classList.add('abnomalValue')
+}
+else{
+  document.querySelector(`.Patienttest${classPatienttest}`).children[1].children[0].classList.remove('abnomalValue')
+}
+
+}
+
+if(arr[ii].testName=='Cholesterol HDL'){
+console.log(text)
+  if(parseFloat(text) < 66){
+    document.querySelector(`.Patienttest${classPatienttest}`).children[1].children[0].classList.add('abnomalValue')
+  }
+  else{
+    document.querySelector(`.Patienttest${classPatienttest}`).children[1].children[0].classList.remove('abnomalValue')
+  }
+
 }
 
 
@@ -721,10 +894,18 @@ let found=0;
 sessionStorage.setItem(patientRefferance, JSON.stringify(patientReportDataToSave));
 ////////////////////////////////////
 
-if(arr[ii].normalRange[0] != '$'){
-  let normalRangeForTest=arr[ii].normalRange.replaceAll(' ','').split('-');
 
+
+  
+  console.log(hasAlphabets(text));
+  console.log(arr[ii].testName)
+
+  if(arr[ii].normalRange.length == 1){
+    if(hasAlphabets(text)==false){
+
+  let normalRangeForTest=arr[ii].normalRange[0].replaceAll(' ','').split('-');
   let checkNormalRangeOfValue=checkNormalRange(text,normalRangeForTest);
+
 console.log(text,normalRangeForTest,checkNormalRangeOfValue)
 
 
@@ -734,7 +915,74 @@ if(checkNormalRangeOfValue=='abnomalValue'){
 else{
   document.querySelector(`.Patienttest${classPatienttest}`).children[1].children[0].classList.remove('abnomalValue')
 }
+
 }
+}
+
+if(arr[ii].testName=='Haemoglobin'){
+
+  console.log(patientReportDataToSave.patientDeatels.gender)
+if(patientReportDataToSave.patientDeatels.gender=='MALE'){
+
+  const originalString = arr[ii].normalRange[0];
+const newString = removeMatchingStrings(originalString);
+
+console.log(newString);
+
+  let normalRangeForTest=newString.replaceAll(' ','').split('-');
+  let checkNormalRangeOfValue=checkNormalRange(text,normalRangeForTest);
+if(checkNormalRangeOfValue=='abnomalValue'){
+  document.querySelector(`.Patienttest${classPatienttest}`).children[1].children[0].classList.add(checkNormalRangeOfValue)
+}
+else{
+  document.querySelector(`.Patienttest${classPatienttest}`).children[1].children[0].classList.remove('abnomalValue')
+}
+
+}
+
+if(patientReportDataToSave.patientDeatels.gender=='FEMALE'){
+
+  const originalString = arr[ii].normalRange[1];
+  const newString = removeMatchingStrings(originalString);
+  
+  console.log(newString);
+  
+    let normalRangeForTest=newString.replaceAll(' ','').split('-');
+    let checkNormalRangeOfValue=checkNormalRange(text,normalRangeForTest);
+  if(checkNormalRangeOfValue=='abnomalValue'){
+    document.querySelector(`.Patienttest${classPatienttest}`).children[1].children[0].classList.add(checkNormalRangeOfValue)
+  }
+  else{
+    document.querySelector(`.Patienttest${classPatienttest}`).children[1].children[0].classList.remove('abnomalValue')
+  }
+
+}
+
+}
+
+
+if(arr[ii].testName=='Triglycerides (TG)'){
+console.log(text)
+  if(parseFloat(text)>150){
+    document.querySelector(`.Patienttest${classPatienttest}`).children[1].children[0].classList.add('abnomalValue')
+  }
+  else{
+    document.querySelector(`.Patienttest${classPatienttest}`).children[1].children[0].classList.remove('abnomalValue')
+  }
+
+}
+
+if(arr[ii].testName=='Cholesterol HDL'){
+  console.log(text)
+    if(parseFloat(text) < 66){
+      document.querySelector(`.Patienttest${classPatienttest}`).children[1].children[0].classList.add('abnomalValue')
+    }
+    else{
+      document.querySelector(`.Patienttest${classPatienttest}`).children[1].children[0].classList.remove('abnomalValue')
+    }
+  
+  }
+
   }
     
    
@@ -764,10 +1012,6 @@ document.querySelector(".form").style.display='flex';
 document.querySelector(".makereport").style.display='block';
 document.querySelector(".add-patient-container").style.display='none';
 
-let x = document.getElementById("optionList");
-
-
-
 let sampleCollectionDate=new Date().toLocaleString();
 
 document.querySelector(".date").value=sampleCollectionDate;
@@ -775,32 +1019,55 @@ document.querySelector(".date").value=sampleCollectionDate;
 let alphabetId=alphabet[randomNumBetween(0,25)];
 document.querySelector(".patientID").value=`${alphabetId}${randomNumBetween(1000,10000)}${randomNumBetween(1000,10000)}`;
 
+})
 
-document.querySelector(".name").addEventListener('input',function () {
 
-  let value=document.querySelector(".name").value;
+let x = document.getElementById("optionList");
+const select = document.getElementById("genderList");
+const input = document.querySelector(".name");
+
+
+select.addEventListener("change", function() {
   
-  console.log(value)
-  
-  if(value=='Mrs.'||value=='mrs.'||value=='MRS.'||value=='MS.'||value=='Ms.'||value=='ms.'){
+  const selectedOption = select.options[select.selectedIndex].textContent;
+  console.log(selectedOption)
+  input.value = selectedOption.replace('female','').replace('male','');
+  input.focus()
+  if(selectedOption=='Mrs.'||selectedOption=='Ms.'||selectedOption=='baby female'){
   
     x.options.selectedIndex=1;
   }
   
-  if(value=='Mr.'||value=='mr.'||value=='MR.'){ 
+  if(selectedOption=='Mr.'||selectedOption=='baby male'){ 
   
     x.options.selectedIndex=0;
   
   }
-  
-  
-  })
 
-})
+});
+
+
+for (let i = 0; i < document.querySelector(`.input-container`).children.length; i++) {
+
+  let nextinput=i+1;
+
+  if(i < document.querySelector(`.input-container`).children.length-1){
+  document.querySelector(`.input-container`).children[i].addEventListener("keypress", function(event) {
+    let key = event.key;
+    if (key == "Enter") {
+
+      document.querySelector(`.input-container`).children[nextinput].focus()
+  
+    }
+  })
+}
+}
+
+
 
 
 function visible(i){
-document.querySelector(`.available-tests${i}`).style.display='block';
+document.querySelector(`.available-tests${i}`).style.display='flex';
 document.querySelector(`.hidden66${i}`).style.display= 'flex';
 document.querySelector(`.department-name${i}>img`).style.transition='0.2s';
 document.querySelector(`.department-name${i}>img`).style.transform='rotate(180deg)';
@@ -858,13 +1125,15 @@ Partof=removeDuplicates(Partof);
 for(let ii = 0; ii <Partof.length; ii++){
 
   let div = document.querySelector(`.available-tests${i}`);
-  let html = ` <button class="but" departments=${testToPrint[ii].department}  Partof=${Partof[ii]}>${Partof[ii]}</button>`;
+  let html = `<button class="but" departments=${testToPrint[ii].department}  Partof=${Partof[ii]}>${Partof[ii]}</button>`;
   div.insertAdjacentHTML("beforeend", html);
   choosetest.push(document.querySelector(`.available-tests${i}`).children[ii])
 }
 
+
 for(let ii = 0; ii < testToPrint.length; ii++){
 
+  if(testToPrint[ii].testName!='Widal'){
   let div = document.querySelector(`.available-tests${i}`);
 
   let html = ` <button class="but" departments=${testToPrint[ii].department}>${testToPrint[ii].testName}</button>`;
@@ -872,7 +1141,7 @@ for(let ii = 0; ii < testToPrint.length; ii++){
   div.insertAdjacentHTML("beforeend", html);
 
   choosetest.push(document.querySelector(`.available-tests${i}`).children[ii+Partof.length])
-
+}
 }
 
 
@@ -881,3 +1150,313 @@ for(let ii = 0; ii < testToPrint.length; ii++){
 
 pritnDepartmentAndtests()
 alltests()
+
+
+
+function groupTest(i) {
+  let div = document.querySelector(`.available-department-container`);
+  let html = `<div class="available-department">
+  <div class="hidden66  hidden66${i}" onclick="visiblityHide(${i})">
+
+  </div>
+  <div class="department-name department-name${i}" onclick="visible(${i})">
+    <p>GROUP TESTS</p>
+    <img src="./up-arrow-svgrepo-com.svg" width="20px" alt="">
+  </div>
+  
+  <div class="available-tests  available-tests${i}"></div>
+</div>`;
+  div.insertAdjacentHTML("beforeend", html);
+}
+groupTest(66)
+
+
+
+
+function displayGroupTestModalWindow() {
+
+
+  document.querySelector(`.add-Group-Tests`).addEventListener('click',function () {
+
+    addHtmlInModalWindow(testToPerform)
+    chaining()
+    document.querySelector(`.modalwindow-for-group-test`).style.display='flex';   
+    document.querySelector(`.modalwindow-for-group-test`).style.transition='0.2s';   
+    document.querySelector(`.modalwindow-for-group-test`).style.transform= 'scale(1)';
+  })
+}
+
+displayGroupTestModalWindow()
+
+function addHtmlInModalWindow(testToPerform) {
+ 
+  performTest(true)
+  console.log(testToPerform,usersGroupTestCreater)
+  
+  let repo1=usersGroupTestCreater.createReport;
+  let repo2=usersGroupTestCreater.repo.sepratePageReport;
+  console.log(repo1,repo2)
+
+  let div = document.querySelector(`.modalwindow-for-group-test`);
+  let html = `<div>
+  <div>
+  <p>Group's Name</p>
+  <input placeholder="Add Group Name" type="text">
+</div>
+<div>
+  <button class="createGroup">create</button>
+</div>
+</div>
+
+      <div class="selected-test-container">
+        <div><p>linked!</p>
+        </div>
+        <div>
+          <p>Selected-Tests</p>
+
+          <div class="img-cont"> 
+        <img class="chain" src="./link-chain-svgrepo-com.svg" width="21px" alt=""> 
+            <img class="mark" src="./check-small-svgrepo-com.svg" width="21px"  alt="">
+          </div>
+        </div>
+      <div class="selected-test">
+
+      </div>
+    </div>`;
+  div.insertAdjacentHTML("beforeend", html);
+
+  createGroup()
+  for (let i = 0; i < testToPerform.length; i++) {
+
+    let div = document.querySelector(`.selected-test`);
+  let html = `<button class="but">${testToPerform[i].testName}</button>`;
+  div.insertAdjacentHTML("beforeend", html);
+
+  document.querySelector(`.selected-test`).children[i].style.backgroundColor='white'; 
+  document.querySelector(`.selected-test`).children[i].addEventListener('click',function () {
+ 
+    
+  
+      document.querySelector(`.selected-test`).children[i].style.backgroundColor='lightgreen'; 
+      
+      testsToMerge.push(document.querySelector(`.selected-test`).children[i])
+     
+   
+
+    })
+    
+  }
+
+
+  // for (let i = 0; i < repo1.length; i++) {
+
+  //   let div = document.querySelector(`.selected-test`);
+  // let html = `<button class="but">${repo1[i].testName}</button>`;
+  // div.insertAdjacentHTML("beforeend", html);
+
+
+    
+  // }
+
+  // for (let i = 0; i < repo2.length; i++) {
+
+  //   let div = document.querySelector(`.selected-test`);
+  // let html = `<button class="but">${repo2[i].testName}</button>`;
+  // div.insertAdjacentHTML("beforeend", html);
+
+
+
+  // }
+}
+
+
+
+
+function chaining() {
+  
+  document.querySelector(`.chain`).addEventListener('click',function () {
+ 
+   
+     
+let addin=testsToMerge[0].textContent;
+let addinto=[];
+
+
+for (let i = 0; i < testsToMerge.length; i++) {
+
+  for (let ii = 0; ii < testToPerform.length; ii++) {
+
+  if(testsToMerge[i].textContent==testToPerform[ii]['testName']){
+
+    addinto.push(testToPerform[ii])
+    break;
+  }
+
+}
+}
+console.log(testsToMerge,addin,testToPerform,addinto)
+let repo2=usersGroupTestCreater.repo.sepratePageReport;
+let createRepo=[];
+
+let color1 =randomNumBetween(100, 250);
+let color2 =randomNumBetween(100, 250);
+let color3 =randomNumBetween(100, 250);
+
+      for (let i = 0; i < addinto.length; i++){
+        testsToMerge[i].style.backgroundColor=`rgb(${color1},${color2},${color3})`;
+        //console.log(testsToMerge[i].textContent)
+ 
+       
+        if(addinto[i].Partof!=undefined){
+
+          console.log(addinto[i]['testName'])
+        for(let ii = 0; ii < usersGroupTestCreater.repo.sepratePageReport.length; ii++){
+           
+          if(usersGroupTestCreater.repo.sepratePageReport[ii].Partof==addinto[i].testName){
+            createRepo.push(usersGroupTestCreater.repo.sepratePageReport[ii])
+
+
+          }
+            
+         
+          }
+
+        }
+       else{ 
+
+        console.log(addinto[i]['testName'])
+
+        for (let ii = 0; ii < usersGroupTestCreater.createReport.length; ii++){
+
+          if(usersGroupTestCreater.createReport[ii].testName==addinto[i].testName){
+
+            createRepo.push(usersGroupTestCreater.createReport[ii])
+            let index = usersGroupTestCreater.createReport.findIndex(obj => obj.testName === addinto[i].testName);
+
+                if (index > -1) {
+                  usersGroupTestCreater.createReport.splice(index, 1);
+                          }
+
+          }
+          
+        }
+
+      }
+      }
+
+for (let i = 0; i < createRepo.length; i++) {
+
+  let index = repo2.findIndex(obj => obj.testName === createRepo[i].testName);
+
+  if (index > -1) {
+    repo2.splice(index, 1);
+            }
+
+}
+
+      // for (let i = 1; i < testsToMerge.length; i++) {
+      //   testsToMerge[i].style.backgroundColor='white';
+      //   console.log(testsToMerge[i].textContent)
+      // }
+      change=1;
+      let repo={sepratePageReport:usersGroupTestCreater.repo.sepratePageReport}
+
+      grouping.push(createRepo)
+       groupedTests = {repo,createReport:usersGroupTestCreater.createReport,groupedTests:grouping};
+    
+      console.log(createRepo,groupedTests)
+
+      testsToMerge=[];
+      
+      document.querySelector(`.selected-test-container>div:nth-child(1)>p`).style.transition='0.2s'; 
+      document.querySelector(`.selected-test-container>div:nth-child(1)>p`).style.visibility='visible'; 
+     
+      document.querySelector(`.selected-test-container>div:nth-child(1)>p`).style.transform= 'scale(2.5)';
+      
+      setTimeout(() => {
+      
+        document.querySelector(`.selected-test-container>div:nth-child(1)>p`).style.visibility='hidden';
+        document.querySelector(`.selected-test-container>div:nth-child(1)>p`).style.transform= 'scale(0)';
+      
+      }, 1000); 
+  })
+
+}
+
+function createGroup() {
+  document.querySelector('.createGroup').addEventListener('click',function () {
+
+    console.log(usersGroupTestCreater,change)
+    let groupName=document.querySelector('.modalwindow-for-group-test>div:nth-child(1)>div:nth-child(1)>input').value.replaceAll(' ','$');
+console.log(groupName)
+if(groupName!=''){
+
+  if(change==0){
+    set(groupName, usersGroupTestCreater,store)
+    .then(() => {
+      console.log('saved the user_id');
+    })
+    }
+
+  if(change==1){
+set(groupName, groupedTests,store)
+.then(() => {
+  console.log('saved the user_id');
+  change=0;
+})
+}
+
+document.querySelector('.modalwindow-for-group-test>div:nth-child(1)>div:nth-child(1)>input').value='';
+
+
+for (let i = document.querySelector('.modalwindow-for-group-test').children.length-1; i >= 0; i--) {
+  
+  document.querySelector('.modalwindow-for-group-test').children[i].remove()
+}
+
+document.querySelector('.modalwindow-for-group-test').style.display='none';
+
+
+ testToPerform=[]
+ usersGroupTestCreater=undefined;
+ groupedTests=undefined;
+ grouping=[];
+
+location.reload()
+
+  }
+  else{alert("enter group's name")}
+
+  })
+}
+
+
+function addGroupedTests() {
+
+  console.log(document.querySelector('.available-tests66'))
+
+
+
+  keys(store).then((keys) => {
+    console.log('keys');
+    console.log(keys);
+
+    let div = document.querySelector(`.available-tests66`);
+
+    for (let i = 0; i < keys.length; i++) {
+      let html = `<div style="display: inline-block;margin-right: 5px;">
+      <div style="display: flex;align-items: center;background-color: rgb(241, 238, 238);gap: 2px;padding: 2.5px;border-radius: 5px;"><button class="fromgroupdatabase fromgroupdatabase${i}" style="border: none;padding: 5px;cursor: pointer;">${keys[i].replaceAll('$',' ')}</button>
+      <img class="deletefromdatabase${i}" width="15px" style="cursor: pointer;" src="./trash-can-svgrepo-com (1).svg" alt="">
+      </div>
+      </div>`;
+      div.insertAdjacentHTML("beforeend", html);
+      printGroupedTests(`.fromgroupdatabase${i}`,`.deletefromdatabase${i}`)
+    }
+
+
+
+  });
+
+
+}
+addGroupedTests()

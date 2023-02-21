@@ -10,8 +10,14 @@
     <title>Document</title>
   </head>
   <body>
+    <div class="modalwindow-for-group-test">
+
+    </div>
     <div id="root">
-      <div class="Navbar-container"></div>
+      <div class="Navbar-container">
+        <img width="40px" src="./cells-hexagon-svgrepo-com (1).svg" alt="">
+        <p>Pathology Lab<br>Management Software</p>
+      </div>
       <div class="others-container">
         <div class="sidebar"></div>
         <div class="main">
@@ -20,27 +26,52 @@
         </div>
         <div class="sidebar2">
           
+          <div class="action-buttons">
           <div class="add-patient-container">
             <p>Add Patient</p>
-            <img src="./add.svg" width="25px" alt="">
+            <img src="./add-circle-svgrepo-com (1).svg" width="25px" alt="">
           </div>
           
+          <div class="add-Group-Tests">
+            <p>Group Tests</p>
+            <img src="./add-circle-svgrepo-com (1).svg" width="25px" alt="">
+          </div>
+        </div>
 <div class="form">
-
+<p>Fill Patient Details</p>
   <div class="input-label-container">
 
     <div class="label-container">
+      <div>
       <p class="label">Name</p>
+      <select style="width: 20px;margin-left: 4px;border-radius: 2px;" name="" id="genderList">
+        <option value="">select</option>
+        <option value="">Mr.</option>
+        <option value="">Mrs.</option>
+        <option value="">Ms.</option>
+        <option value="">baby male</option>
+        <option value="">baby female</option>
+      </select>
+    </div>
       <p class="label">Age</p> 
+      <p class="label">Mobile</p>
       <p class="label">Date</p> 
       <p class="label">ID</p> 
+      <p class="label">Ref. By</p> 
     </div>
 
     <div class="input-container">
       <input type="text" class="forminput name" placeholder="Enter Name">
       <input type="text" class="forminput age" placeholder="Enter age">  
+      <input type="text" class="forminput MobileNo" placeholder="Enter Mobile Number"> 
       <input type="text" class="forminput date" placeholder="Enter date"> 
       <input type="text" class="forminput patientID" placeholder="patient ID">
+      <select name="" id="RefByList">
+        <option value="">Dr.Dummy</option>
+        <option value="">Self</option>
+        <option value="">Dummy hospital</option>
+        <option value="">Dummy path lab</option>
+      </select>
     </div>
 
   </div>
@@ -74,9 +105,11 @@
       </div>
     </div>
 
- 
+    <script src="./indexedDB.js"></script>
     <script src="./patienttest.js"></script>
     <script src="./index.js"></script>
+<script src="./newStructureReport.js"></script>
+<script src="./printGroupedTests.js"></script>
 
   </body>
 </html>

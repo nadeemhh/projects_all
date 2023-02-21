@@ -14,131 +14,29 @@
  
 }
 
-.widal{width: 600px;display: flex;flex-direction: column;gap: 20px;}
+.shorten {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 100px; /* Set a maximum width for the shortened text */
+}
 
-.widal-test-container{display: flex;height: 150px;width: 450px;align-items: flex-end;justify-content: space-between;}
-
- table {
-        border-collapse: collapse;
-      }
-     td {
-        
-        padding:5px;
-        padding-left: 10px;
-        text-align: left;
-        text-align: center;
-      }
-
-      .td2{  padding-left: 20px;}
-
-
-.widal-result-container{display: flex;gap: 10px;align-items: center;}
-.widal-result-container>p:nth-child(1){font-weight: 600;}
-.widal-result-container>p:nth-child(2){font-weight: 600;}
-
-
-.widal-comment-container>p:nth-child(1){display: inline-block; margin-bottom: 10px;border-bottom: 1px solid black;}
+.shorten:hover {
+  max-width: none;
+}
 
     </style>
     <title>Document</title>
   </head>
   <body>
-<div class="widal">
-    <div class="widal-test-container">
-      
-      <div>
-    <table class="widal-values">
-        <td>S Typhi 'O'</td>
-    </table>
-    <table class="widal-values">
-       <td>S Typhi 'H'</td>
-  </table>
-  <table class="widal-values">
-    <td>S ParaTyphi 'AH'</td>
-</table>
-<table class="widal-values">
-  <td>S ParaTyphi 'BH'</td> 
-</table>
-</div>
-<div>
-    <table>
-      <tr>
-        <td class="td2"  class="td2" contenteditable="true">1/20</td>
-        <td  class="td2" contenteditable="true">1/40</td>
-        <td  class="td2" contenteditable="true">1/80</td>
-        <td  class="td2" contenteditable="true">1/160</td>
-        <td  class="td2" contenteditable="true">1/320</td>
-      </tr>
-      <tr>
-        <td  class="td2" contenteditable="true">+</td>
-        <td  class="td2" contenteditable="true">+</td>
-        <td  class="td2" contenteditable="true">-</td>
-        <td  class="td2" contenteditable="true">-</td>
-        <td  class="td2" contenteditable="true">-</td>
-      </tr>
-      <tr>
-        <td  class="td2" contenteditable="true">+</td>
-        <td  class="td2" contenteditable="true">+</td>
-        <td  class="td2" contenteditable="true">-</td>
-        <td  class="td2" contenteditable="true">-</td>
-        <td  class="td2" contenteditable="true">-</td>
-      </tr>
-      <tr>
-        <td  class="td2" contenteditable="true">-</td>
-        <td  class="td2" contenteditable="true">-</td>
-        <td  class="td2" contenteditable="true">-</td>
-        <td  class="td2" contenteditable="true">-</td>
-        <td  class="td2" contenteditable="true">-</td>
-      </tr>
-      <tr>
-        <td  class="td2" contenteditable="true">-</td>
-        <td  class="td2" contenteditable="true">-</td>
-        <td  class="td2" contenteditable="true">-</td>
-        <td  class="td2" contenteditable="true">-</td>
-        <td  class="td2" contenteditable="true">-</td>
-      </tr>
-    </table>
-  </div>
+    <p class="shorten">This is a long string of text that needs to be shortened</p>
 
-  </div>
 
-  <div class="widal-result-container">
-    <p>RESULT</p>
-    <p>:</p>
-    <p contenteditable="true" class="widal-result">NEGATIVE </p>
-  </div>
+<script type="module">
+  
+ 
 
-  <div contenteditable="true" class="widal-comment-container">
 
-    <p>RESULT INTERPRETATION :</p>
-    <p>In non vaccinated persons the titre as high as 1:80 between7th or 10th day of fever is of diagnostic value and the same titre increases gradually during subsequent period. In vaccinated persons the question of anamnestic response should always be borne in mind and 'H' titre should not be taken into account for the purpose of diagnosis unless there is a rising titre of 'H' in subsequent period. </p>
-  </div>
-
-</div>
-    <script>
-      
-
-    
-
-//       if (navigator.geolocation) {
-//   navigator.geolocation.getCurrentPosition(function(position) {
-//     var latitude = position.coords.latitude;
-//     var longitude = position.coords.longitude;
-//     console.log("Latitude: " + latitude + ", Longitude: " + longitude);
-
-// fetch("https://nominatim.openstreetmap.org/reverse?format=json&lat=" + latitude + "&lon=" + longitude)
-//   .then(function(response) {
-//     return response.json();
-//   })
-//   .then(function(data) {
-//     console.log(data.display_name);
-//     document.querySelector('.location').textContent=data.display_name;
-//   });
-
-//   });
-// } else {
-//   console.log("Geolocation is not supported by this browser.");
-// }
     </script>
   </body>
 </html>

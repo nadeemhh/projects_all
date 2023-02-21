@@ -1,7 +1,7 @@
 .available-department-container{width: 100%;margin-top: 10px;}
 .available-department{width: 100%;position: relative;}
 
-.department-name{background-color: #DC3535;width: 100%;display: flex; align-items: center;justify-content: space-between; height: 30px;color: #FFEFD6;font-weight: 500;margin-top: 2px;border-radius: 2px;}
+.department-name{background-color: #dc3535de;width: 100%;display: flex; align-items: center; justify-content: space-between; height: 40px;color: #FFEFD6;font-weight: 500;margin-top: 2px;border-radius: 2px;cursor: pointer;}
 
 
 .department-name>p{margin-left: 5px;}
@@ -10,6 +10,8 @@
 
 .hidden66{ width: 100%;display: none;flex-direction: column; align-items: flex-start;justify-content: center; height: 30px;position: absolute;}
 
-.available-tests{background-color: #850000;width: 100%;overflow-y: scroll;display: none;padding: 5px;}
+.available-tests{background-color: rgba(255, 255, 255, 0.39);width: 100%;overflow-y: scroll;display: none;padding: 5px;
+flex-wrap: wrap;
+align-items: center;border: 1px solid black;}
 
 
