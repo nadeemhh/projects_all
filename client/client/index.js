@@ -16,6 +16,9 @@ import {
 
 let store = createStore('myDB', 'groupedtests');
 
+document.querySelector('.makereport').addEventListener("click", function() {
+  performTest()
+})
 //let store2 = createStore('myDB2', 'random');
 
 
