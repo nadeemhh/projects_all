@@ -7,7 +7,7 @@ const mongoose = require('mongoose')
 let cors = require('cors')
 app.use(cors())
 var nodemailer = require('nodemailer');
-const publicDirectoryPath = path.join(__dirname, './client')
+const publicDirectoryPath = path.join(__dirname, './client/client')
 app.use(express.static(publicDirectoryPath, {
     setHeaders: (res, path, stat) => {
       if (path.endsWith('.js')) {
