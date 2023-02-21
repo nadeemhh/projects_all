@@ -1,4 +1,4 @@
-let store = createStore('myDB', 'groupedtests');
+// let store = createStore('myDB', 'groupedtests');
 
 //let store2 = createStore('myDB2', 'random');
 
