@@ -92,7 +92,7 @@ body {
 .headerlogo-container{ height: 64%;width: 100%;}
 .patient-details-container{ height: 36%;width: 100%;display: flex;justify-content: center;align-items: center;z-index: 100;}
 
-.patient-details{height: 100% ;width: 100%;border-style: groove;box-sizing: border-box;border-top: 1px solid; display: flex;margin-left: 10px;margin-right: 10px;}
+.patient-details{height: 100% ;width: 100%;box-sizing: border-box;border: 1px solid black; display: flex;margin-left: 10px;margin-right: 10px;}
 
 .patient-details1,.patient-details2{height: 100% ;width: 50%;}
 .patient-details1,.patient-details2{display: flex;justify-content: space-evenly;}
@@ -132,12 +132,7 @@ a{text-decoration: none;}
 .comment-for-test>p:first-child{font-weight: 600;margin-bottom: 5px;}
 .avltest{display: flex;flex-wrap: wrap;justify-content: center;margin-top: 5px;display: none;}
 .but,.makereport{padding: 8px;padding-left: 10px;padding-right: 10px;border-radius: 5px;border: none;margin: 2px;cursor: pointer;}
-.but{max-width: 150px; overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;}
-  .but:hover {
-    max-width: none;
-  }
+
 .but:active{transform: scale(0.97);}
 .secleted{background-color: #4d4c4c;color: white;}
 .makereport{width: 90%;background-color: green;color: white;font-size: 15px;border-radius: 10px;margin-top: 15px;display: none;}
@@ -150,6 +145,7 @@ a{text-decoration: none;}
 .hide{display: none;}
 .printreport{cursor: pointer;margin-left: 10px;}
 .printreport:active{transform: scale(0.97);}
+.testName{flex-grow: 0.3;}
  /*///////// test style  end ///////////*/ 
 
 

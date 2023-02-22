@@ -1,30 +1,14 @@
-
-import {
-  get,
-  set,
-  getMany,
-  setMany,
-  update,
-  del,
-  clear,
-  keys,
-  values,
-  entries,
-  createStore,
-} from 'https://cdn.jsdelivr.net/npm/idb-keyval@6/+esm';
-
-
 let store = createStore('myDB', 'groupedtests');
 
-document.querySelector('.makereport').addEventListener("click", function() {
-  performTest()
-})
 //let store2 = createStore('myDB2', 'random');
 
 
 console.log('hello')
 
 console.log(availableTest)
+
+
+
 
 let alphabet=['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
 let leftTest={count:0};
@@ -327,12 +311,14 @@ document.querySelector(".makereport").style.display='none';
 
   
   // console.log(availableTest.departments[testToPerform[0].departments])
-  let createReport=[];
+let createReport=[];
 let sepratePageReport=[];
+let totalTestPerformed=[];
+
   for (let i = 0; i < testToPerform.length; i++) {
 
     console.log(testToPerform[i])
-
+    totalTestPerformed.push(testToPerform[i].testName)
     if(testToPerform[i].Partof=="group"){
       console.log(testToPerform[i])
       printGTests(testToPerform[i],patientDeatels)
@@ -378,7 +364,7 @@ else{
 
 patientReportToSave.push({repo,createReport,patientDeatels})
 
-let user = {repo,createReport,patientDeatels};
+let user = {repo,createReport,patientDeatels,totalTestPerformed};
 
 const newArray = [];
 
@@ -425,7 +411,7 @@ for (let t = 0; t < repo.sepratePageReport.length; t++) {
 let totalTest=[];
 let testNameToAdd=undefined;
 for (let t = 0; t < totaldepartment.length; t++) {
-
+console.log(totaldepartment)
   switch (totaldepartment[t]) {
     case 'cbc':
       testNameToAdd = "Complete Blood Count (CBC)";
@@ -445,9 +431,15 @@ for (let t = 0; t < totaldepartment.length; t++) {
        case 'LipidProfile':
         testNameToAdd = "Lipid Profile";
        break;
+       case 'Dengue-Serology-IgG-&-IgM-(Rapid)':
+        testNameToAdd = "Dengue Serology IgG & IgM (Rapid)";
+       break;
+       case 'Salmonella-Typhi-Dot-IgG-IgM':
+        testNameToAdd = "Salmonella Typhi Dot IgG-IgM";
+       break;
   }
 
-
+  
 for (let tt = 0; tt < repo.sepratePageReport.length; tt++) {
 
   if(totaldepartment[t]==repo.sepratePageReport[tt].Partof){
@@ -1087,6 +1079,7 @@ for (let i = 0; i < document.querySelector(`.input-container`).children.length; 
 
 function visible(i){
 document.querySelector(`.available-tests${i}`).style.display='flex';
+document.querySelector(`.hidden66${i}`).style.transition='1s';
 document.querySelector(`.hidden66${i}`).style.display= 'flex';
 document.querySelector(`.department-name${i}>img`).style.transition='0.2s';
 document.querySelector(`.department-name${i}>img`).style.transform='rotate(180deg)';
@@ -1110,10 +1103,10 @@ for(let i = 0; i <departments.length; i++) {
 
   let div = document.querySelector(`.available-department-container`);
   let html = `<div class="available-department">
-  <div class="hidden66  hidden66${i}">
+  <div class="hidden66  hidden66${i}" onclick="visiblityHide(${i})">
 
   </div>
-  <div class="department-name department-name${i}">
+  <div class="department-name department-name${i}" onclick="visible(${i})">
     <p>${departments[i]}</p>
     <img src="./up-arrow-svgrepo-com.svg" width="20px" alt="">
   </div>
@@ -1125,15 +1118,7 @@ for(let i = 0; i <departments.length; i++) {
   
 let testToPrint=availableTest.departments[departments[i]];
 
-document.querySelector(`.department-name${i}`).addEventListener('click',function () {
-  visible(i)
 
-})
-
-document.querySelector(`.hidden66${i}`).addEventListener('click',function () {
-  visiblityHide(i)
-
-})
 let Partof=[];
 
 for(let ii = 0; ii <testToPrint.length; ii++){
@@ -1163,7 +1148,7 @@ for(let ii = 0; ii < testToPrint.length; ii++){
   if(testToPrint[ii].testName!='Widal'){
   let div = document.querySelector(`.available-tests${i}`);
 
-  let html = ` <button class="but" departments=${testToPrint[ii].department}>${testToPrint[ii].testName}</button>`;
+  let html = ` <button class="but" departments=${testToPrint[ii].department}>${testToPrint[ii].testName.replace('!','')}</button>`;
 
   div.insertAdjacentHTML("beforeend", html);
 
@@ -1173,8 +1158,6 @@ for(let ii = 0; ii < testToPrint.length; ii++){
 
 
 }
-
-
 }
 
 pritnDepartmentAndtests()
@@ -1185,10 +1168,10 @@ alltests()
 function groupTest(i) {
   let div = document.querySelector(`.available-department-container`);
   let html = `<div class="available-department">
-  <div class="hidden66  hidden66${i}">
+  <div class="hidden66  hidden66${i}" onclick="visiblityHide(${i})">
 
   </div>
-  <div class="department-name department-name${i}">
+  <div class="department-name department-name${i}" onclick="visible(${i})">
     <p>GROUP TESTS</p>
     <img src="./up-arrow-svgrepo-com.svg" width="20px" alt="">
   </div>
@@ -1196,16 +1179,6 @@ function groupTest(i) {
   <div class="available-tests  available-tests${i}"></div>
 </div>`;
   div.insertAdjacentHTML("beforeend", html);
-
-  document.querySelector(`.department-name${i}`).addEventListener('click',function () {
-    visible(i)
-  
-  })
-  
-  document.querySelector(`.hidden66${i}`).addEventListener('click',function () {
-    visiblityHide(i)
-  
-  })
 }
 groupTest(66)
 

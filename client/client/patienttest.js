@@ -154,7 +154,16 @@ let availableTest={departments:{
         department:'HAEMATOLOGY',
         value:'0.0',
         Specimen:'WB-EDTA'
-        }],
+        },{
+            testName:'AEC',
+            shortName:'',
+            unit:'Cells/cumm',
+            normalRange:['40 - 440'],
+            Partof:'none',
+            department:'HAEMATOLOGY',
+            value:'0.0',
+            Specimen:'WB-EDTA'
+            }],
     BIOCHEMISTRY:[{
         testName:'Bilirubin-Total',
         shortName:'',
@@ -309,6 +318,44 @@ let availableTest={departments:{
     value:'0.0',
         Specimen:'Serum'
     },{
+        testName:'Blood Sugar Fasting',
+        shortName:'',
+        unit:'mg/dL',
+        normalRange:['74 - 106'],
+        Partof:'none',
+        department:'BIOCHEMISTRY',
+        value:'0.0',
+            Specimen:'Serum'
+        },{
+            testName:'Glucose Post Prandial',
+            shortName:'',
+            unit:'mg/dL',
+            normalRange:['80 - 140'],
+            Partof:'none',
+            department:'BIOCHEMISTRY',
+            value:'0.0',
+                Specimen:'Serum'
+            },{
+                testName:'Blood Sugar Random',
+                shortName:'',
+                unit:'mg/dL',
+                normalRange:['80 - 120'],
+                Partof:'none',
+                department:'BIOCHEMISTRY',
+                value:'0.0',
+                    Specimen:'Serum'
+                },{
+                    testName:'C Reactive Protein (CRP) Quantitative',
+                    shortName:'',
+                    unit:'mg/L',
+                    normalRange:['0.0 - 8.0'],
+                    Partof:'none',
+                    newPage:true,
+                    department:'BIOCHEMISTRY',
+                    value:'0.0',
+                    Specimen:'Serum',
+                    comment:[`comment:`,`C-reactive    protein    (CRP)    is     a     normal     serum     constituent     present     in healthy     individuals     in     very low concentrations. Invasive bacterial   infection and extensive tissue damage cause    CRP levels     to     increase. CRP levels rise rapidly and increased values can be detected within 6 to 12 hours after an inflammatory process has begun. Measurement of CRP concentration provides valuable information for the diagnosis of bacterial infections specially in neonates. The CRP concentration has been reported to be a sensitive indicator for use when monitoring the efficacy of antimicrobial therapy, for the follow up of bacterial infections,   and   for   controlling   and monitoring post-operative infections. Monitoring CRP levels may contribute to the early recognition of intercurrent complications occuring after myocardial infarction.`]
+                    },{
         testName:'Cholesterol Total',
         shortName:'',
         unit:'mg/dL',
@@ -439,7 +486,8 @@ let availableTest={departments:{
         throughtout the tropical and subtropical areas of the world. There are four known distinct serotypes (dengue virus 1,2,3   and 4). In children, infection is often subclinical or causes a self -limited febrile disease. However, if the patient is infected a second time with a different serotype, a more severe disease,dengue hemorrhagic fever or dengue shock syndrome, is more likely to occur. Dengue is considered to be the most important arthoropod -borne viral disease due to the human morbidity and mortality it causes.
         NS1 is a  highly-conserved glycoprotein that is present at high concentrations in the sera of Dengue-infected patients  during the early clinical phase of the disease. NS1  antigen is found from the first day and upto 9 days after onset of fever   in sample of primary or secondary Dengue NS1 antigen. Usually IgM does not become detectable until 5 to 10 days after the onset of illness in cases of primary Dengue infection and until 4 to 5 days after onset of illness in  secondary   infections. In primary infections, IgG appears the 14th day and persist for life. Secondary infections show that IgGs rise within 1 - 2 days after the onset of symptoms and induce IgM response after 20 days of infection.`]
             }],
-    SEROLOGY:[{
+    SEROLOGY:[
+        {
         testName:'HBsAg',
         shortName:'HBsAg',
         unit:'',
@@ -449,6 +497,42 @@ let availableTest={departments:{
         value:'0.0',
         Specimen:'Serum'
         },{
+            testName:'Dengue Serology IgM (Rapid) *',
+            shortName:'',
+            unit:'',
+            normalRange:['Negative'],
+            Partof:'Dengue-Serology-IgG-&-IgM-(Rapid)',
+            department:'SEROLOGY',
+            value:'0.0',
+            Specimen:'Serum'
+            },{
+                testName:'Dengue Serology IgG (Rapid) *',
+                shortName:'',
+                unit:'',
+                normalRange:['Negative'],
+                Partof:'Dengue-Serology-IgG-&-IgM-(Rapid)',
+                department:'SEROLOGY',
+                value:'0.0',
+                Specimen:'Serum'
+                },{
+                    testName:'Salmonella Typhi Dot - IgM *',
+                    shortName:'',
+                    unit:'',
+                    normalRange:['Negative'],
+                    Partof:'Salmonella-Typhi-Dot-IgG-IgM',
+                    department:'SEROLOGY',
+                    value:'0.0',
+                    Specimen:'Serum'
+                    },{
+                        testName:'Salmonella Typhi Dot - IgG *',
+                        shortName:'',
+                        unit:'',
+                        normalRange:['Negative'],
+                        Partof:'Salmonella-Typhi-Dot-IgG-IgM',
+                        department:'SEROLOGY',
+                        value:'0.0',
+                        Specimen:'Serum'
+                        },{
             testName:'Anti HCV (Rapid)',
             shortName:'hcv',
             unit:'',
