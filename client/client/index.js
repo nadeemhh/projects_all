@@ -24,6 +24,9 @@ let testsToMerge=[];
 let grouping=[];
 let groupedTests=undefined;
 let change=0;
+let anotherHeading=[];
+
+
 function randomNumBetween(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
@@ -36,7 +39,12 @@ console.log(arr,patientInfo)
   if(Patientreportcount == 0){
     let select = document.querySelector(".main");
 let totalReportCounter = ` <div class="Patientreportcount">
+<div>
 <img class='printreport' src="./printer-print-svgrepo-com.svg" width="25px" alt="">
+<a target="_blank" href="https://web.whatsapp.com/">
+<img class='printreport' src="./whatsapp-svgrepo-com.svg" width="25px" alt="">
+</a>
+</div>
 <div class="patient-button-contenier"></div>
 </div>`;
 select.insertAdjacentHTML("afterbegin", totalReportCounter);
@@ -268,6 +276,8 @@ console.log(choosetest[i])
 
 
 function performTest(out=false) {
+
+  console.log('vvvv')
   uniqueIdForPage.count++
   let addIdOneTime=0;
   if(testToPerform.length==0){
@@ -326,13 +336,13 @@ let totalTestPerformed=[];
     }
     console.log(testToPerform[i])
     let department = availableTest.departments[testToPerform[i].departments.replace('-','')];
-
+console.log(department)
 for (let ii = 0; ii < department.length; ii++) {
 
-
+  console.log('kk', department[ii].testName ,'ll' ,testToPerform[i].testName)
 if(testToPerform[i].Partof === undefined ? department[ii].testName == testToPerform[i].testName : department[ii].Partof == testToPerform[i].Partof){
-
- // console.log(department[ii])
+  
+  console.log('kk')
  if(testToPerform[i].Partof !== undefined){
 
   sepratePageReport.push(department[ii])
@@ -364,8 +374,10 @@ else{
 
 patientReportToSave.push({repo,createReport,patientDeatels})
 
-let user = {repo,createReport,patientDeatels,totalTestPerformed};
 
+let user = {repo,createReport,patientDeatels,totalTestPerformed};
+console.log(user)
+sessionStorage.setItem(patientDeatels.patientId, JSON.stringify(user));
 const newArray = [];
 
 ///////////////create new page where newpage:true
@@ -380,22 +392,35 @@ i--;
 
 }
 
+if(newArray.length>0){
+  user = {repo,createReport,patientDeatels,totalTestPerformed,newPageReport:newArray};
+console.log(user)
+
+sessionStorage.setItem(patientDeatels.patientId, JSON.stringify(user));
+}
+
+if(out==true){
+
+  usersGroupTestCreater=user;
+
+  return;}
+
 console.log(newArray)
 for (let i = 0; i < newArray.length; i++) {
 
 console.log(newArray[i],patientDeatels)
-addReportTemplate([newArray[i]],newArray[i].testName[0]=='!'?newArray[i].testName.replace('!',''):undefined,patientDeatels)
-testnameaddonlyonetime=0;
 
+addReportTemplate([newArray[i]],newArray[i].testName[0]=='!'?newArray[i].testName:undefined,patientDeatels)
+
+testnameaddonlyonetime=0;
+anotherHeading=[];
 }
 
 //////////////////////////
 
-if(out==true){
-  usersGroupTestCreater=user;
 
-  return;}
-sessionStorage.setItem(patientDeatels.patientId, JSON.stringify(user));
+  
+
 
 
 if(repo.sepratePageReport.length !== 0){
@@ -437,9 +462,12 @@ console.log(totaldepartment)
        case 'Salmonella-Typhi-Dot-IgG-IgM':
         testNameToAdd = "Salmonella Typhi Dot IgG-IgM";
        break;
+       case 'UrineR/M(UrineAnalysis)':
+        testNameToAdd = "Urine R/M (Urine Analysis)";
+       break;
   }
 
-  
+  //add-Group-Tests
 for (let tt = 0; tt < repo.sepratePageReport.length; tt++) {
 
   if(totaldepartment[t]==repo.sepratePageReport[tt].Partof){
@@ -451,7 +479,7 @@ for (let tt = 0; tt < repo.sepratePageReport.length; tt++) {
 
 
 addReportTemplate(totalTest,testNameToAdd,patientDeatels)
-
+anotherHeading=[];
 if(addIdOneTime==0){
   
   let select = document.querySelector(".patient-button-contenier");
@@ -514,7 +542,7 @@ console.log(createReport)
 
 
 addReportTemplate(createReport,undefined,patientDeatels)
-
+anotherHeading=[];
 testToPerform=[];
 leftTest.count=0;
 
@@ -606,7 +634,16 @@ divtestname.insertAdjacentHTML('beforeend', testname);
 testnameaddonlyonetime=1;
 }
 }
-
+console.log(arr[ii],arr[ii].heading)
+if(arr[ii].heading!=undefined && anotherHeading.includes(arr[ii].heading)==false){
+  let testdiv = document.querySelector(`.all-test-container${className}`);  
+  console.log(arr[ii],arr[ii].heading)
+let html =`<div class="another-heading">
+<p>${arr[ii].heading}</p>
+</div>`
+  testdiv.insertAdjacentHTML('beforeend', html);
+  anotherHeading.push(arr[ii].heading)
+}
 ////////////////////////////
 
 
@@ -630,7 +667,7 @@ let patientRefferance=patientReportToSave[patientReportToSave.length-1].patientD
   
 if(arr[ii].testName != 'Widal'){
   tests =`<div class='Patienttest Patienttest${classPatienttest}'>
-<p class="testNamevalue testNamevalue${classtestNamevalue}">${arr[ii].testName.replace('!','')}</p>
+<p class="testNamevalue testNamevalue${classtestNamevalue}">${arr[ii].testName}</p>
 <div class="resultvalue resultvalue${classresultvalue}">
 <p class="b${classNameForInputAndValue} para">${arr[ii].value}</p>
   <input class="a${classNameForInputAndValue} textarea hide input" type="text">
@@ -647,6 +684,10 @@ newStructureReport(arr[ii],`${alphabet[randomNumBetween(0,24)]}${randomNumBetwee
   testdiv.insertAdjacentHTML('beforeend', tests);
 
 let tn=arr[ii].testName;
+
+
+
+
 
 if(arr[ii].comment!=undefined){
   console.log(arr[ii],arr[ii].comment)
@@ -1145,15 +1186,15 @@ for(let ii = 0; ii <Partof.length; ii++){
 
 for(let ii = 0; ii < testToPrint.length; ii++){
 
-  if(testToPrint[ii].testName!='Widal'){
+
   let div = document.querySelector(`.available-tests${i}`);
 
-  let html = ` <button class="but" departments=${testToPrint[ii].department}>${testToPrint[ii].testName.replace('!','')}</button>`;
+  let html = ` <button class="but" departments=${testToPrint[ii].department}>${testToPrint[ii].testName}</button>`;
 
   div.insertAdjacentHTML("beforeend", html);
 
   choosetest.push(document.querySelector(`.available-tests${i}`).children[ii+Partof.length])
-}
+
 }
 
 
@@ -1201,7 +1242,7 @@ function displayGroupTestModalWindow() {
 displayGroupTestModalWindow()
 
 function addHtmlInModalWindow(testToPerform) {
- 
+  console.log('vvvv')
   performTest(true)
   console.log(testToPerform,usersGroupTestCreater)
   
@@ -1285,7 +1326,7 @@ function addHtmlInModalWindow(testToPerform) {
 
 
 function chaining() {
-  
+  console.log('vvvv')
   document.querySelector(`.chain`).addEventListener('click',function () {
  
    
@@ -1374,9 +1415,9 @@ for (let i = 0; i < createRepo.length; i++) {
       let repo={sepratePageReport:usersGroupTestCreater.repo.sepratePageReport}
 
       grouping.push(createRepo)
-       groupedTests = {repo,createReport:usersGroupTestCreater.createReport,groupedTests:grouping};
+       groupedTests = {repo,createReport:usersGroupTestCreater.createReport,groupedTests:grouping,newPageReport:usersGroupTestCreater.newPageReport};
     
-      console.log(createRepo,groupedTests)
+      console.log(createRepo,groupedTests,usersGroupTestCreater)
 
       testsToMerge=[];
       

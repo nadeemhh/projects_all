@@ -1,5 +1,4 @@
 
-
 let availableTest={departments:{
     HAEMATOLOGY:[{
         testName:'Haemoglobin',
@@ -94,6 +93,7 @@ let availableTest={departments:{
         },{
         testName:'Neutrophil',
         shortName:'Neutrophil',
+        heading:'DLC (Differential Leukocyte Count)',
         unit:'%',
         normalRange:['50 - 70'],
         Partof:'cbc',
@@ -103,6 +103,7 @@ let availableTest={departments:{
         },{
         testName:'Lymphocyte',
         shortName:'Lymphocyte',
+        heading:'DLC (Differential Leukocyte Count)',
         unit:'%',
         normalRange:['25 - 40'],
         Partof:'cbc',
@@ -112,6 +113,7 @@ let availableTest={departments:{
         },{
         testName:'Eosinophil',
         shortName:'Eosinophil',
+        heading:'DLC (Differential Leukocyte Count)',
         unit:'%',
         normalRange:['02 - 04'],
         Partof:'cbc',
@@ -121,6 +123,7 @@ let availableTest={departments:{
         },{
         testName:'Monocyte',
         shortName:'Monocyte',
+        heading:'DLC (Differential Leukocyte Count)',
         unit:'%',
         normalRange:['02 - 08'],
         Partof:'cbc',
@@ -130,6 +133,7 @@ let availableTest={departments:{
         },{
         testName:'Basophil',
         shortName:'Basophil',
+        heading:'DLC (Differential Leukocyte Count)',
         unit:'%',
         normalRange:['00 - 01'],
         Partof:'cbc',
@@ -473,7 +477,7 @@ let availableTest={departments:{
         department:'IMMUNOLOGY-CHEMI',
         value:'0.0',
         Specimen:'Serum'
-        },{testName:'!Dengue Ns1 Antigen (Rapid)',
+        },{testName:'Dengue Ns1 Antigen (Rapid)',
         shortName:'',
         unit:'',
         normalRange:['Negative'],
@@ -481,6 +485,7 @@ let availableTest={departments:{
         department:'IMMUNOLOGY-CHEMI',
         value:'Negative',
         Specimen:'Serum',
+        heading:'Dengue Ns1 Antigen (Rapid)', 
         newPage:true,
         comment:[`RESULT INTERPRETATION:`,`Dengue viruses, transmitted by the mosquito, Aedes aegypti and Aedes albopictus mosquitoes, are widely distributed
         throughtout the tropical and subtropical areas of the world. There are four known distinct serotypes (dengue virus 1,2,3   and 4). In children, infection is often subclinical or causes a self -limited febrile disease. However, if the patient is infected a second time with a different serotype, a more severe disease,dengue hemorrhagic fever or dengue shock syndrome, is more likely to occur. Dengue is considered to be the most important arthoropod -borne viral disease due to the human morbidity and mortality it causes.
@@ -544,10 +549,12 @@ let availableTest={departments:{
             },{
                 testName:'Widal',
                 shortName:'Widal',
-                Partof:'Widal',
+                Partof:'none',
                 RESULT:'NEGATIVE',
                 Specimen:'Serum',
-                department:'SEROLOGY',          
+                department:'SEROLOGY',  
+                newPage:true, 
+                heading:'Widal Test ( Slide Method) *',       
                 values:{
                     O:'+,+,-,-,-',
                     H:'+,+,-,-,-',
@@ -555,5 +562,188 @@ let availableTest={departments:{
                     BH:'-,-,-,-,-',
                 },
                 comment:`In non vaccinated persons the titre as high as 1:80 between7th or 10th day of fever is of diagnostic value and the same titre increases gradually during subsequent period. In vaccinated persons the question of anamnestic response should always be borne in mind and 'H' titre should not be taken into account for the purpose of diagnosis unless there is a rising titre of 'H' in subsequent period.`,
-                }]
+                }],
+                CLINICALPATHOLOGY:[
+                {
+                testName:'Colour',
+                shortName:'',
+                unit:'',
+                normalRange:['Pale Yellow'],
+                Partof:'UrineR/M(UrineAnalysis)',
+                department:'CLINICALPATHOLOGY',
+                value:'Pale Yellow',
+                Specimen:'Urine',
+                heading:'Physical Examination'
+                },{
+                    testName:'Transparency',
+                    shortName:'',
+                    unit:'',
+                    normalRange:['Clear'],
+                    Partof:'UrineR/M(UrineAnalysis)',
+                    department:'CLINICALPATHOLOGY',
+                    value:'Clear',
+                    Specimen:'Urine',
+                    heading:'Physical Examination'
+                    },{
+                        testName:'pH',
+                        shortName:'',
+                        unit:'',
+                        normalRange:['6.5'],
+                        Partof:'UrineR/M(UrineAnalysis)',
+                        department:'CLINICALPATHOLOGY',
+                        value:'6.5',
+                        Specimen:'Urine',
+                        heading:'Chemical Examination'
+                        },{
+                            testName:'Specific Gravity',
+                            shortName:'',
+                            unit:'',
+                            normalRange:['1.005 - 1.030'],
+                            Partof:'UrineR/M(UrineAnalysis)',
+                            department:'CLINICALPATHOLOGY',
+                            value:'1.010',
+                            Specimen:'Urine',
+                            heading:'Chemical Examination'
+                            }, {
+                                testName:'Urine Sugar',
+                                shortName:'',
+                                unit:'',
+                                normalRange:['Not Detected'],
+                                Partof:'UrineR/M(UrineAnalysis)',
+                                department:'CLINICALPATHOLOGY',
+                                value:'Not Detected',
+                                Specimen:'Urine',
+                                heading:'Chemical Examination'
+                                },{
+                 testName:'Urine Protein',
+                 shortName:'',
+                 unit:'',
+                 normalRange:['Not Detected'],
+                 Partof:'UrineR/M(UrineAnalysis)',
+                 department:'CLINICALPATHOLOGY',
+                 value:'Not Detected',
+                 Specimen:'Urine',
+                 heading:'Chemical Examination'
+                 },{
+                     testName:'Urine Bilirubin',
+                     shortName:'',
+                     unit:'',
+                     normalRange:['Not Detected'],
+                     Partof:'UrineR/M(UrineAnalysis)',
+                     department:'CLINICALPATHOLOGY',
+                     value:'Not Detected',
+                     Specimen:'Urine',
+                     heading:'Chemical Examination'
+                     },{
+                         testName:'Ketones',
+                         shortName:'',
+                         unit:'',
+                         normalRange:['Not Detected'],
+                         Partof:'UrineR/M(UrineAnalysis)',
+                         department:'CLINICALPATHOLOGY',
+                         value:'Not Detected',
+                         Specimen:'Urine',
+                         heading:'Chemical Examination'
+                         },{
+                             testName:'Urobilinogen',
+                             shortName:'',
+                             unit:'',
+                             normalRange:['Normal'],
+                             Partof:'UrineR/M(UrineAnalysis)',
+                             department:'CLINICALPATHOLOGY',
+                             value:'Normal',
+                             Specimen:'Urine',
+                             heading:'Chemical Examination'
+                             },{
+                                 testName:'Nitrite',
+                                 shortName:'',
+                                 unit:'',
+                                 normalRange:['Not Detected'],
+                                 Partof:'UrineR/M(UrineAnalysis)',
+                                 department:'CLINICALPATHOLOGY',
+                                 value:'Not Detected',
+                                 Specimen:'Urine',
+                                 heading:'Chemical Examination'
+                                 },{
+                  testName:'Pus Cells',
+                  shortName:'',
+                  unit:'/HPF',
+                  normalRange:['0 - 2'],
+                  Partof:'UrineR/M(UrineAnalysis)',
+                  department:'CLINICALPATHOLOGY',
+                  value:'1-2',
+                  Specimen:'Urine',
+                  heading:'Microscopy Examination'
+                  },{
+                      testName:'Epithelial Cells',
+                      shortName:'',
+                      unit:'/HPF',
+                      normalRange:['3 - 5'],
+                      Partof:'UrineR/M(UrineAnalysis)',
+                      department:'CLINICALPATHOLOGY',
+                      value:'3-4',
+                      Specimen:'Urine',
+                      heading:'Microscopy Examination'
+                      }, {
+                          testName:"RBC's",
+                          shortName:'',
+                          unit:'',
+                          normalRange:['Nil'],
+                          Partof:'UrineR/M(UrineAnalysis)',
+                          department:'CLINICALPATHOLOGY',
+                          value:'Nil',
+                          Specimen:'Urine',
+                          heading:'Microscopy Examination'
+                          },{
+                              testName:'Casts',
+                              shortName:'',
+                              unit:'',
+                              normalRange:['Nil'],
+                              Partof:'UrineR/M(UrineAnalysis)',
+                              department:'CLINICALPATHOLOGY',
+                              value:'Nil',
+                              Specimen:'Urine',
+                              heading:'Microscopy Examination'
+                              },{
+               testName:'Crystals',
+               shortName:'',
+               unit:'',
+               normalRange:['Nil'],
+               Partof:'UrineR/M(UrineAnalysis)',
+               department:'CLINICALPATHOLOGY',
+               value:'Nil',
+               Specimen:'Urine',
+               heading:'Microscopy Examination'
+               },{
+                   testName:'Amorphous Sediments * ',
+                   shortName:'',
+                   unit:'',
+                   normalRange:['Nil'],
+                   Partof:'UrineR/M(UrineAnalysis)',
+                   department:'CLINICALPATHOLOGY',
+                   value:'Nil',
+                   Specimen:'Urine',
+                   heading:'Microscopy Examination'
+                   },{
+ testName:'Yeast Cells',
+ shortName:'',
+ unit:'',
+ normalRange:['Nil'],
+ Partof:'UrineR/M(UrineAnalysis)',
+ department:'CLINICALPATHOLOGY',
+ value:'Nil',
+ Specimen:'Urine',
+ heading:'Microscopy Examination'
+ },{
+     testName:'Bacteria',
+     shortName:'',
+     unit:'',
+     normalRange:['Not Seen'],
+     Partof:'UrineR/M(UrineAnalysis)',
+     department:'CLINICALPATHOLOGY',
+     value:'Not Seen',
+     Specimen:'Urine',
+     heading:'Microscopy Examination'
+     },]
+
 }}

@@ -1,5 +1,7 @@
 function newStructureReport(obj,randomclassName,className,classPatienttest,patientRefferance)  {
+  console.log(patientRefferance)
     let patientReportDataToSave = JSON.parse(sessionStorage[patientRefferance]);
+    console.log('kk')
       console.log(obj.values,patientReportDataToSave)
       //let testdiv = document.querySelector(`.all-test-container${className}`);  
       let testdiv = document.querySelector(`.all-test-container${className}`);

@@ -6,37 +6,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- <link rel="stylesheet" href="./index.css" /> -->
     <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
- 
-}
+      .shorten {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        max-width: 100px; /* Set a maximum width for the shortened text */
+      }
 
-.shorten {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  max-width: 100px; /* Set a maximum width for the shortened text */
-}
+      .shorten:hover {
+        max-width: none;
+      }
 
-.shorten:hover {
-  max-width: none;
-}
-
+      button{display: none;}
     </style>
     <title>Document</title>
   </head>
   <body>
-    <p class="shorten">This is a long string of text that needs to be shortened</p>
+    <p class="shorten">
+      This is a long string of text that needs to be shortened
+    </p>
 
+    <h1>vi</h1>
 
-<script type="module">
-  
- 
+    <button>h</button>
+    <button>5</button>
+    <button>4</button>
+    <button>h</button>
+    <button>4</button>
+    <button>5</button>
+    <button>t</button>
+    <button>t</button>
+    <button>gh</button>
+    <button>h</button>
 
+    <script>
 
+      document.querySelector('h1').addEventListener('click',function () {
+        console.log('l')
+        document.querySelector('button').style.display='block';
+
+      })
+      //  // Define the file URL and message text
+      // const fileUrl = 'https://example.com/my-file.jpg';
+      // const messageText = 'Check out this file!';
+
+      // // Construct the WhatsApp Web URL with parameters
+      // const whatsAppUrl = `https://web.whatsapp.com/send?text=${encodeURIComponent(messageText)}&file=${encodeURIComponent(fileUrl)}`;
+
+      // // Open WhatsApp Web in a new window
+      // window.open(whatsAppUrl);
     </script>
   </body>
 </html>
