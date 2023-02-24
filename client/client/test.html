@@ -1,66 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <link rel="stylesheet" href="./index.css" /> -->
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
+<html>
+<head>
+	<title>Convert Div to PDF</title>
+	<style>
+		.my-div {
+			background-color: #f0f0f0;
+			border: 1px solid #ccc;
+			padding: 20px;
+			font-size: 16px;
+			line-height: 1.5;
+			text-align: justify;
+			font-family: Arial, sans-serif;
+		}
+	</style>
+</head>
+<body>
+	<div id="pdf-content" class="my-div">
+		<h1>My Heading</h1>
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vel malesuada magna. Donec lobortis vitae risus vel suscipit. Nulla euismod mauris vel ultricies suscipit. Pellentesque lobortis aliquet purus, nec vulputate erat pulvinar eget. Aenean vitae lorem eu sapien pellentesque dignissim.</p>
+	</div>
 
-      .shorten {
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        max-width: 100px; /* Set a maximum width for the shortened text */
-      }
+	<button id="download-pdf">Download PDF</button>
 
-      .shorten:hover {
-        max-width: none;
-      }
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js" integrity="sha512-a9NgEEK7tsCvABL7KqtUTQjl69z7091EVPpw5KxPlZ93T141ffe1woLtbXTX+r2/8TtTvRX/v4zTL2UlMUPgwg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script>
+		const downloadBtn = document.getElementById("download-pdf");
 
-      button{display: none;}
-    </style>
-    <title>Document</title>
-  </head>
-  <body>
-    <p class="shorten">
-      This is a long string of text that needs to be shortened
-    </p>
+		downloadBtn.addEventListener("click", () => {
+			const content = document.querySelector(".my-div");
+			
+			const docDefinition = {
+				pageSize: 'A4',
+				pageMargins: [40, 60, 40, 60],
+				content: [{
+					text: content.innerHTML,
+					style: 'my-div'
+				}],
+				styles: {
+					'my-div': {
+						backgroundColor: '#f0f0f0',
+						border: '1px solid #ccc',
+						padding: 20,
+						fontSize: 16,
+						lineHeight: 1.5,
+						textAlign: 'justify',
+						fontFamily: 'Arial'
+					}
+				}
+			};
 
-    <h1>vi</h1>
-
-    <button>h</button>
-    <button>5</button>
-    <button>4</button>
-    <button>h</button>
-    <button>4</button>
-    <button>5</button>
-    <button>t</button>
-    <button>t</button>
-    <button>gh</button>
-    <button>h</button>
-
-    <script>
-
-      document.querySelector('h1').addEventListener('click',function () {
-        console.log('l')
-        document.querySelector('button').style.display='block';
-
-      })
-      //  // Define the file URL and message text
-      // const fileUrl = 'https://example.com/my-file.jpg';
-      // const messageText = 'Check out this file!';
-
-      // // Construct the WhatsApp Web URL with parameters
-      // const whatsAppUrl = `https://web.whatsapp.com/send?text=${encodeURIComponent(messageText)}&file=${encodeURIComponent(fileUrl)}`;
-
-      // // Open WhatsApp Web in a new window
-      // window.open(whatsAppUrl);
-    </script>
-  </body>
+			pdfMake.createPdf(docDefinition).download('converted.pdf');
+		});
+	</script>
+</body>
 </html>

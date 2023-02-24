@@ -62,36 +62,14 @@ if(data.groupedTests !== undefined){
   let testNameToAdd=undefined;
 for (let i = 0; i < data.groupedTests.length; i++) {
 
-    switch (data.groupedTests[i][0].Partof) {
-      case 'cbc':
-        testNameToAdd = "Complete Blood Count (CBC)";
-        break;
-      case 'kft':
-        testNameToAdd = "Kidney Function Test (KFT)";
-        break;
-      case 'lft':
-         testNameToAdd = "Liver Function Test (LFT)";
-        break;
-        case 'thyroidprofile':
-          testNameToAdd = "thyroid profile";
-         break;
-         case 'Widal':
-          testNameToAdd = "Widal Test ( Slide Method) *";
-         break;
-         case 'LipidProfile':
-          testNameToAdd = "Lipid Profile";
-         break;
-         case 'Dengue-Serology-IgG-&-IgM-(Rapid)':
-          testNameToAdd = "Dengue Serology IgG & IgM (Rapid)";
-         break;
-         case 'Salmonella-Typhi-Dot-IgG-IgM':
-          testNameToAdd = "Salmonella Typhi Dot IgG-IgM";
-         break;
-         case 'UrineR/M(UrineAnalysis)':
-          testNameToAdd = "Urine R/M (Urine Analysis)";
-         break;
-      }
-    addReportTemplate(data.groupedTests[i],testNameToAdd,patientDeatels)
+  if(data.groupedTests[i][0].Partof!='none'){
+    testNameToAdd=testInfo[data.groupedTests[i][0].Partof].heading;
+  }
+console.log(data.groupedTests[i][0].Partof)
+if(data.groupedTests[i][0].Partof!='none'){
+    addReportTemplate(data.groupedTests[i],testNameToAdd,patientDeatels,testInfo[data.groupedTests[i][0].Partof].comment[1]!='null'?testInfo[data.groupedTests[i][0].Partof].comment:undefined)
+}
+else{addReportTemplate(data.groupedTests[i],testNameToAdd,patientDeatels)}
     anotherHeading=[];
     testToPerform=[];
 leftTest.count=0;
@@ -100,38 +78,14 @@ testnameaddonlyonetime=0;
     }
 
     if(data.newPageReport !== undefined){
+      
       let testNameToAdd=undefined;
     for (let i = 0; i < data.newPageReport.length; i++) {
     
-        switch (data.newPageReport[i].Partof) {
-          case 'cbc':
-            testNameToAdd = "Complete Blood Count (CBC)";
-            break;
-          case 'kft':
-            testNameToAdd = "Kidney Function Test (KFT)";
-            break;
-          case 'lft':
-             testNameToAdd = "Liver Function Test (LFT)";
-            break;
-            case 'thyroidprofile':
-              testNameToAdd = "thyroid profile";
-             break;
-             case 'Widal':
-              testNameToAdd = "Widal Test ( Slide Method) *";
-             break;
-             case 'LipidProfile':
-              testNameToAdd = "Lipid Profile";
-             break;
-             case 'Dengue-Serology-IgG-&-IgM-(Rapid)':
-              testNameToAdd = "Dengue Serology IgG & IgM (Rapid)";
-             break;
-             case 'Salmonella-Typhi-Dot-IgG-IgM':
-              testNameToAdd = "Salmonella Typhi Dot IgG-IgM";
-             break;
-             case 'UrineR/M(UrineAnalysis)':
-              testNameToAdd = "Urine R/M (Urine Analysis)";
-             break;
-          }
+      if(data.newPageReport[i].Partof!='none'){
+        testNameToAdd=testInfo[data.newPageReport[i].Partof].heading;
+      }
+
         addReportTemplate([data.newPageReport[i]],testNameToAdd,patientDeatels)
         anotherHeading=[];
         testToPerform=[];
@@ -157,37 +111,10 @@ if(data.repo.sepratePageReport.length !== 0){
     let totalTest=[];
     let testNameToAdd=undefined;
     for (let t = 0; t < totaldepartment.length; t++) {
-    
-      switch (totaldepartment[t]) {
-        case 'cbc':
-          testNameToAdd = "Complete Blood Count (CBC)";
-          break;
-        case 'kft':
-          testNameToAdd = "Kidney Function Test (KFT)";
-          break;
-        case 'lft':
-           testNameToAdd = "Liver Function Test (LFT)";
-          break;
-          case 'thyroidprofile':
-            testNameToAdd = "thyroid profile";
-           break;
-           case 'Widal':
-            testNameToAdd = "Widal Test ( Slide Method) *";
-           break;
-           case 'LipidProfile':
-           testNameToAdd = "Lipid Profile";
-           break;
-           case 'Dengue-Serology-IgG-&-IgM-(Rapid)':
-            testNameToAdd = "Dengue Serology IgG & IgM (Rapid)";
-           break;
-           case 'Salmonella-Typhi-Dot-IgG-IgM':
-            testNameToAdd = "Salmonella Typhi Dot IgG-IgM";
-           break;
-           case 'UrineR/M(UrineAnalysis)':
-            testNameToAdd = "Urine R/M (Urine Analysis)";
-           break;
-      }
-    
+
+    if(totaldepartment[t]!='none'){
+      testNameToAdd=testInfo[totaldepartment[t]].heading;
+    }
     
     for (let tt = 0; tt < data.repo.sepratePageReport.length; tt++) {
     
@@ -199,7 +126,7 @@ if(data.repo.sepratePageReport.length !== 0){
     }
     
     console.log(totalTest,testNameToAdd,patientDeatels)
-    addReportTemplate(totalTest,testNameToAdd,patientDeatels)
+    addReportTemplate(totalTest,testNameToAdd,patientDeatels,testInfo[totaldepartment[t]].comment[1]!='null'?testInfo[totaldepartment[t]].comment:undefined)
     anotherHeading=[];
     addIdOneTime=1;
     testnameaddonlyonetime=0;

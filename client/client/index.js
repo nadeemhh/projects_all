@@ -31,7 +31,7 @@ function randomNumBetween(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
-function addReportTemplate(arr,testNameForFew=undefined,patientInfo) {
+function addReportTemplate(arr,testNameForFew=undefined,patientInfo,grouptestcomment) {
 console.log(arr,patientInfo)
 
 
@@ -44,11 +44,31 @@ let totalReportCounter = ` <div class="Patientreportcount">
 <a target="_blank" href="https://web.whatsapp.com/">
 <img class='printreport' src="./whatsapp-svgrepo-com.svg" width="25px" alt="">
 </a>
+<img class='pointer hide-and-show' src="./hide-svgrepo-com.svg" width="25px" alt="">
 </div>
+
 <div class="patient-button-contenier"></div>
 </div>`;
 select.insertAdjacentHTML("afterbegin", totalReportCounter);
 Patientreportcount=1;
+
+document.querySelector('.hide-and-show').addEventListener('click',function () {
+  document.querySelector('.hide-and-show').classList.toggle("hideheaderfooter");
+
+  let allhideelement=  document.querySelectorAll('.hide-header-footer-images');
+
+for (let i = 0; i < allhideelement.length; i++) {
+  const myElement =allhideelement[i];
+  const computedStyle = window.getComputedStyle(myElement);
+  const displayValue = computedStyle.getPropertyValue('display');
+
+
+  if(displayValue=='inline'){
+  allhideelement[i].style.display='none';
+  }
+  else{allhideelement[i].style.display='inline';}
+}
+})
 }
 
 
@@ -74,7 +94,7 @@ let ReportTemplate =`<div  style="height:29.7cm;width:21cm; margin-bottom: 15px;
 <div class='Reportheader'>
 <div class="headerlogo-container">
 
-<img style="width: 320px;height: 200px;transform: translateX(-4%);margin-top: -10px;" src="./fq.png" alt="logo">
+<img class='hide-header-footer-images' style="width: 320px;height: 200px;transform: translateX(-4%);margin-top: -10px;" src="./fq.png" alt="logo">
 
 </div>
 <div class="patient-details-container">
@@ -139,9 +159,9 @@ let ReportTemplate =`<div  style="height:29.7cm;width:21cm; margin-bottom: 15px;
       </div>
     </div>
   </div>
-<div>
+<div class="Reportfotter-last-child">
 
-<img class="translatepoaitive" style="height: 100%; width: 100%;transform: translateY(-18%);" src="./ins.png" alt="">
+<img class="translatepoaitive hide-header-footer-images" style="height: 100%; width: 100%;transform: translateY(-18%);" src="./ins.png" alt="">
 
 </div>
 </div>
@@ -161,13 +181,13 @@ for (let ii = leftTest.count; ii < arr.length; ii++) {
   if(deparmentarray.includes(arr[ii].department)==false){
     
   deparmentarray.push(arr[ii].department)
-  testAddToTemplate(arr,className,ii,0,testNameForFew)
+  testAddToTemplate(arr,className,ii,0,testNameForFew,grouptestcomment)
   if(deparmentarray.length>1){deparmentarray.shift()}
 
   }
   else{ 
     
-    testAddToTemplate(arr,className,ii,1,testNameForFew)
+    testAddToTemplate(arr,className,ii,1,testNameForFew,grouptestcomment)
   }
  
 
@@ -437,35 +457,7 @@ let totalTest=[];
 let testNameToAdd=undefined;
 for (let t = 0; t < totaldepartment.length; t++) {
 console.log(totaldepartment)
-  switch (totaldepartment[t]) {
-    case 'cbc':
-      testNameToAdd = "Complete Blood Count (CBC)";
-      break;
-    case 'kft':
-      testNameToAdd = "Kidney Function Test (KFT)";
-      break;
-    case 'lft':
-       testNameToAdd = "Liver Function Test (LFT)";
-      break;
-      case 'thyroidprofile':
-        testNameToAdd = "thyroid profile";
-       break;
-       case 'Widal':
-        testNameToAdd = "Widal Test ( Slide Method) *";
-       break;
-       case 'LipidProfile':
-        testNameToAdd = "Lipid Profile";
-       break;
-       case 'Dengue-Serology-IgG-&-IgM-(Rapid)':
-        testNameToAdd = "Dengue Serology IgG & IgM (Rapid)";
-       break;
-       case 'Salmonella-Typhi-Dot-IgG-IgM':
-        testNameToAdd = "Salmonella Typhi Dot IgG-IgM";
-       break;
-       case 'UrineR/M(UrineAnalysis)':
-        testNameToAdd = "Urine R/M (Urine Analysis)";
-       break;
-  }
+testNameToAdd=testInfo[totaldepartment[t]].heading;
 
   //add-Group-Tests
 for (let tt = 0; tt < repo.sepratePageReport.length; tt++) {
@@ -478,7 +470,8 @@ for (let tt = 0; tt < repo.sepratePageReport.length; tt++) {
 }
 
 
-addReportTemplate(totalTest,testNameToAdd,patientDeatels)
+addReportTemplate(totalTest,testNameToAdd,patientDeatels,testInfo[totaldepartment[t]].comment[1]!='null'?testInfo[totaldepartment[t]].comment:undefined)
+
 anotherHeading=[];
 if(addIdOneTime==0){
   
@@ -611,7 +604,7 @@ function removeMatchingStrings(str) {
   return str.replace(regex, '');
 }
 
-function testAddToTemplate(arr,className,ii,deparmentPrintValue,testNameForFew) {
+function testAddToTemplate(arr,className,ii,deparmentPrintValue,testNameForFew,grouptestcomment) {
 
 
 ////////add department
@@ -704,6 +697,16 @@ let html =`<div class="comment-for-test">
   alignMaker(`resultvalue${classresultvalue}`,`result`)
   alignMaker(`unitvalue${classunitvalue}`,`unit`)
   alignMaker(`normalRangevalue${classnormalRangevalue}`,`normalRange`)
+
+if(ii==arr.length-1){
+  if(grouptestcomment != undefined){
+    console.log(grouptestcomment)
+  let html =`<div class="comment-for-test">
+  <p class="comment-heading">${grouptestcomment[0]}</p>
+  <p class="comment-paragraph">${grouptestcomment[1]}</p>
+  </div>`
+    testdiv.insertAdjacentHTML('beforeend', html);
+  }}
 
   //console.log(document.querySelector(`.resultvalue${classresultvalue}`).children)
 
@@ -1513,3 +1516,6 @@ function addGroupedTests() {
 
 }
 addGroupedTests()
+
+
+

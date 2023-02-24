@@ -1,4 +1,28 @@
 
+let testInfo={
+    'cbc':{heading:'Complete Blood Count (CBC)', comment:[`comment:`,`null`]},
+    'kft':{heading:'Kidney Function Test (KFT)', comment:[`comment:`,`null`]},
+    'lft':{heading:'Liver Function Test (LFT)', comment:[`comment:`,`null`]},
+    'HIV-I-&-II-Serology-(Rapid)':{heading:'HIV I & II Serology (Rapid)', comment:[`comment:`,`*	It is a rapid screening procedure which cannot be used as a sole criteria for diagnosis of HIV infection.<br>
+    *	A non reactive result implies that no anti HIV I or anti HIV II antibodies have been detected in sample by this      method.<br>
+    This means that either the patient has not been exposed to HIV-I or HIV-II infection or the sample has been tested during WINDOW PHASE (before the development of detectable level of antibodies).<br>
+    *	A reactive result suggests the possibility of HIV I-II,All positive cases are advised a repeat tests using another methodology. Suppemental test like Western Blot and confirmation by molecular technique (RT-PCR) is mandatory   before pronouncing the patient positive for HIV I/II
+    *	Rarely false negativity or positivity may occur.<br>
+    *	All results to be read in conjunction with clinical findings and all positive patients should be counselled.<br>
+    *	The test has been performed on rapid test kit; confirmation using other technique is highly recommented.<br>
+    `]},
+    'thyroidprofile':{heading:'thyroid profile', comment:[`comment:`,`Total T3 :- Increased levels are seen in hyperthyroidism and decreased levels are seen in hypothyroidism.
+    Total T4:- Increased levels are seen in graves disease under of thyroid as symptoms of hyperthyroidism.Low levels are seen in hypothyroidism whose symptoms are my oxyedema hashmito disease and pituitary disorders.
+    TSH :- A high TSH result often means an underactive thyroid gland caused by failure of the gland (hypothyroidism). A low TSH result can indicate an overactive thyroid gland (hyperthyroidism) or damage to the pituitary gland that prevents it from producing TSH.
+    <br><br>Below mentioned are the guidelines for age reference ranges for T3, T4, TSH results.`]},
+    'Widal':{heading:'Widal Test ( Slide Method) *', comment:[`comment:`,`null`]},
+    'LipidProfile':{heading:'Lipid Profile', comment:[`comment:`,`null`]},
+    'Dengue-Serology-IgG-&-IgM-(Rapid)':{heading:'Dengue Serology IgG & IgM (Rapid)', comment:[`comment:`,`null`]},
+    'Salmonella-Typhi-Dot-IgG-IgM':{heading:'Salmonella Typhi Dot IgG-IgM', comment:[`comment:`,`null`]},
+    'UrineR/M(UrineAnalysis)':{heading:'Urine R/M (Urine Analysis)', comment:[`comment:`,`null`]}
+};
+
+console.log(testInfo)
 let availableTest={departments:{
     HAEMATOLOGY:[{
         testName:'Haemoglobin',
@@ -562,7 +586,36 @@ let availableTest={departments:{
                     BH:'-,-,-,-,-',
                 },
                 comment:`In non vaccinated persons the titre as high as 1:80 between7th or 10th day of fever is of diagnostic value and the same titre increases gradually during subsequent period. In vaccinated persons the question of anamnestic response should always be borne in mind and 'H' titre should not be taken into account for the purpose of diagnosis unless there is a rising titre of 'H' in subsequent period.`,
-                }],
+                },{
+                    testName:'HIV I *',
+                    shortName:'',
+                    unit:'',
+                    normalRange:['Negative'],
+                    Partof:'HIV-I-&-II-Serology-(Rapid)',
+                    department:'SEROLOGY',
+                    value:'Negative',
+                    Specimen:'Serum',
+                    },{
+                        testName:'HIV II *',
+                        shortName:'',
+                        unit:'',
+                        normalRange:['Negative'],
+                        Partof:'HIV-I-&-II-Serology-(Rapid)',
+                        department:'SEROLOGY',
+                        value:'Negative',
+                        Specimen:'Serum',
+
+                        },{
+                            testName:'VDRL Test (RPR)',
+                            shortName:'',
+                            unit:'',
+                            normalRange:['Negative'],
+                            Partof:'none',
+                            department:'SEROLOGY',
+                            value:'Negative',
+                            Specimen:'Serum',
+    
+                            }],
                 CLINICALPATHOLOGY:[
                 {
                 testName:'Colour',

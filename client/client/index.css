@@ -77,7 +77,8 @@ body {
        .sidebar2{height: 90vh;width: 20vw;background-color: #263159;display: flex;flex-direction: column; align-items: center;overflow-y: scroll;padding: 5px;}
 
 
-       .Patientreportcount{height: 40px;width: 100%;  background-image: linear-gradient(to right, rgb(250, 93, 93) , rgb(243, 133, 133));margin-bottom: 15px;position: sticky;top: 0;box-shadow: 0px 5px #41404054;display: flex;align-items: center;z-index: 5;gap: 10px;overflow-x: scroll;}
+       .Patientreportcount{height: 40px;width: 100%;  background-image: linear-gradient(to right, rgb(250, 93, 93) , rgb(243, 133, 133));margin-bottom: 15px;position: sticky;top: 0;box-shadow: 0px 5px #41404054;display: flex;align-items: center;z-index: 5;gap: 10px; overflow-x: auto;
+        white-space: nowrap;}
 
        .Patientreportcount:first-child>div{margin-left: 10px;display: flex;gap: 10px;margin-right: 10px;}
 
@@ -90,7 +91,8 @@ body {
 
        .Reportheader{height: 250px;width: 100%;}
 
-.headerlogo-container{ height: 64%;width: 100%;}
+
+.headerlogo-container{ height: 160px;width: 100%;}
 .patient-details-container{ height: 36%;width: 100%;display: flex;justify-content: center;align-items: center;z-index: 100;}
 
 .patient-details{height: 100% ;width: 100%;box-sizing: border-box;border: 1px solid black; display: flex;margin-left: 10px;margin-right: 10px;}
@@ -156,9 +158,11 @@ a{text-decoration: none;}
 
 
 /* //////////////fotter////////// */
-.Reportfotter{height: 160px;width: 100%;display: flex;flex-direction: column;justify-content: space-between;border-top: 1px solid;}
+.Reportfotter{height: 190px;width: 100%;display: flex;flex-direction: column;justify-content: space-between;border-top: 1px solid;}
 
-.doctor-name-container{height: 190px;width: 100%;}
+ .Reportfotter-last-child{height: 61.50px;} 
+/* .Reportfotter-last-child>img{background-color: antiquewhite;} */
+.doctor-name-container{height: 100px;width: 100%;}
 
 /* ////////////// fotter end////////// */
 
@@ -244,5 +248,5 @@ box-shadow: 1px 1px 4px 2px rgb(0 0 0 / 37%);
 .selected-test{overflow-y: scroll;padding: 2px;}
 
 .fromgroupdatabase{display: flex;gap: 2px;align-items: center;}
-/* .img-cont>img:nth-child(1):active{transform: scale(0.8);}
-.img-cont>img:nth-child(2):active{transform: scale(0.8);} */
+.pointer{cursor: pointer;}
+.hideheaderfooter{background-color: #263159;}
