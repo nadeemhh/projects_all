@@ -3,6 +3,7 @@ let testInfo={
     'cbc':{heading:'Complete Blood Count (CBC)', comment:[`comment:`,`null`]},
     'kft':{heading:'Kidney Function Test (KFT)', comment:[`comment:`,`null`]},
     'lft':{heading:'Liver Function Test (LFT)', comment:[`comment:`,`null`]},
+    'Blood-Group-&-Rh':{heading:'Blood Group & Rh', comment:[`comment:`,`null`]},
     'HIV-I-&-II-Serology-(Rapid)':{heading:'HIV I & II Serology (Rapid)', comment:[`comment:`,`*	It is a rapid screening procedure which cannot be used as a sole criteria for diagnosis of HIV infection.<br>
     *	A non reactive result implies that no anti HIV I or anti HIV II antibodies have been detected in sample by this      method.<br>
     This means that either the patient has not been exposed to HIV-I or HIV-II infection or the sample has been tested during WINDOW PHASE (before the development of detectable level of antibodies).<br>
@@ -191,7 +192,25 @@ let availableTest={departments:{
             department:'HAEMATOLOGY',
             value:'0.0',
             Specimen:'WB-EDTA'
-            }],
+            },{
+                testName:'Blood Group ABO *',
+                shortName:'',
+                unit:'',
+                normalRange:[''],
+                Partof:'Blood-Group-&-Rh',
+                department:'HAEMATOLOGY',
+                value:"'A'",
+                Specimen:'WB-EDTA'
+                },{
+                    testName:'Rh Typing *',
+                    shortName:'',
+                    unit:'',
+                    normalRange:[''],
+                    Partof:'Blood-Group-&-Rh',
+                    department:'HAEMATOLOGY',
+                    value:'Positive',
+                    Specimen:'WB-EDTA'
+                    }],
     BIOCHEMISTRY:[{
         testName:'Bilirubin-Total',
         shortName:'',
@@ -340,7 +359,7 @@ let availableTest={departments:{
     testName:'Potassium',
     shortName:'',
     unit:'mmol/L',
-    normalRange:['13.0 - 17.0'],
+    normalRange:['3.5 - 5.5'],
     Partof:'kft',
     department:'BIOCHEMISTRY',
     value:'0.0',

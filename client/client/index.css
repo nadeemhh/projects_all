@@ -62,9 +62,13 @@ body {
       
       
       
-      .Navbar-container{height: 10vh;width: 100%;background-color: #495579;position: sticky;top: 0;display: flex; align-items: center;padding-left: 10px;padding-right: 10px;}
-      .Navbar-container>P{color: aliceblue;}
-      .Navbar-container>img{margin-right: 5px;}
+      .Navbar-container{height: 10vh;width: 100%;background-color: #495579;position: sticky;top: 0;display: flex; align-items: center;justify-content: space-between; padding-left: 10px;}
+      .brand-name{display: flex;}
+      .brand-name>P{color: aliceblue;}
+      .brand-name>img{margin-right: 5px;}
+      .features-list{ height: 100%;width: 20vw; display: flex;justify-content: center;align-items: center;gap: 30px;}
+      .features-list>img{cursor: pointer;}
+      .features-list>img:active{transform: scale(0.9);}
        .others-container{display: flex;justify-content: space-between;} 
       
       
@@ -106,7 +110,7 @@ body {
 .patient-details2-2{height: 100%;width: 60%;display: flex;flex-direction: column;}
 
 .mp{margin-left: 5px;}
-
+.para{cursor: pointer;}
 /* @media only screen and (max-width: 1052px) {
  .reporttemplate{transform: scale(0.5);transform: translateX(-50%);}
 
@@ -224,6 +228,29 @@ padding: 5px;
 box-shadow: 1px 1px 4px 2px rgb(0 0 0 / 37%);
 }
 
+.basic-test-editar{
+  height: 110px;
+  width: 110px;
+  background-color: lightpink;position: fixed;z-index: 7;
+  border: 1px solid;
+  transform: scale(0);
+display: none;flex-direction: column;
+
+padding: 2px;
+box-shadow: 1px 1px 4px 2px rgb(0 0 0 / 37%);
+}
+
+.close-image-container{height: 25px;width: 100%;display: flex;align-items: center;justify-content: flex-end;}
+.close-image-container>img{width: 25px;cursor: pointer;}
+.colors{display: flex;gap: 2px;margin-top: 5px;}
+
+.colors>div{width: 20px;height: 20px;cursor: pointer;}
+div[bold="text"]{font-weight: 500;}
+img[bold="900"]{cursor: pointer;}
+img[bold="900"]:active{background-color: yellow;transform: scale(0.9);}
+div[colorName="red"]{background-color: red;}
+div[colorName="black"]{background-color: black;}
+.addcolor:active{transform: scale(0.9);}
 .modalwindow-for-group-test:first-child>div{margin-top: 15px;}
 .modalwindow-for-group-test>div:nth-child(1)>div:nth-child(1){width: 60%;display: flex;flex-direction: column;gap: 10px;}
 .modalwindow-for-group-test>div:nth-child(1)>div:nth-child(1)>p{color: rgb(0, 0, 0);font-weight: 600;}
@@ -250,3 +277,5 @@ box-shadow: 1px 1px 4px 2px rgb(0 0 0 / 37%);
 .fromgroupdatabase{display: flex;gap: 2px;align-items: center;}
 .pointer{cursor: pointer;}
 .hideheaderfooter{background-color: #263159;}
+
+

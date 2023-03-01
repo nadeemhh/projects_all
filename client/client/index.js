@@ -708,7 +708,18 @@ if(ii==arr.length-1){
     testdiv.insertAdjacentHTML('beforeend', html);
   }}
 
-  //console.log(document.querySelector(`.resultvalue${classresultvalue}`).children)
+ 
+  let clasToAddStle=`.b${classNameForInputAndValue}`;
+  document.querySelector(clasToAddStle).addEventListener('contextmenu', function(event) {
+
+    // Prevent the default right-click menu from appearing
+    event.preventDefault();
+    // Do something when the right-click event occurs
+    textEditer(document.querySelector(clasToAddStle))
+
+    
+});
+
 
   document.querySelector(`.Patienttest${classPatienttest}`).addEventListener('click',function (e) {
 
@@ -1500,7 +1511,7 @@ function addGroupedTests() {
     let div = document.querySelector(`.available-tests66`);
 
     for (let i = 0; i < keys.length; i++) {
-      let html = `<div style="display: inline-block;margin-right: 5px;">
+      let html = `<div style="display: inline-block;margin: 2px;">
       <div style="display: flex;align-items: center;background-color: rgb(241, 238, 238);gap: 2px;padding: 2.5px;border-radius: 5px;"><button class="fromgroupdatabase fromgroupdatabase${i}" style="border: none;padding: 5px;cursor: pointer;">${keys[i].replaceAll('$',' ')}</button>
       <img class="deletefromdatabase${i}" width="15px" style="cursor: pointer;" src="./trash-can-svgrepo-com (1).svg" alt="">
       </div>
