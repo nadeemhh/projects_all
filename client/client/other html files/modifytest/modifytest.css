@@ -1,0 +1,71 @@
+*{margin: 0;padding: 0;box-sizing: border-box;}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  display: flex;flex-direction: column;justify-content: center;
+  }
+  
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+  }
+  
+  
+  @page {
+    size: auto;   /* auto is the initial value */
+    margin: 0;
+    padding: 0;  /* this affects the margin in the printer settings */
+  }
+     @media print {
+     
+      body {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+  
+    }
+
+
+    .report{margin-top: 13px;box-shadow: 0px 0px #ffffff54 !important;}
+    
+    .Navbar-container,.sidebar,.sidebar2,.Patientreportcount{display: none !important;}
+
+    .main{width: 100vw !important;visibility: hidden;overflow-y: visible !important;}
+    .reporttemplate{visibility: visible;box-shadow:none !important;}
+    .translatepoaitive{transform: translateY(20%) !important;}
+   
+     }
+
+     
+
+     ::-webkit-scrollbar {
+        width: 0px;
+        height: 5px;
+       
+      }
+      
+      /* Handle */
+      ::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.993); 
+        border-radius:20px;
+      
+      }
+
+.Navbar-container{height: 10vh;width: 100%;background-color: #495579;position: sticky;top: 0;display: flex; align-items: center;justify-content: space-between; padding-left: 10px;}
+      .brand-name{display: flex;}
+      .brand-name>P{color: aliceblue;}
+      .brand-name>img{margin-right: 5px;}
+      .features-list{ height: 100%;width: 20vw; display: flex;justify-content: center;align-items: center;}
+      .features-list>a{cursor: pointer;height: 100%;width: 100%;display: flex;justify-content: center;align-items: center;}
+
+      .features-list>a:hover{background-color: blue;}
+      .features-list>a:active{transform: scale(0.9);background-color: blue;}

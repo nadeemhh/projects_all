@@ -30,7 +30,7 @@ const port = process.env.PORT || 3600
 //      })
 
 app.get('/convert', (req, res) => {
-const workbook = xlsx.readFile('RELIANCE.csv');
+const workbook = xlsx.readFile('prices2.xlsx');
 
 // Get the worksheet by name or index
 const worksheet = workbook.Sheets['Sheet1'];
@@ -64,12 +64,12 @@ for (let i = 0; i < dateArray.length; i++) {
 }
 
 // Write the result array to a JSON file
-fs.writeFileSync('result2.json', JSON.stringify(resultArray));
+fs.writeFileSync('result5.json', JSON.stringify(resultArray));
 });
 
 app.get('/data', (req, res) => {
     // Read the JSON data from the file
-    const data = fs.readFileSync('result2.json', 'utf-8');
+    const data = fs.readFileSync('result5.json', 'utf-8');
     
     // Send the JSON data as the response
     res.json(data);

@@ -40,11 +40,11 @@ console.log(arr,patientInfo)
     let select = document.querySelector(".main");
 let totalReportCounter = ` <div class="Patientreportcount">
 <div>
-<img class='printreport' src="./printer-print-svgrepo-com.svg" width="25px" alt="">
+<img class='printreport' src="./svg images/printer-print-svgrepo-com.svg" width="25px" alt="">
 <a target="_blank" href="https://web.whatsapp.com/">
-<img class='printreport' src="./whatsapp-svgrepo-com.svg" width="25px" alt="">
+<img class='printreport' src="./svg images/whatsapp-svgrepo-com.svg" width="25px" alt="">
 </a>
-<img class='pointer hide-and-show' src="./hide-svgrepo-com.svg" width="25px" alt="">
+<img class='pointer hide-and-show' src="./svg images/hide-svgrepo-com.svg" width="25px" alt="">
 </div>
 
 <div class="patient-button-contenier"></div>
@@ -478,8 +478,8 @@ if(addIdOneTime==0){
   let select = document.querySelector(".patient-button-contenier");
   let anchortag = `<div class="patient-button">
     <button class="user-link"><a class="linkclass${uniqueIdForPage.count}" href="#id${uniqueIdForPage.count}">${patientDeatels.Patientname}</a></button>
-  <img width="20px" class="deleteicon" src="./trash-can-svgrepo-com (1).svg" alt="">
-  <img width="20px" class="printicon printicon${uniqueIdForPage.count}" src="./printer-print-svgrepo-com.svg" alt="">
+  <img width="20px" class="deleteicon" src="./svg images/trash-can-svgrepo-com (1).svg" alt="">
+  <img width="20px" class="printicon printicon${uniqueIdForPage.count}" src="./svg images/printer-print-svgrepo-com.svg" alt="">
 </div>`;
   select.insertAdjacentHTML("beforeend", anchortag);
 
@@ -544,8 +544,8 @@ if(addIdOneTime==0){
   let select = document.querySelector(".patient-button-contenier");
   let anchortag = `<div class="patient-button">
     <button class="user-link"><a class="linkclass${uniqueIdForPage.count}" href="#id${uniqueIdForPage.count}">${patientDeatels.Patientname}</a></button>
-  <img width="20px" class="deleteicon" src="./trash-can-svgrepo-com (1).svg" alt="">
-  <img width="20px" class="printicon printicon${uniqueIdForPage.count}" src="./printer-print-svgrepo-com.svg" alt="">
+  <img width="20px" class="deleteicon" src="./svg images/trash-can-svgrepo-com (1).svg" alt="">
+  <img width="20px" class="printicon printicon${uniqueIdForPage.count}" src="./svg images/printer-print-svgrepo-com.svg" alt="">
 </div>`;
   select.insertAdjacentHTML("beforeend", anchortag);
 
@@ -1163,7 +1163,7 @@ for(let i = 0; i <departments.length; i++) {
   </div>
   <div class="department-name department-name${i}" onclick="visible(${i})">
     <p>${departments[i]}</p>
-    <img src="./up-arrow-svgrepo-com.svg" width="20px" alt="">
+    <img src="./svg images/up-arrow-svgrepo-com.svg" width="20px" alt="">
   </div>
   
   <div class="available-tests  available-tests${i}">
@@ -1188,22 +1188,53 @@ function removeDuplicates(arr) {
 Partof=removeDuplicates(Partof);
 
 
+console.log(Partof)
+
+Partof.sort((a, b) => {
+
+  let nameA = a.toUpperCase();
+  let nameB = b.toUpperCase();
+
+  if (nameA < nameB) {
+    return -1;
+  }
+  if (nameA > nameB) {
+    return 1;
+  }
+  return 0;
+});
 
 for(let ii = 0; ii <Partof.length; ii++){
 
   let div = document.querySelector(`.available-tests${i}`);
-  let html = `<button class="but" departments=${testToPrint[ii].department}  Partof=${Partof[ii]}>${Partof[ii]}</button>`;
+  let html = `<button class="but group-test-different-color" departments=${testToPrint[ii].department}  Partof=${Partof[ii]}>${Partof[ii]}</button>`;
   div.insertAdjacentHTML("beforeend", html);
   choosetest.push(document.querySelector(`.available-tests${i}`).children[ii])
 }
 
+console.log(testToPrint)
 
-for(let ii = 0; ii < testToPrint.length; ii++){
+const testToPrint2 = [...testToPrint].sort((a, b) => {
+  const nameA = a.testName.toUpperCase();
+  const nameB = b.testName.toUpperCase();
+
+  if (nameA < nameB) {
+    return -1;
+  }
+  if (nameA > nameB) {
+    return 1;
+  }
+  return 0;
+});
+
+
+
+for(let ii = 0; ii < testToPrint2.length; ii++){
 
 
   let div = document.querySelector(`.available-tests${i}`);
 
-  let html = ` <button class="but" departments=${testToPrint[ii].department}>${testToPrint[ii].testName}</button>`;
+  let html = ` <button class="but" departments=${testToPrint2[ii].department}>${testToPrint2[ii].testName}</button>`;
 
   div.insertAdjacentHTML("beforeend", html);
 
@@ -1228,7 +1259,7 @@ function groupTest(i) {
   </div>
   <div class="department-name department-name${i}" onclick="visible(${i})">
     <p>GROUP TESTS</p>
-    <img src="./up-arrow-svgrepo-com.svg" width="20px" alt="">
+    <img src="./svg images/up-arrow-svgrepo-com.svg" width="20px" alt="">
   </div>
   
   <div class="available-tests  available-tests${i}"></div>
@@ -1282,8 +1313,8 @@ function addHtmlInModalWindow(testToPerform) {
           <p>Selected-Tests</p>
 
           <div class="img-cont"> 
-        <img class="chain" src="./link-chain-svgrepo-com.svg" width="21px" alt=""> 
-            <img class="mark" src="./check-small-svgrepo-com.svg" width="21px"  alt="">
+        <img class="chain" src="./svg images/link-chain-svgrepo-com.svg" width="21px" alt=""> 
+            <img class="mark" src="./svg images/check-small-svgrepo-com.svg" width="21px"  alt="">
           </div>
         </div>
       <div class="selected-test">
@@ -1314,26 +1345,6 @@ function addHtmlInModalWindow(testToPerform) {
     
   }
 
-
-  // for (let i = 0; i < repo1.length; i++) {
-
-  //   let div = document.querySelector(`.selected-test`);
-  // let html = `<button class="but">${repo1[i].testName}</button>`;
-  // div.insertAdjacentHTML("beforeend", html);
-
-
-    
-  // }
-
-  // for (let i = 0; i < repo2.length; i++) {
-
-  //   let div = document.querySelector(`.selected-test`);
-  // let html = `<button class="but">${repo2[i].testName}</button>`;
-  // div.insertAdjacentHTML("beforeend", html);
-
-
-
-  // }
 }
 
 
@@ -1513,7 +1524,7 @@ function addGroupedTests() {
     for (let i = 0; i < keys.length; i++) {
       let html = `<div style="display: inline-block;margin: 2px;">
       <div style="display: flex;align-items: center;background-color: rgb(241, 238, 238);gap: 2px;padding: 2.5px;border-radius: 5px;"><button class="fromgroupdatabase fromgroupdatabase${i}" style="border: none;padding: 5px;cursor: pointer;">${keys[i].replaceAll('$',' ')}</button>
-      <img class="deletefromdatabase${i}" width="15px" style="cursor: pointer;" src="./trash-can-svgrepo-com (1).svg" alt="">
+      <img class="deletefromdatabase${i}" width="15px" style="cursor: pointer;" src="./svg images/trash-can-svgrepo-com (1).svg" alt="">
       </div>
       </div>`;
       div.insertAdjacentHTML("beforeend", html);
