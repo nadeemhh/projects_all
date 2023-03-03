@@ -657,7 +657,7 @@ let patientRefferance=patientReportToSave[patientReportToSave.length-1].patientD
 
   let tests;
 
-  
+  let indexx=0;
 if(arr[ii].testName != 'Widal'){
   tests =`<div class='Patienttest Patienttest${classPatienttest}'>
 <p class="testNamevalue testNamevalue${classtestNamevalue}">${arr[ii].testName}</p>
@@ -666,8 +666,8 @@ if(arr[ii].testName != 'Widal'){
   <input class="a${classNameForInputAndValue} textarea hide input" type="text">
 </div>
 <p contenteditable="true" class="unitvalue unitvalue${classunitvalue}">${arr[ii].unit}</p>
-${`<p contenteditable="true" class="normalRangevalue normalRangevalue${classnormalRangevalue}">${arr[ii].normalRange.length==1?`<span>${arr[ii].normalRange[0]}</span>`:arr[ii].normalRange.map(function(value) {
-  if(value!=''){  return `<span>${value}</span><br>`;}
+${`<p class="normalRangevalue normalRangevalue${classnormalRangevalue}">${arr[ii].normalRange.length==1?`<span contenteditable="true" department=${arr[ii].department} index=${indexx++}>${arr[ii].normalRange[0]}</span>`:arr[ii].normalRange.map(function(value) {
+  if(value!=''){return `<span contenteditable="true" department=${arr[ii].department} index=${indexx++}>${value}</span><br>`;}
 })}</p>`.replaceAll(',','')}</div>`;
 }
 else{
@@ -709,6 +709,26 @@ if(ii==arr.length-1){
   }}
 
  
+console.log(arr[ii])
+
+let normalRangeClassName=`.normalRangevalue${classnormalRangevalue}`;
+console.log(document.querySelector(normalRangeClassName).children)
+
+for (let y = 0; y < document.querySelector(normalRangeClassName).children.length; y++) {
+  document.querySelector(normalRangeClassName).children[y].addEventListener('input', function() {
+    let indexForNormalRange=document.querySelector(normalRangeClassName).children[y].getAttribute('index')
+    let departmentForNormalRange=document.querySelector(normalRangeClassName).children[y].getAttribute('department')
+    let updetedNormalRange=document.querySelector(normalRangeClassName).children[y].textContent;
+let testNameUpdateNormalRange=document.querySelector(normalRangeClassName).parentElement.children[0].textContent
+    console.log(testNameUpdateNormalRange)
+console.log(indexForNormalRange,updetedNormalRange,departmentForNormalRange)
+  })
+  
+}
+
+
+
+
   let clasToAddStle=`.b${classNameForInputAndValue}`;
   document.querySelector(clasToAddStle).addEventListener('contextmenu', function(event) {
 
