@@ -1177,10 +1177,25 @@ function pritnDepartmentAndtests(){
 
   get('availableTest',store2)
   .then((data) => {
-    availableTest=data;
-  console.log(availableTest)
+ 
+    let departments;
 
-let departments=Object.keys(availableTest.departments);
+console.log(data)
+if(data==undefined){
+
+  set('availableTest', availableTest2,store2)
+  .then(() => {
+    console.log('saved tests');
+  
+  })
+
+  departments=Object.keys(availableTest.departments);
+}else{
+
+  availableTest=data;
+  departments=Object.keys(availableTest.departments);
+}
+ 
 
 for(let i = 0; i <departments.length; i++) {
 
