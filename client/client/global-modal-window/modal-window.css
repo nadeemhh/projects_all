@@ -38,13 +38,13 @@ padding: 10px;border-radius: 5px; box-shadow: 1px 3px 4px 4px rgb(0 0 0 / 37%);}
 .dropdown-memu>p:hover{color: rgb(255, 255, 255);}
 .dropdown-memu>p:active{color: rgb(255, 255, 255);font-size: 14px;}
 
-table {
+.client-list-table {
   border-collapse: collapse;
   width: 100%;
   margin-bottom: 20px;
 margin-top: 10px;
 }
-th, td {
+.client-thead>tr>th,.insert-client-list>tr>td {
   padding: 5px;
   text-align: left;
   border-bottom: 1px solid #ddd;
@@ -55,7 +55,7 @@ word-wrap: break-word;
 }
 
 
-th {
+.client-thead>tr>th {
   background-color: #f2f2f2;
 color: #000000;
 }

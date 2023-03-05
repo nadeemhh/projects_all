@@ -80,10 +80,9 @@ location.reload()
 ///////////////////////////////////////////////////////
 function showListOfClients() {
   
-
   const div = document.querySelector(".modalwindow-for-all");
-  let html = `<table>
-  <thead>
+  let html = `<table class="client-list-table">
+  <thead class="client-thead">
     <tr>
     <th>client's Name</th>
     <th>commission</th>
