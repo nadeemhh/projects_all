@@ -7,10 +7,12 @@
     <link rel="stylesheet" href="./index.css" />
     <link rel="stylesheet" href="./form.css">
     <link rel="stylesheet" href="./patienttest.css">
+    <link rel="stylesheet" href="./global-modal-window/modal-window.css">
     <title>Document</title>
   </head>
   <body>
-    
+
+
     <div class="modalwindow-for-group-test">
 
     </div>
@@ -24,22 +26,32 @@
 
         <div class="features-list">
 
+         <div>
           <a target="_blank" href="#">
             <img width="25px" src="./svg images/home-home-svgrepo-com (2).svg" alt="">
           </a>
+        </div>
 
-        <a href="#">
+        <div class="dropdown">
           <img width="39px" src="./svg images/group-add-svgrepo-com.svg" alt="">
-        </a>
+<div class="dropdown-memu">
+<p class="add-client">Add Client</p>
+<p class="client-list">Client's List</p>
+</div>
+        </div>
 
+        <div>
           <a target="_blank"  href="#">
           <img width="35px" src="./svg images/database-svgrepo-com.svg" alt="">
         </a>
+      </div> 
 
+      <div>
           <a target="_blank"  href="./other html files/modifytest/modifytest.html">
           <img width="26px" src="./svg images/edit-so-svgrepo-com.svg" alt="">
         </a>
-        
+      </div>
+      
         </div>
       </div>
       <div class="others-container">
@@ -90,9 +102,8 @@
       <input type="text" class="forminput MobileNo" placeholder="Enter Mobile Number"> 
       <input type="text" class="forminput date" placeholder="Enter date"> 
       <input type="text" class="forminput patientID" placeholder="patient ID">
+      
       <select name="" id="RefByList">
-        <option value="">Dr.Roy</option>
-        <option value="">Dr.Dummy</option>
         <option value="">Self</option>
         <option value="">Dummy hospital</option>
         <option value="">Dummy path lab</option>
@@ -114,7 +125,7 @@
           
 <div class="available-department-container"></div>
 
-          <button class="makereport" onclick="performTest()">create report</button>
+          <button class="makereport">create report</button>
 
           
         </div>
@@ -126,6 +137,7 @@
 <script src="./index.js"></script>
 <script src="./newStructureReport.js"></script>
 <script src="./printGroupedTests.js"></script>
+<script src="./global-modal-window/modal-window.js"></script>
 <script src="./textEditer.js"></script>
   </body>
 </html>

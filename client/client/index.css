@@ -62,15 +62,16 @@ body {
       
       
       
-      .Navbar-container{height: 10vh;width: 100%;background-color: #495579;position: sticky;top: 0;display: flex; align-items: center;justify-content: space-between; padding-left: 10px;}
+      .Navbar-container{height: 10vh;width: 100%;background-color: #495579;position: sticky;top: 0;display: flex; align-items: center;justify-content: space-between; padding-left: 10px;z-index: 1;}
       .brand-name{display: flex;}
       .brand-name>P{color: aliceblue;}
       .brand-name>img{margin-right: 5px;}
       .features-list{ height: 100%;width: 20vw; display: flex;justify-content: center;align-items: center;}
-      .features-list>a{cursor: pointer;height: 100%;width: 100%;display: flex;justify-content: center;align-items: center;}
+      .features-list>div{height: 100%;width: 100%;display: flex;justify-content: center;align-items: center;}
 
-      .features-list>a:hover{background-color: blue;}
-      .features-list>a:active{transform: scale(0.9);background-color: blue;}
+      .features-list>div:hover{background-color: blue;}
+      .features-list>div>a,.features-list>div>img{cursor: pointer;}
+      .features-list>div>a:active{transform: scale(0.9)}
        .others-container{display: flex;justify-content: space-between;} 
       
       
@@ -230,10 +231,13 @@ padding: 5px;
 box-shadow: 1px 1px 4px 2px rgb(0 0 0 / 37%);
 }
 
+
+
 .basic-test-editar{
   height: 110px;
   width: 110px;
-  background-color: lightpink;position: fixed;z-index: 7;
+  background-color: #2cb39bde;position: fixed;z-index: 7;
+  border-radius: 5px;
   border: 1px solid;
   transform: scale(0);
 display: none;flex-direction: column;

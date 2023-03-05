@@ -24,7 +24,7 @@ let testInfo={
 };
 
 console.log(testInfo)
-let availableTest={departments:{
+let availableTest2={departments:{
     HAEMATOLOGY:[{
         testName:'Haemoglobin',
         shortName:'hb',

@@ -1,10 +1,12 @@
 let store = createStore('myDB', 'groupedtests');
+let store2 = createStore('availableTestDB', 'availableTest');
+let store3 = createStore('clientsDB', 'clients');
 
-//let store2 = createStore('myDB2', 'random');
 
 
 console.log('hello')
 
+let availableTest=availableTest2;
 console.log(availableTest)
 
 
@@ -25,6 +27,12 @@ let grouping=[];
 let groupedTests=undefined;
 let change=0;
 let anotherHeading=[];
+let testToPerform=[];
+let choosetest=[];
+let x = document.getElementById("optionList");
+const select = document.getElementById("genderList");
+const input = document.querySelector(".name");
+
 
 
 function randomNumBetween(min, max) {
@@ -234,14 +242,7 @@ return spaceLeft;
   }
 
 
-if(location.pathname == '/client/print.html'){
 
-    window.print()
-  setTimeout(() => {
-    window.location.href = location.origin+'/client/index.html';
-  }, 1000);
-
-   }
 
 
 function alignMaker(fclassname,sclassname) {
@@ -257,11 +258,6 @@ function alignMaker(fclassname,sclassname) {
 
 
 
-let testToPerform=[];
-
-
-
-let choosetest=[];
 
 
 
@@ -720,8 +716,21 @@ for (let y = 0; y < document.querySelector(normalRangeClassName).children.length
     let departmentForNormalRange=document.querySelector(normalRangeClassName).children[y].getAttribute('department')
     let updetedNormalRange=document.querySelector(normalRangeClassName).children[y].textContent;
 let testNameUpdateNormalRange=document.querySelector(normalRangeClassName).parentElement.children[0].textContent
-    console.log(testNameUpdateNormalRange)
+    
 console.log(indexForNormalRange,updetedNormalRange,departmentForNormalRange)
+
+if(updetedNormalRange.includes('-')){
+  arr[ii].normalRange[indexForNormalRange]=updetedNormalRange;
+console.log(availableTest)
+set('availableTest', availableTest,store2)
+.then(() => {
+  console.log('saved tests');
+
+})
+
+}
+else{alert('Add Hyphen - Between Two Numbers')}
+
   })
   
 }
@@ -1108,11 +1117,6 @@ document.querySelector(".patientID").value=`${alphabetId}${randomNumBetween(1000
 })
 
 
-let x = document.getElementById("optionList");
-const select = document.getElementById("genderList");
-const input = document.querySelector(".name");
-
-
 select.addEventListener("change", function() {
   
   const selectedOption = select.options[select.selectedIndex].textContent;
@@ -1171,6 +1175,11 @@ function visiblityHide(i){
 
 function pritnDepartmentAndtests(){
 
+  get('availableTest',store2)
+  .then((data) => {
+    availableTest=data;
+  console.log(availableTest)
+
 let departments=Object.keys(availableTest.departments);
 
 for(let i = 0; i <departments.length; i++) {
@@ -1178,10 +1187,10 @@ for(let i = 0; i <departments.length; i++) {
 
   let div = document.querySelector(`.available-department-container`);
   let html = `<div class="available-department">
-  <div class="hidden66  hidden66${i}" onclick="visiblityHide(${i})">
+  <div class="hidden66  hidden66${i}">
 
   </div>
-  <div class="department-name department-name${i}" onclick="visible(${i})">
+  <div class="department-name department-name${i}">
     <p>${departments[i]}</p>
     <img src="./svg images/up-arrow-svgrepo-com.svg" width="20px" alt="">
   </div>
@@ -1191,6 +1200,16 @@ for(let i = 0; i <departments.length; i++) {
 </div>`;
   div.insertAdjacentHTML("beforeend", html);
   
+ 
+document.querySelector(`.hidden66${i}`).addEventListener('click',function () {
+  visiblityHide(i)
+})
+document.querySelector(`.department-name${i}`).addEventListener('click',function () {
+  visible(i)
+})
+
+
+
 let testToPrint=availableTest.departments[departments[i]];
 
 
@@ -1264,20 +1283,33 @@ for(let ii = 0; ii < testToPrint2.length; ii++){
 
 
 }
+
+
+groupTest(66)
+addGroupedTests()
+alltests()
+document.querySelector(`.makereport`).addEventListener('click',function () {
+  performTest()
+
+})
+})
+
+
 }
 
+///
 pritnDepartmentAndtests()
-alltests()
+
 
 
 
 function groupTest(i) {
   let div = document.querySelector(`.available-department-container`);
   let html = `<div class="available-department">
-  <div class="hidden66  hidden66${i}" onclick="visiblityHide(${i})">
+  <div class="hidden66  hidden66${i}">
 
   </div>
-  <div class="department-name department-name${i}" onclick="visible(${i})">
+  <div class="department-name department-name${i}">
     <p>GROUP TESTS</p>
     <img src="./svg images/up-arrow-svgrepo-com.svg" width="20px" alt="">
   </div>
@@ -1285,8 +1317,15 @@ function groupTest(i) {
   <div class="available-tests  available-tests${i}"></div>
 </div>`;
   div.insertAdjacentHTML("beforeend", html);
+
+  document.querySelector(`.hidden66${i}`).addEventListener('click',function () {
+    visiblityHide(i)
+  })
+  document.querySelector(`.department-name${i}`).addEventListener('click',function () {
+    visible(i)
+  })
 }
-groupTest(66)
+
 
 
 
@@ -1557,7 +1596,7 @@ function addGroupedTests() {
 
 
 }
-addGroupedTests()
+
 
 
 

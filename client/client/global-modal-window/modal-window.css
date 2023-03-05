@@ -1,0 +1,64 @@
+.modalwindow-for-all{
+
+   background-color: rgba(76, 0, 130, 0.76); position: fixed;z-index: 7;
+    border: 1px solid;
+    overflow-y: auto;
+  display: flex;flex-direction: column;
+  padding: 5px;
+  box-shadow: 1px 1px 4px 2px rgb(0 0 0 / 37%);
+  }
+  
+  .close-modalwindow-parent{width: 100%; display: flex;justify-content: flex-end;}
+  .modalwindow-for-all:first-child>div>img{cursor: pointer;}
+  .modalwindow-for-all:first-child>div>img:active{transform: scale(0.9);}
+
+  /* client's css */
+
+  .add-client-form{display: flex;flex-direction: column;gap: 10px;padding: 10px;margin-top: 10px;}
+  .add-client-form>div{display: flex;flex-direction: column; color: azure;gap: 10px;padding-right: 100px;}
+  .add-client-form>div>input{background: none;border: none;border-bottom: 2px solid rgb(255, 0, 0);outline: none;color: azure;font-size: 17px;font-weight: 10;}
+  .Commission{width: 50px;float: right; }
+  input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.client-submit{width: 100%;display: flex;align-items: center;}
+.client-submit>button{width: 100px;padding: 8px;border-radius: 20px;cursor: pointer;border: none;background-color: rgb(4, 110, 36);color: azure;letter-spacing: 2px;font-size: 15px;margin-top: 5px;}
+.client-submit>button:active{transform: scale(0.9);}
+
+
+
+.dropdown{position: relative;}
+.dropdown-memu{display: none; position: absolute;width: 100px; background-color: rgb(88, 209, 18);top: 100%;
+padding: 10px;border-radius: 5px; box-shadow: 1px 3px 4px 4px rgb(0 0 0 / 37%);}
+.dropdown-memu>p{margin-bottom: 5px;cursor: pointer;color: rgb(0, 0, 0);font-weight: 500;font-size: 15px;}
+.dropdown:hover .dropdown-memu{display: block;}
+.dropdown-memu>p:hover{color: rgb(255, 255, 255);}
+.dropdown-memu>p:active{color: rgb(255, 255, 255);font-size: 14px;}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 20px;
+margin-top: 10px;
+}
+th, td {
+  padding: 5px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+color: #ffffff;
+max-width: 200px;
+word-wrap: break-word;
+
+}
+
+
+th {
+  background-color: #f2f2f2;
+color: #000000;
+}
+
+.delete-client{cursor: pointer;}
+  /* client's css  end*/
