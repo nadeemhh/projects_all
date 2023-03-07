@@ -62,11 +62,11 @@ body {
       
       
       
-      .Navbar-container{height: 10vh;width: 100%;background-color: #495579;position: sticky;top: 0;display: flex; align-items: center;justify-content: space-between; padding-left: 10px;z-index: 1;}
+      .Navbar-container{height: 10vh;width: 100%;background-color: #495579;position: sticky;top: 0;display: flex; align-items: center;justify-content: space-between; padding-left: 10px;z-index: 6;}
       .brand-name{display: flex;}
       .brand-name>P{color: aliceblue;}
       .brand-name>img{margin-right: 5px;}
-      .features-list{ height: 100%;width: 20vw; display: flex;justify-content: center;align-items: center;}
+      .features-list{ height: 100%;width: 25vw; display: flex;justify-content: center;align-items: center;}
       .features-list>div{height: 100%;width: 100%;display: flex;justify-content: center;align-items: center;}
 
       .features-list>div:hover{background-color: blue;}

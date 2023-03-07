@@ -1,5 +1,5 @@
 
-let testInfo={
+let testInfo2={
     'cbc':{heading:'Complete Blood Count (CBC)', comment:[`comment:`,`null`]},
     'kft':{heading:'Kidney Function Test (KFT)', comment:[`comment:`,`null`]},
     'lft':{heading:'Liver Function Test (LFT)', comment:[`comment:`,`null`]},
@@ -23,7 +23,7 @@ let testInfo={
     'UrineR/M(UrineAnalysis)':{heading:'Urine R/M (Urine Analysis)', comment:[`comment:`,`null`]}
 };
 
-console.log(testInfo)
+console.log(testInfo2)
 let availableTest2={departments:{
     HAEMATOLOGY:[{
         testName:'Haemoglobin',

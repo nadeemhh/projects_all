@@ -1,13 +1,28 @@
 let store = createStore('myDB', 'groupedtests');
 let store2 = createStore('availableTestDB', 'availableTest');
 let store3 = createStore('clientsDB', 'clients');
-
+let store4 = createStore('groupTestsDB', 'groupTests');
 
 
 console.log('hello')
-
+let testInfo=testInfo2;
 let availableTest=availableTest2;
 console.log(availableTest)
+
+
+get('groupTests',store4)
+.then((data) => {
+  console.log(data);
+
+  if(data==undefined){
+    set('groupTests', testInfo2,store4)
+.then(() => {
+  console.log('saved group tests');
+
+})
+  }
+  else{testInfo=data;}
+})
 
 
 
@@ -1226,7 +1241,6 @@ document.querySelector(`.department-name${i}`).addEventListener('click',function
 
 
 let testToPrint=availableTest.departments[departments[i]];
-
 
 let Partof=[];
 

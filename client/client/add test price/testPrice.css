@@ -1,0 +1,51 @@
+
+.save-and-copy{display: flex;justify-content: space-between;margin-top: 10px;}
+.Savebutton{background-color: green;padding: 5px;color: white;border: none;border-radius: 2px;cursor: pointer;}
+.Savebutton:active{transform:scale(0.9) ;}
+.copy-parent{display: flex;gap: 5px;align-items: center;}
+.copy-parent>button{background-color: lightcoral;padding: 2px;color: rgb(0, 0, 0);border-radius: 2px;cursor: pointer;}
+.copy-parent>button:active{transform:scale(0.9) ;}
+.copy-price{width: 50px;height: 20px;background-color: white;}
+
+
+.price-list-table{
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20px;
+  margin-top: 10px;
+  }
+
+  .price-thead>tr{
+    border: 1px solid #ddd;
+
+  }
+  
+  .price-thead>tr>th,.insert-price-list>tr>td{
+    padding: 5px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    border: 1px solid #ddd;
+  color: #ffffff;
+  max-width: 200px;
+  word-wrap: break-word;
+  
+  }
+  
+  .price-thead>tr>th,.insert-price-list>tr>td>input{
+
+width: 50px;
+border: none;
+outline: none;
+background-color: rgba(189, 16, 16, 0);
+color: white;
+  
+  }
+
+  .price-thead>tr>th {
+    background-color: #f2f2f2;
+  color: #000000;
+  white-space: nowrap;
+  border-left: 1px solid gray;
+  }
+
+  .Tname{max-width:none !important;white-space: nowrap !important;}

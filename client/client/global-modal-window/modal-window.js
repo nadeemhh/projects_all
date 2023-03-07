@@ -9,7 +9,9 @@ let html = `<div class="modalwindow-for-all">
 </div>`;
 body.insertAdjacentHTML("afterbegin", html);
 
+if(width !== undefined){
 document.querySelector(`.modalwindow-for-all`).style.width=width;
+}
 document.querySelector(`.modalwindow-for-all`).style.height=height;
 document.querySelector(`.close-modalwindow`).addEventListener('click',function () {
     document.querySelector(`.modalwindow-for-all`).remove()
