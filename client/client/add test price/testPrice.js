@@ -8,7 +8,7 @@ document.querySelector(`.add-test-price`).addEventListener('click',function () {
 
 function showListOfTestPrice() {
 
-    console.log(testToPerform)
+    console.log(testToPerform,choosetest)
     const div = document.querySelector(".modalwindow-for-all");
     let html = `<div class="save-and-copy">
     <div class="copy-parent">
@@ -34,41 +34,63 @@ function showListOfTestPrice() {
 
   
       for (let i = 0; i < testToPerform.length; i++) {
-         
+        console.log(testToPerform[i].testName)
+        get(testToPerform[i].testName,store5)
+        .then((data) => {
+          console.log(data);
+          
         const div = document.querySelector(".insert-price-list");
   let html = `<tr>
     <td><input id="myCheckbox" type="checkbox"></td>
     <td class="Tname">${testToPerform[i].testName}</td>
-    <td><input id=priceinput${i} Partof=${testToPerform[i].Partof?testToPerform[i].Partof.replaceAll(' ','$'):testToPerform[i].Partof} department=${testToPerform[i].departments} testname=${testToPerform[i].testName.replaceAll(' ','$')} type="number"  value=${setAndGetPrice(undefined,undefined,testToPerform[i])}></td>
+    <td><input id=priceinput${i} Partof=${testToPerform[i].Partof?testToPerform[i].Partof.replaceAll(' ','$'):testToPerform[i].Partof} department=${testToPerform[i].departments} testname=${testToPerform[i].testName.replaceAll(' ','$')} type="number"  value=${data!==undefined?data.price:'0'}></td>
     </tr>`;
   div.insertAdjacentHTML("beforeend", html);
 
-  let inputprice=`#priceinput${i}`
-  document.querySelector(inputprice).addEventListener('input',function () {
-
-    let value= document.querySelector(inputprice).value;
-
-        setAndGetPrice(document.querySelector(inputprice),value,undefined)
-
-
-  })
- 
+        
+})
     }
 
   
 
     document.querySelector(`.Savebutton`).addEventListener('click',function () {
-        set('availableTest', availableTest,store2)
+
+let parentofallprice=document.querySelector(`.insert-price-list`).children;
+for (let o = 0; o < parentofallprice.length; o++) {
+
+  let testName=document.querySelectorAll(`.insert-price-list`)[0].children[o].children[1].textContent;
+  let testPrice=document.querySelectorAll(`.insert-price-list`)[0].children[o].children[2].children[0].value;
+  console.log(parentofallprice.length,testName,testPrice)
+        set(`${testName}`, {price:testPrice},store5)
 .then(() => {
   console.log('saved test price');
 
 })
 
-set('groupTests', testInfo,store4)
-.then(() => {
-  console.log('saved group tests');
+if(o == parentofallprice.length-1){ 
+   for (let i = 0; i < choosetest.length; i++) {
 
-})
+  choosetest[i].classList.remove('secleted')
+  
+}
+
+for (let i = 0; i < groupTestButtonElements.length; i++) {
+
+  groupTestButtonElements[i].classList.remove('secleted')
+  
+}
+
+testToPerform=[];
+alert('price has been saved!')
+}
+}
+
+
+
+
+
+
+
     })
 
     document.querySelector(`.copy-parent>button`).addEventListener('click',function () {
@@ -85,7 +107,7 @@ set('groupTests', testInfo,store4)
         document.querySelectorAll(`#myCheckbox`)[i].checked=false;
         
 
-        setAndGetPrice(document.querySelectorAll(`#myCheckbox`)[i].parentElement.parentElement.children[2].children[0],value,undefined)
+        //setAndGetPrice(document.querySelectorAll(`#myCheckbox`)[i].parentElement.parentElement.children[2].children[0],value,undefined)
 
 
      }else{ console.log( 'not checked')}
@@ -96,57 +118,17 @@ set('groupTests', testInfo,store4)
     
   }
 
-  function setAndGetPrice(myElement,value,obj) {
+  function setAndGetPrice(testname) {
 
-    if(myElement!==undefined){
-        console.log('myElement')
-    let departmentAtribute=myElement.getAttribute('department').replaceAll('-','');
+    console.log(testname)
 
-    let PartofAtribute=myElement.getAttribute('Partof').replaceAll('$',' ');
-
-    let testnameAtribute=myElement.getAttribute('testname').replaceAll('$',' ');
-
-    console.log(testnameAtribute,departmentAtribute,PartofAtribute,availableTest.departments[departmentAtribute])
-
-if(PartofAtribute=='undefined'){
-for (let ii = 0; ii < availableTest.departments[departmentAtribute].length; ii++) {
-
-if(availableTest.departments[departmentAtribute][ii].testName == testnameAtribute){
-    availableTest.departments[departmentAtribute][ii].testPrice=value;
-}
-
-}
-}else{
-
-testInfo[testnameAtribute].testPrice=value;
-}
+    get(testname,store5)
+    .then((data) => {
+      console.log(data.price);
+      return Number(data.price);
+    
+    })
+    console.log('end')
   }
 
-  if(obj!==undefined){
-console.log('obj')
 
-let department=obj.departments.replaceAll('-','');
-
-let Partof=obj.Partof;
-
-let testname=obj.testName;
-
-console.log(testname,department,Partof,availableTest.departments[department])
-
-if(Partof==undefined){
-for (let ii = 0; ii < availableTest.departments[department].length; ii++) {
-
-if(availableTest.departments[department][ii].testName == testname){
-    return availableTest.departments[department][ii].testPrice ?availableTest.departments[department][ii].testPrice :0;
-}
-
-}
-}else{
-console.log(testInfo[testname])
-return testInfo[testname].testPrice ? testInfo[testname].testPrice:0;
-
-}
-
-
-  }
-  }

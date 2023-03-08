@@ -2,7 +2,7 @@ let store = createStore('myDB', 'groupedtests');
 let store2 = createStore('availableTestDB', 'availableTest');
 let store3 = createStore('clientsDB', 'clients');
 let store4 = createStore('groupTestsDB', 'groupTests');
-
+let store5 = createStore('testpriceDB', 'testprice');
 
 console.log('hello')
 let testInfo=testInfo2;
@@ -47,7 +47,8 @@ let choosetest=[];
 let x = document.getElementById("optionList");
 const select = document.getElementById("genderList");
 const input = document.querySelector(".name");
-
+let groupTestButtonElements=[];
+let totalTestPerformed=[];
 
 
 function randomNumBetween(min, max) {
@@ -347,6 +348,11 @@ document.querySelector(".makereport").style.display='none';
     choosetest[i].classList.remove('secleted')
     
   }
+  for (let i = 0; i < groupTestButtonElements.length; i++) {
+
+    groupTestButtonElements[i].classList.remove('secleted')
+    
+  }
 
   console.log('testToPerform',testToPerform.length)
 
@@ -354,12 +360,12 @@ document.querySelector(".makereport").style.display='none';
   // console.log(availableTest.departments[testToPerform[0].departments])
 let createReport=[];
 let sepratePageReport=[];
-let totalTestPerformed=[];
+
 
   for (let i = 0; i < testToPerform.length; i++) {
 
     console.log(testToPerform[i])
-    totalTestPerformed.push(testToPerform[i].testName)
+    
     if(testToPerform[i].Partof=="group"){
       console.log(testToPerform[i])
       printGTests(testToPerform[i],patientDeatels)
@@ -382,26 +388,15 @@ else{
 
   createReport.push(department[ii])}
 
-
-
-
 }
 
-
-  
 }
     
   }
 
   let repo={sepratePageReport:sepratePageReport}
 
-
-
-
-
   console.log(sepratePageReport,createReport,patientDeatels)
-
-
 
 patientReportToSave.push({repo,createReport,patientDeatels})
 
@@ -409,6 +404,7 @@ patientReportToSave.push({repo,createReport,patientDeatels})
 let user = {repo,createReport,patientDeatels,totalTestPerformed};
 console.log(user)
 sessionStorage.setItem(patientDeatels.patientId, JSON.stringify(user));
+
 const newArray = [];
 
 ///////////////create new page where newpage:true
@@ -447,6 +443,7 @@ testnameaddonlyonetime=0;
 anotherHeading=[];
 }
 
+totalTestPerformed=[];
 //////////////////////////
 
 
@@ -661,7 +658,7 @@ let classnormalRangevalue=ii+alphabet[randomNumBetween(0,25)]+randomNumBetween(1
 ////////////////////////////
 classNameForInputAndValue++
 
-console.log(patientReportToSave[patientReportToSave.length-1].patientDeatels.patientId)
+
 let patientRefferance=patientReportToSave[patientReportToSave.length-1].patientDeatels.patientId;
 
   let testdiv = document.querySelector(`.all-test-container${className}`);  
@@ -720,7 +717,7 @@ if(ii==arr.length-1){
   }}
 
  
-console.log(arr[ii])
+
 
 let normalRangeClassName=`.normalRangevalue${classnormalRangevalue}`;
 console.log(document.querySelector(normalRangeClassName).children)
@@ -1318,7 +1315,24 @@ groupTest(66)
 addGroupedTests()
 alltests()
 document.querySelector(`.makereport`).addEventListener('click',function () {
-  performTest()
+
+  for (let i = 0; i < testToPerform.length; i++) {
+    get(testToPerform[i].testName,store5)
+    .then((data) => {
+
+      console.log(data,testToPerform);
+      if(data!==undefined){
+    totalTestPerformed.push({testName:testToPerform[i].testName,testPrice:data.price})
+    }
+    else{totalTestPerformed.push({testName:testToPerform[i].testName,testPrice:'0'})}
+
+    if(i == testToPerform.length-1){performTest()}
+    })
+    
+    
+  }
+
+  
 
 })
 })
@@ -1558,14 +1572,14 @@ console.log(groupName)
 if(groupName!=''){
 
   if(change==0){
-    set(groupName, usersGroupTestCreater,store)
+    set(`${groupName}`, usersGroupTestCreater,store)
     .then(() => {
       console.log('saved the user_id');
     })
     }
 
   if(change==1){
-set(groupName, groupedTests,store)
+set(`${groupName}`, groupedTests,store)
 .then(() => {
   console.log('saved the user_id');
   change=0;
@@ -1617,9 +1631,11 @@ function addGroupedTests() {
       </div>`;
       div.insertAdjacentHTML("beforeend", html);
       printGroupedTests(`.fromgroupdatabase${i}`,`.deletefromdatabase${i}`)
+
+      groupTestButtonElements.push(document.querySelector(`.fromgroupdatabase${i}`))
     }
 
-
+    console.log(groupTestButtonElements);
 
   });
 
