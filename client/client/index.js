@@ -3,6 +3,7 @@ let store2 = createStore('availableTestDB', 'availableTest');
 let store3 = createStore('clientsDB', 'clients');
 let store4 = createStore('groupTestsDB', 'groupTests');
 let store5 = createStore('testpriceDB', 'testprice');
+let store6 = createStore('allpatientsDB', 'allpatients');
 
 console.log('hello')
 let testInfo=testInfo2;
@@ -320,10 +321,12 @@ function performTest(out=false) {
 
 let x = document.getElementById("optionList");
 let x2 = document.getElementById("RefByList");
+let x3 = document.getElementById("set-payment-status");
 let Patientname=document.querySelector(".name").value.toUpperCase();
 let Patientage=document.querySelector(".age").value;
 let gender = x.options[x.selectedIndex].text.toUpperCase(); 
 let refby = x2.options[x2.selectedIndex].text.toUpperCase(); 
+let paymentstatus = x3.options[x3.selectedIndex].text; 
 let registrationDate =document.querySelector(".date").value;
 let patientID =document.querySelector(".patientID").value;
 let mobileNo =document.querySelector(".MobileNo").value;
@@ -338,7 +341,7 @@ document.querySelector(".patientID").value='';
 
 console.log(Patientname,Patientage,registrationDate,patientID)
 
-let patientDeatels={Patientname:Patientname,Patientage:Patientage,registrationDate:registrationDate,gender:gender,patientId:patientID,refby:refby,mobileNo:mobileNo};
+let patientDeatels={Patientname:Patientname,Patientage:Patientage,registrationDate:registrationDate,gender:gender,patientId:patientID,refby:refby,mobileNo:mobileNo,paymentstatus:paymentstatus};
 
 document.querySelector(".add-patient-container").style.display='flex';
 document.querySelector(".form").style.display='none';
@@ -403,6 +406,13 @@ patientReportToSave.push({repo,createReport,patientDeatels})
 
 let user = {repo,createReport,patientDeatels,totalTestPerformed};
 console.log(user)
+
+set(`${patientDeatels.patientId}`, {patientDeatels,totalTestPerformed},store6)
+.then(() => {
+  console.log('saved patient Deatels');
+
+})
+
 sessionStorage.setItem(patientDeatels.patientId, JSON.stringify(user));
 
 const newArray = [];
@@ -422,6 +432,12 @@ i--;
 if(newArray.length>0){
   user = {repo,createReport,patientDeatels,totalTestPerformed,newPageReport:newArray};
 console.log(user)
+
+set(`${patientDeatels.patientId}`, {patientDeatels,totalTestPerformed},store6)
+.then(() => {
+  console.log('saved patient Deatels');
+
+})
 
 sessionStorage.setItem(patientDeatels.patientId, JSON.stringify(user));
 }
@@ -1641,7 +1657,5 @@ function addGroupedTests() {
 
 
 }
-
-
 
 

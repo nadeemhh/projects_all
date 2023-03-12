@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="./patienttest.css">
     <link rel="stylesheet" href="./global-modal-window/modal-window.css">
     <link rel="stylesheet" href="./add test price/testPrice.css">
+    <link rel="stylesheet" href="./patientdatabase/patientdatabase.css">
     <title>Document</title>
   </head>
   <body>
@@ -50,7 +51,7 @@
 </div>
         </div>
 
-        <div>
+        <div class="show-database">
           <a target="_blank"  href="#">
           <img width="35px" src="./svg images/database-svgrepo-com.svg" alt="">
         </a>
@@ -67,8 +68,7 @@
       <div class="others-container">
         <div class="sidebar"></div>
         <div class="main">
-         
-         
+
         </div>
         <div class="sidebar2">
           
@@ -115,8 +115,6 @@
       
       <select name="" id="RefByList">
         <option value="">Self</option>
-        <option value="">Dummy hospital</option>
-        <option value="">Dummy path lab</option>
       </select>
     </div>
 
@@ -127,6 +125,10 @@
       <option value="">Male</option>
       <option value="">Female</option>
       <option value="">Individuals</option>
+    </select>
+    <select name="" id="set-payment-status">
+      <option value="">unpaid</option>
+      <option value="">paid</option>
     </select>
   </div>
 </div>
@@ -150,5 +152,6 @@
 <script src="./global-modal-window/modal-window.js"></script>
 <script src="./textEditer.js"></script>
 <script src="./add test price/testPrice.js"></script>
+<script src="./patientdatabase/patientdatabase.js"></script>
   </body>
 </html>

@@ -1,12 +1,13 @@
 .modalwindow-for-all{
 
-   background-color: rgba(76, 0, 130, 0.76); position: fixed;z-index: 7;
+   background-color: rgba(76, 0, 130, 0.87); position: fixed;z-index: 7;
     border: 1px solid;
     border-radius: 4px;
     overflow-y: auto;
   display: flex;flex-direction: column;
   padding: 5px;
   box-shadow: 1px 1px 4px 2px rgb(0 0 0 / 37%);
+
   }
   
   .close-modalwindow-parent{width: 100%; display: flex;justify-content: flex-end;position: sticky;top: 0;}
