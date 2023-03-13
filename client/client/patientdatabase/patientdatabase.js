@@ -3,8 +3,9 @@ document.querySelector(`.show-database`).addEventListener('click',function () {
 
   values(store6).then((allpatients) => {
     values(store3).then((clients) => {
-     
+      if(document.querySelector('.patient-database-container')==null){
       patientdatabase(allpatients,clients)
+      }
        });
   
     });
@@ -199,6 +200,7 @@ function patientdatabase(allpatients,clients) {
         console.log(discount)
         sessionStorage.setItem('patientReceipt', JSON.stringify({discount,patients:insertPatient}));
         document.querySelector(".close-modalwindow").click()
+        window.open("http://127.0.0.1:5500/client/client/receipt/receipt.html", '_blank');
         }
       
       
