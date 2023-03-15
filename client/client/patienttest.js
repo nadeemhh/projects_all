@@ -365,6 +365,15 @@ let availableTest2={departments:{
     value:'0.0',
         Specimen:'Serum'
     },{
+        testName:'GGT (Gamma Glutamyl Transferase)',
+        shortName:'',
+        unit:'U/L',
+        normalRange:['0 - 60'],
+        Partof:'none',
+        department:'BIOCHEMISTRY',
+        value:'0.0',
+        Specimen:'Serum'
+        },{
         testName:'Blood Sugar Fasting',
         shortName:'',
         unit:'mg/dL',

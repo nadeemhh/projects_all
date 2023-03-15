@@ -13,21 +13,11 @@ app.use(express.static(publicDirectoryPath))
 const port = process.env.PORT || 3600
 
 
+app.get('/download', (req, res) => {
+  const file = `${__dirname}/prices2.xlsx`; // Assumes the file is named 'file.xlsx' and is in the root directory of your project
+  res.download(file); // Set disposition and send it.
+});
 
-// app.get('/changedata', async (req, res) => {
-//     availableTest[0].departments.BIOCHEMISTRY[0].newPage=false;
-
-//     fs.writeFile('data.json', JSON.stringify(availableTest), function (err) {
-//         if (err) throw err;
-//         console.log('Replaced!');
-//       });
-
-
-//       const dataBuffer = fs.readFileSync('data.json')
-// const dataJSON = dataBuffer.toString()
-// const tests = JSON.parse(dataJSON)
-//  res.send(tests)
-//      })
 
 app.get('/convert', (req, res) => {
 const workbook = xlsx.readFile('prices2.xlsx');
