@@ -1,7 +1,8 @@
 const express = require('express')
 const path = require('path')
 const xlsx = require('xlsx');
-var fs = require('fs');
+const  fs = require('fs');
+const archiver = require('archiver');
 const app = express()
 app.use(express.json())
 const mongoose = require('mongoose')
@@ -14,8 +15,36 @@ const port = process.env.PORT || 3600
 
 
 app.get('/download', (req, res) => {
-  const file = `${__dirname}/prices2.xlsx`; // Assumes the file is named 'file.xlsx' and is in the root directory of your project
-  res.download(file); // Set disposition and send it.
+  const folderPath = `${__dirname}/excel`; // Replace 'folder' with the name of the folder you want to send
+  const zipName = 'folder.zip';
+  const zipPath = `${__dirname}/${zipName}`;
+  
+  // Create a write stream to write the archive to disk
+  const output = fs.createWriteStream(zipPath);
+  const archive = archiver('zip');
+
+  // Send the file to the client when the archive is complete
+  output.on('close', () => {
+    res.download(zipPath, zipName, (err) => {
+      // Delete the temporary archive file
+      fs.unlinkSync(zipPath);
+      if (err) throw err;
+    });
+  });
+
+  // Catch any errors writing to the archive stream
+  archive.on('error', (err) => {
+    throw err;
+  });
+
+  // Pipe the archive to the write stream
+  archive.pipe(output);
+
+  // Add the contents of the folder to the archive
+  archive.directory(folderPath, false);
+
+  // Finalize the archive
+  archive.finalize();
 });
 
 
