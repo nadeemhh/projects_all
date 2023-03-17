@@ -76,9 +76,9 @@ body {
       
       
       
-       .main{height: 90vh;width: 80vw;background-image: url('./svg images/back.svg');background-repeat: no-repeat; background-size: cover;background-position: center; overflow-y: scroll;position: relative;box-sizing: border-box;}
+       .main{height: 90vh;width: 80vw;background-color: white; overflow-y: scroll;position: relative;box-sizing: border-box;}
 
-       .reporttemplate{ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 3), 0 6px 20px 0 rgba(0, 0, 0, 3);}
+       .reporttemplate{ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 3);}
 
        .sidebar{height: 90vh;width: 10vw;background-color: rgba(0, 0, 0, 0.979);position: fixed;z-index: 0;}
        .sidebar2{height: 90vh;width: 20vw;background-color: #263159;display: flex;flex-direction: column; align-items: center;overflow-y: scroll;padding: 5px;}
@@ -87,7 +87,9 @@ body {
        .Patientreportcount{height: 40px;width: 100%;  background-image: linear-gradient(to right, rgb(250, 93, 93) , rgb(243, 133, 133));margin-bottom: 15px;position: sticky;top: 0;box-shadow: 0px 5px #41404054;display: flex;align-items: center;z-index: 5;gap: 10px; overflow-x: auto;
         white-space: nowrap;}
 
-       .Patientreportcount:first-child>div{margin-left: 10px;display: flex;gap: 10px;margin-right: 10px;}
+       .Patientreportcount:first-child>div{margin-left: 10px;display: flex;gap: 15px;margin-right: 10px;align-items: center;}
+
+       .Patientreportcount:first-child>div>select{padding: 5px;}
 
        .report{ height:29.7cm;width:21cm; margin-bottom: 15px;margin-left: auto;margin-right: auto;page-break-before: always;display: flex;flex-direction: column;justify-content: space-between; box-shadow: 5px 5px #41404054;}
 
@@ -286,3 +288,7 @@ div[colorName="black"]{background-color: black;}
 
 
 .group-test-different-color{background-color: #F7C4F5;}
+
+
+.Savebuttonfornormalrange{background-color: green;padding: 5px;color: white;border: none;border-radius: 2px;cursor: pointer;}
+.Savebuttonfornormalrange:active{transform:scale(0.9) ;}

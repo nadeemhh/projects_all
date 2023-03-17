@@ -12,7 +12,9 @@ body.insertAdjacentHTML("afterbegin", html);
 if(width !== undefined){
 document.querySelector(`.modalwindow-for-all`).style.width=width;
 }
+if(height !== undefined){
 document.querySelector(`.modalwindow-for-all`).style.height=height;
+}
 document.querySelector(`.close-modalwindow`).addEventListener('click',function () {
     document.querySelector(`.modalwindow-for-all`).remove()
     

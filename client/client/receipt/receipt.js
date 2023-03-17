@@ -8,7 +8,15 @@ function printReceipt() {
         
         const div = document.querySelector(".paper-container");
         let html = `<div class="a4Sizepaper">
-        <div class="header"></div>
+        <div class="header">
+        <div class="lab-name-slogan"><p>F&Q Diagnostic</p><p>Commited To Accurate Error Free</p></div>
+
+<div class="lab-adress">Noida sector-35 Near Random Electronics</div>
+<div class="lab-phone-number">
+    <img width="25px" src="../svg images/phone-call-svgrepo-com.svg" alt=""> 88765245673 - 9967855543</div>
+
+    <div class="cash-memo"><p>Cash Memo</p></div>
+        </div>
         <div  class="patient-table-container">
         <table id="patient-table">
       <tr>
@@ -52,7 +60,7 @@ function printReceipt() {
         return `<span class="whitesp">${obj.testName}</span><br>`;
       })}</td>
       <td id="select-patient-status">${patientTable[ii].patientDeatels.paymentstatus}</td>
-      <td id="select-patient-Amount">${totalamountfortest-(Number(patientTable[ii].patientDeatels.commission)/100) *totalamountfortest}₹</td>
+      <td id="select-patient-Amount">${totalamountfortest}₹</td>
     </tr>`.replaceAll(',','');
     tbody.insertAdjacentHTML("beforeend", html);
 
@@ -115,12 +123,12 @@ function calcTotal(receiptData) {
   if(receiptData.discount.includes('%')){
     let discount=receiptData.discount.replace('%','');
 
-  document.querySelector(`#table-Total+td`).textContent=`${Number(addOn-(Number(discount)/100) *addOn).toFixed(2)}`;
+  document.querySelector(`#table-Total+td`).textContent=`${Number(addOn-(Number(discount)/100) *addOn).toFixed(2)}₹`;
 }
 else if(receiptData.discount.includes('₹')){
   let discount=receiptData.discount.replace('₹','');
   console.log(addOn,Number(discount))
-document.querySelector(`#table-Total+td`).textContent=`${addOn-Number(discount).toFixed(2)}`;
+document.querySelector(`#table-Total+td`).textContent=`${addOn-Number(discount).toFixed(2)}₹`;
 }
   }
 

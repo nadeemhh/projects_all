@@ -2,7 +2,8 @@
 
 .patient-table-and-other-data{display: flex;flex-direction: column;align-items: center;}
 
-
+.delete-patient-record{width: 28px;background-color: #ffffff;cursor: pointer;}
+.delete-patient-record:active{transform: scale(0.9);}
 #patient-table {
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
@@ -56,3 +57,14 @@
 .generate-receipt{width: 100%;display: flex;justify-content: center;}
 .generate-receipt>button{padding: 8px;background-color: rgb(0, 218, 0);border: none;border-radius: 10px;cursor: pointer;font-size: 17px;font-weight: 550; letter-spacing: 1px;font-family: cursive;}
 .generate-receipt>button:active{transform: scale(0.9);}
+
+
+
+/* /////////// reconfirm */
+
+.reconfirm{height: 100%;width: 100%;display: flex;flex-direction: column;justify-content: center;gap: 20px;}
+.reconfirm>div{display: flex;justify-content: center;gap: 30px;color: rgb(255, 255, 255);font-size: 18px;}
+.reconfirm>div>button{padding: 3px 10px 3px 10px;cursor: pointer;border: none;border-radius: 2px;}
+.reconfirm>div>button:hover{background-color: rgb(9, 199, 9);}
+
+/* /////////// reconfirm end */

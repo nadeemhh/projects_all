@@ -6,106 +6,45 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
 	<style>
-		*{margin: 0;padding: 0;box-sizing: border-box;}
-.select-recepit-preferances{height: 180px;width: 200px;display: flex;flex-direction: column; background-color: blueviolet;color: rgb(255, 255, 255);font-weight:500;font-size: 18px;letter-spacing: 1px;gap: 20px;padding: 5px;justify-content: center;}
-.clientnameforrecipt{width: 100%;display: flex;justify-content: center;}
-.discountbypersentage,.discountbyrupee{display: flex;align-items: center;gap: 10px;}
-.select-recepit-preferances input[type="text"]{width: 30px;height: 20px;}
-.generate-receipt{width: 100%;display: flex;justify-content: center;}
-.generate-receipt>button{padding: 10px;background-color: rgb(0, 218, 0);border: none;border-radius: 10px;cursor: pointer;font-size: 15px;}
-.generate-receipt>button:active{transform: scale(0.9);}
-
+*{margin: 0;padding: 0;box-sizing: border-box;}
+body{height: 100vh; display: flex;justify-content: center;align-items: center;}
+.reconfirm{height: 100px;width: 250px;background-color: blueviolet;display: flex;flex-direction: column;justify-content: center;gap: 20px;box-shadow: 0 1px 8px 0 black;border-radius: 2px;}
+.reconfirm>div{display: flex;justify-content: center;gap: 30px;color: rgb(255, 255, 255);font-size: 18px;}
+.reconfirm>div>button{padding: 3px 10px 3px 10px;cursor: pointer;border: none;border-radius: 2px;}
+.reconfirm>div>button:hover{background-color: rgb(9, 199, 9);}
 	</style>
 </head>
 <body>
-	
-	<div class="select-recepit-preferances">
 
-	<div class="clientnameforrecipt">
-		<p>xdhsdgh</p>
-	</div>
-
-<div class="discountbypersentage">
-	<input class="bypersentage" type="checkbox">
-	<p>discount</p>
-	<input value="50" type="text">
-	<p>%</p>
+<div class="reconfirm">
+	<div>
+<p>are you sure you want to delete?</p>
+</div>
+<div>
+	<button class="terminate-program">No</button>
+	<button class="execute-program">Yes</button>
+</div>
 </div>
 
-<div class="discountbyrupee">
-	<input class="bybyrupee" type="checkbox">
-	<p>rupee</p>
-	<input type="text">
-	<p>₹</p>
-</div>
 
-<div class="generate-receipt"><button>generate receipt</button></div>
-	</div>
 	<script>
+// 		function generateRandomString() {
+//   let alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+//   let result = "";
+//   for (let i = 0; i < 8; i++) {
+//     result += alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+//   }
+//   return result;
+// }
+// console.log( generateRandomString())
+let obj = {name: 'john'};
 
-function receiptpreferances() {
-	const div = document.querySelector(".modalwindow-for-all");
-let html = `<div class="select-recepit-preferances">
-
-<div class="clientnameforrecipt">
-	<p>xdhsdgh</p>
-</div>
-
-<div class="discountbypersentage">
-<input class="bypersentage" type="checkbox">
-<p>discount</p>
-<input value="50" type="text">
-<p>%</p>
-</div>
-
-<div class="discountbyrupee">
-<input class="bybyrupee" type="checkbox">
-<p>rupee</p>
-<input type="text">
-<p>₹</p>
-</div>
-
-<div class="generate-receipt"><button>generate receipt</button></div>
-</div>`;
-div.insertAdjacentHTML("beforeend", html);
+console.log(navigator)
 
 
 
-	let value;
-
-const checkbox1 = document.querySelector('.bypersentage');
-const checkbox2 = document.querySelector('.bybyrupee');
-checkbox1.checked = true;
-value=document.querySelector('.discountbypersentage>input[type="text"]').value;
-
-checkbox1.addEventListener('change', function() {
-  if (this.checked) {
-    checkbox2.checked = false;
-  }
-
-   value=document.querySelector('.discountbypersentage>input[type="text"]').value;
-});
-
-checkbox2.addEventListener('change', function() {
-  if (this.checked) {
-    checkbox1.checked = false;
-  }
-
-   value=document.querySelector('.discountbyrupee>input[type="text"]').value;
-});
-
-document.querySelector('.generate-receipt>button').addEventListener('click', function() {
-	
-  if (checkbox1.checked || checkbox2.checked) {
-	console.log(value)
-  }
 
 
-
-});
-
-}
-receiptpreferances()
 	</script>
 </body>
 </html>

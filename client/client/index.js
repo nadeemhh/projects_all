@@ -4,6 +4,9 @@ let store3 = createStore('clientsDB', 'clients');
 let store4 = createStore('groupTestsDB', 'groupTests');
 let store5 = createStore('testpriceDB', 'testprice');
 let store6 = createStore('allpatientsDB', 'allpatients');
+let store7 = createStore('headertextdb', 'headertext');
+
+let originUrl=location.origin;
 
 console.log('hello')
 let testInfo=testInfo2;
@@ -70,6 +73,7 @@ let totalReportCounter = ` <div class="Patientreportcount">
 <img class='printreport' src="./svg images/whatsapp-svgrepo-com.svg" width="25px" alt="">
 </a>
 <img class='pointer hide-and-show' src="./svg images/hide-svgrepo-com.svg" width="25px" alt="">
+<button class="Savebuttonfornormalrange">Save</button>
 </div>
 
 <div class="patient-button-contenier"></div>
@@ -103,7 +107,11 @@ if(openPrintPopup==0){
 document.querySelector('.printreport').addEventListener('click',function () {
 
   window.print()
+ 
+})
 
+document.querySelector('.Savebuttonfornormalrange').addEventListener('click',function () {
+  saveNormalRange() 
 })
 }
 openPrintPopup=1;
@@ -750,11 +758,6 @@ console.log(indexForNormalRange,updetedNormalRange,departmentForNormalRange)
 if(updetedNormalRange.includes('-')){
   arr[ii].normalRange[indexForNormalRange]=updetedNormalRange;
 console.log(availableTest)
-set('availableTest', availableTest,store2)
-.then(() => {
-  console.log('saved tests');
-
-})
 
 }
 else{alert('Add Hyphen - Between Two Numbers')}
@@ -1342,7 +1345,13 @@ document.querySelector(`.makereport`).addEventListener('click',function () {
     }
     else{totalTestPerformed.push({testName:testToPerform[i].testName,testPrice:'0'})}
 
-    if(i == testToPerform.length-1){performTest()}
+    if(i == testToPerform.length-1){
+      if(document.querySelector(`.patient-database-container`) !== null){
+        document.querySelector(`.patient-database-container`).remove()
+      }
+      performTest()
+    }
+
     })
     
     
@@ -1659,3 +1668,14 @@ function addGroupedTests() {
 }
 
 
+
+
+function saveNormalRange() {
+
+  set('availableTest', availableTest,store2)
+.then(() => {
+  console.log('saved tests');
+
+})
+  console.log('inside')
+}
