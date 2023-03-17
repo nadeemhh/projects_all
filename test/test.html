@@ -29,5 +29,13 @@
 
     <div class="cash-memo"><p>Cash Memo</p></div>
     </div>
+
+
+    <script>
+
+fetch('http://localhost:3600/jsond')
+  .then(response => response.json())
+  .then(data => {console.log(data)})
+    </script>
 </body>
 </html>

@@ -14,6 +14,15 @@ app.use(express.static(publicDirectoryPath))
 const port = process.env.PORT || 3600
 
 
+
+app.get('/jsond', (req, res) => {
+  const jdata = fs.readFileSync('file2.json', 'utf-8');
+  let obj=JSON.parse(jdata)
+  console.log(obj)
+  res.send(obj)
+})
+
+
 app.get('/download', (req, res) => {
   const folderPath = `${__dirname}/excel`; // Replace 'folder' with the name of the folder you want to send
   const zipName = 'folder.zip';
