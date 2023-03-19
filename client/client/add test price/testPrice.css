@@ -4,7 +4,7 @@
 
 .Savebutton:active{transform:scale(0.9) ;}
 .copy-parent{display: flex;gap: 5px;align-items: center;}
-.copy-parent>button{background-color: lightcoral;padding: 2px;color: rgb(0, 0, 0);border-radius: 2px;cursor: pointer;}
+.copy-parent>button{background-color: rgb(96, 94, 240);padding: 2px;color: rgb(255, 255, 255);border-radius: 2px;cursor: pointer;font-weight: 500;letter-spacing: 1px;border: none;}
 .copy-parent>button:active{transform:scale(0.9) ;}
 .copy-price{width: 50px;height: 20px;background-color: white;}
 
@@ -33,8 +33,6 @@
   }
   
   .price-thead>tr>th,.insert-price-list>tr>td>input{
-
-width: 50px;
 border: none;
 outline: none;
 background-color: rgba(189, 16, 16, 0);
@@ -48,5 +46,7 @@ color: white;
   white-space: nowrap;
   border-left: 1px solid gray;
   }
+
+  .insert-price-list td input[type=number]{width:60px;}
 
   .Tname{max-width:none !important;white-space: nowrap !important;}

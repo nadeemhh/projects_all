@@ -1,5 +1,6 @@
+let store7 = createStore('headertextdb', 'headertext');
 
-function printReceipt() {
+function printReceipt(data) {
   let checkIvalue=0;
     let receiptData = JSON.parse(sessionStorage.patientReceipt);
     console.log(receiptData)
@@ -9,14 +10,13 @@ function printReceipt() {
         const div = document.querySelector(".paper-container");
         let html = `<div class="a4Sizepaper">
         <div class="header">
-        <div class="lab-name-slogan"><p>F&Q Diagnostic</p><p>Commited To Accurate Error Free</p></div>
+        <div class="lab-name-slogan"><p>${data.labname}</p><p>${data.slogan}</p></div>
 
-<div class="lab-adress">Noida sector-35 Near Random Electronics</div>
+<div class="lab-adress">${data.adress}</div>
 <div class="lab-phone-number">
-    <img width="25px" src="../svg images/phone-call-svgrepo-com.svg" alt=""> 88765245673 - 9967855543</div>
-
-    <div class="cash-memo"><p>Cash Memo</p></div>
+    <img width="25px" src="../svg images/phone-call-svgrepo-com.svg" alt="">${data.phonenumbers}</div>
         </div>
+        <div class="cash-memo"><p>Cash Memo</p></div>
         <div  class="patient-table-container">
         <table id="patient-table">
       <tr>
@@ -104,8 +104,11 @@ console.log(sapceCheack)
 
 }
 
-printReceipt()
 
+get('headerdeatels',store7)
+.then((data) => {
+  printReceipt(data)
+})
 
 function calcTotal(receiptData) {
   

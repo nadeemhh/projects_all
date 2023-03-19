@@ -6,6 +6,8 @@ let store5 = createStore('testpriceDB', 'testprice');
 let store6 = createStore('allpatientsDB', 'allpatients');
 let store7 = createStore('headertextdb', 'headertext');
 
+
+
 let originUrl=location.origin;
 
 console.log('hello')
@@ -682,7 +684,7 @@ let classnormalRangevalue=ii+alphabet[randomNumBetween(0,25)]+randomNumBetween(1
 ////////////////////////////
 classNameForInputAndValue++
 
-
+console.log(arr[ii])
 let patientRefferance=patientReportToSave[patientReportToSave.length-1].patientDeatels.patientId;
 
   let testdiv = document.querySelector(`.all-test-container${className}`);  

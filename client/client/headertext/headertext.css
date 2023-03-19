@@ -1,3 +1,3 @@
 .header-text-form{display: flex;flex-direction: column;gap: 10px;padding: 10px;margin-top: 10px;}
 .header-text-form>div{display: flex;flex-direction: column; color: azure;gap: 10px;padding-right: 100px;}
-.header-text-form>div>input{background: none;border: none;border-bottom: 2px solid rgb(255, 0, 0);outline: none;color: azure;font-size: 17px;font-weight: 10;}
+.header-text-form>div>input{background: none;border: none;border-bottom: 2px solid rgb(255, 0, 0);outline: none;color: rgb(255, 217, 0);font-size: 17px;font-weight: 10;}

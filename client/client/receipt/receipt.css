@@ -66,14 +66,14 @@ body {
 
    .a4Sizepaper{ height:29.7cm;width:21cm; margin-bottom: 15px;margin-left: auto;margin-right: auto;page-break-before: always;display: flex;flex-direction: column;justify-content: space-between;border: 1px solid #020101;}
 
-   .header{height: 200px;width:100%;background-color: rgb(249, 200, 255);display: flex;flex-direction: column;align-items: center;gap: 5px;font-family: serif;margin-bottom: 50px;}
+   .header{height: 160px;width:100%;background-color: rgb(249, 200, 255);display: flex;flex-direction: column;align-items: center;gap: 5px;font-family: serif;}
 .lab-name-slogan{display: flex;flex-direction: column;align-items: center;}
 .lab-name-slogan p:first-child {font-size: 25px;margin-top: 10px;font-weight: 600;}
 .lab-name-slogan p:last-child {font-size:15px;}
 
 .lab-adress{font-size: 20px;}
 .lab-phone-number{font-size: 20px;display: flex;justify-content: center;gap: 10px;}
-.cash-memo{font-size: 25px;margin-top: 10px;border-bottom: 1px solid black;}
+.cash-memo{width: 100%;display: flex;justify-content: center; font-size: 25px;margin-top: 10px;font-weight: 550;font-family: serif;margin: 12px 0px 10px 0px;}
    .patient-table-container{width: 100%;height: 100%;display: flex;flex-direction: column;align-items: center;}
    /* .fotter{width: 100%;height:50px;background-color: rgb(160, 107, 38);position: relative;flex-shrink: 0;} */
 

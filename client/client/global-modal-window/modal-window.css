@@ -1,6 +1,6 @@
 .modalwindow-for-all{
 
-   background-color: rgba(76, 0, 130, 0.87); position: fixed;z-index: 7;
+   background-color: rgba(76, 0, 130, 0.95); position: fixed;z-index: 7;
     border: 1px solid;
     border-radius: 4px;
     overflow-y: auto;

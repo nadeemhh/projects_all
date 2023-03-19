@@ -13,14 +13,14 @@ function showListOfTestPrice() {
     let html = `<div class="save-and-copy">
     <div class="copy-parent">
 	<input class="copy-price" type="number">
-<button>paste</button>
+<button>Paste</button>
 </div>
 <div><button class="Savebutton">Save</button></div>
 </div>
     <table class="price-list-table">
     <thead class="price-thead">
       <tr>
-      <th>Checkbox</th>
+      <th>#</th>
       <th  class="Tname">Test Name</th>
       <th>Price ₹</th>
       </tr>

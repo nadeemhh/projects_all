@@ -8,34 +8,73 @@
     <style>
 
         *{margin: 0;padding: 0;box-sizing: border-box;}
-.header{height: 200px;width:21cm;background-color: blanchedalmond;display: flex;flex-direction: column;align-items: center;gap: 5px;font-family: serif;}
-.lab-name-slogan{display: flex;flex-direction: column;align-items: center;}
-.lab-name-slogan p:first-child {font-size: 25px;margin-top: 10px;font-weight: 600;}
-.lab-name-slogan p:last-child {font-size:15px;}
 
-.lab-adress{font-size: 20px;}
-.lab-phone-number{font-size: 20px;display: flex;justify-content: center;gap: 10px;}
-.cash-memo{font-size: 25px;margin-top: 10px;border-bottom: 1px solid black;}
+        .add-test-form{width: 500px; padding: 10px; background-color: blueviolet;display: flex;flex-direction: column;gap: 20px;color: rgb(255, 255, 255);font-size: 17px;font-weight: 10;}
+    
+
+        #select-Department{padding: 5px;}
+        .add-test-form div:nth-child(1) {display: flex; width: 100%;justify-content: center;}
+        .add-test-form div:nth-child(3) {display: flex; gap: 10px;}
+.testdeatelparent{display: flex;gap: 10px;}
+.testdeatelparent>div{display: flex;flex-direction: column;justify-content: flex-start;gap: 10px;}
+.testdeatelparent>div>div{display: flex;flex-direction: column;justify-content: flex-start;}
+        .testdeatelparent>div>div>input{background: none;border: none;border-bottom: 2px solid rgb(255, 0, 0);outline: none;color: rgb(255, 217, 0);font-size: 17px;font-weight: 10;}
+        .test-Comment{width: 100%;}
+        .client-submit-new-test{width: 100%;display: flex;justify-content: center;}
+        .new-test-unit{width: 100px;}
     </style>
 </head>
 <body>
-    
-    <div class="header">
-<div class="lab-name-slogan"><p>F&Q Diagnostic</p><p>Commited To Accurate Error Free</p></div>
+    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sapiente omnis molestias tenetur vitae, officiis nemo facilis illo labore, quo expedita possimus? Reiciendis molestias aut voluptatibus numquam reprehenderit soluta voluptatum voluptate facere consequuntur sed eligendi voluptates iste error explicabo, quibusdam saepe praesentium magnam unde animi. Praesentium ad repellat repellendus reprehenderit impedit eos molestiae facere neque nisi dolorum ut dolorem illo, veniam enim aperiam sed consequatur provident, facilis deserunt error? Sapiente facilis minus aut necessitatibus soluta. Nulla nesciunt, doloremque obcaecati voluptas quam itaque. Impedit voluptatum aperiam nostrum non laudantium molestias, repellat ipsum consequatur commodi?</p>
+    <div class="add-test-form">
+        <div><h2>Add New Test</h2></div>
+        <div>
+            <select id="select-Department">
+                <option>select Department</option>
+            </select>
+          </div>
 
-<div class="lab-adress">Noida sector-35 Near Random Electronics</div>
-<div class="lab-phone-number">
-    <img width="25px" src="../client/client/svg images/phone-call-svgrepo-com.svg" alt=""> 88765245673 - 9967855543</div>
+          <div>
+           <p>New Page</p>
+          <input class="new-test-page" type="checkbox" checked>
+          </div>
 
-    <div class="cash-memo"><p>Cash Memo</p></div>
-    </div>
+          <div class="testdeatelparent">
+        <div class="testdeatel1"> <div>
+            <p>Test Name*</p>
+            <input class="new-test-name" type="text">
+          </div>
+          <div>
+              <p>Value*</p>
+              <input class="new-test-value" type="text">
+            </div>
+            <div>
+              <p>Unit*</p>
+              <input class="new-test-unit" type="text">
+            </div></div>
 
+        <div class="testdeatel2"> <div>
+            <p>Normal Range*</p>
+            <input class="new-test-NormalRange" type="text">
+          </div>
+          <div>
+            <p>Specimen*</p>
+            <input class="new-test-Specimen" type="text">
+          </div></div>
+        </div>
+          <div>
+            <p>Comment*</p>
+           <textarea id="test-Comment" cols="40" rows="10"></textarea>
+          </div>
+        <div class="client-submit-new-test"><button class="client-submit-button">Submit</button></div>
+              </div>
 
     <script>
+function updateValue(val) {
+    
+  document.getElementById('value').innerHTML = val;
+}
 
-fetch('http://localhost:3600/jsond')
-  .then(response => response.json())
-  .then(data => {console.log(data)})
     </script>
 </body>
 </html>

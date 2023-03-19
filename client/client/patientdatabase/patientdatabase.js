@@ -255,7 +255,7 @@ let totalamountfortest=0;
     })}</td>
     <td id="select-patient-status"  paidorunpaid=${dailypatientarray[i].patientDeatels.patientId}>${dailypatientarray[i].patientDeatels.paymentstatus}</td>
     <td id="select-patient-Discount">${dailypatientarray[i].patientDeatels.commission}%</td>
-    <td id="select-patient-Amount">${totalamountfortest-(Number(dailypatientarray[i].patientDeatels.commission)/100) *totalamountfortest}₹</td>
+    <td id="select-patient-Amount">${totalamountfortest-(Number(dailypatientarray[i].patientDeatels.commission)/100) *totalamountfortest.toFixed(2)}₹</td>
   </tr>`.replaceAll(',','');
   tbody.insertAdjacentHTML("beforeend", html);
 }
@@ -360,7 +360,7 @@ let totalamountfortest=0;
     })}</td>
     <td id="select-patient-status" paidorunpaid=${clientPatient[i].patientDeatels.patientId}>${clientPatient[i].patientDeatels.paymentstatus}</td>
     <td id="select-patient-Discount">${clientPatient[i].patientDeatels.commission}%</td>
-    <td id="select-patient-Amount">${totalamountfortest-(Number(clientPatient[i].patientDeatels.commission)/100) *totalamountfortest}₹</td>
+    <td id="select-patient-Amount">${totalamountfortest-(Number(clientPatient[i].patientDeatels.commission)/100) *totalamountfortest.toFixed(2)}₹</td>
   </tr>`.replaceAll(',','');
   tbody.insertAdjacentHTML("beforeend", html);
 }
