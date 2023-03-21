@@ -417,11 +417,15 @@ patientReportToSave.push({repo,createReport,patientDeatels})
 let user = {repo,createReport,patientDeatels,totalTestPerformed};
 console.log(user)
 
-set(`${patientDeatels.patientId}`, {patientDeatels,totalTestPerformed},store6)
+if(patientDeatels.Patientname!=''){
+  set(`${patientDeatels.patientId}`, {patientDeatels,totalTestPerformed},store6)
 .then(() => {
   console.log('saved patient Deatels');
 
 })
+
+}
+
 
 sessionStorage.setItem(patientDeatels.patientId, JSON.stringify(user));
 
@@ -443,12 +447,13 @@ if(newArray.length>0){
   user = {repo,createReport,patientDeatels,totalTestPerformed,newPageReport:newArray};
 console.log(user)
 
+if(patientDeatels.Patientname!=''){
 set(`${patientDeatels.patientId}`, {patientDeatels,totalTestPerformed},store6)
 .then(() => {
   console.log('saved patient Deatels');
 
 })
-
+}
 sessionStorage.setItem(patientDeatels.patientId, JSON.stringify(user));
 }
 

@@ -9,71 +9,44 @@
 
         *{margin: 0;padding: 0;box-sizing: border-box;}
 
-        .add-test-form{width: 500px; padding: 10px; background-color: blueviolet;display: flex;flex-direction: column;gap: 20px;color: rgb(255, 255, 255);font-size: 17px;font-weight: 10;}
-    
-
-        #select-Department{padding: 5px;}
-        .add-test-form div:nth-child(1) {display: flex; width: 100%;justify-content: center;}
-        .add-test-form div:nth-child(3) {display: flex; gap: 10px;}
-.testdeatelparent{display: flex;gap: 10px;}
-.testdeatelparent>div{display: flex;flex-direction: column;justify-content: flex-start;gap: 10px;}
-.testdeatelparent>div>div{display: flex;flex-direction: column;justify-content: flex-start;}
-        .testdeatelparent>div>div>input{background: none;border: none;border-bottom: 2px solid rgb(255, 0, 0);outline: none;color: rgb(255, 217, 0);font-size: 17px;font-weight: 10;}
-        .test-Comment{width: 100%;}
-        .client-submit-new-test{width: 100%;display: flex;justify-content: center;}
-        .new-test-unit{width: 100px;}
     </style>
 </head>
 <body>
-    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sapiente omnis molestias tenetur vitae, officiis nemo facilis illo labore, quo expedita possimus? Reiciendis molestias aut voluptatibus numquam reprehenderit soluta voluptatum voluptate facere consequuntur sed eligendi voluptates iste error explicabo, quibusdam saepe praesentium magnam unde animi. Praesentium ad repellat repellendus reprehenderit impedit eos molestiae facere neque nisi dolorum ut dolorem illo, veniam enim aperiam sed consequatur provident, facilis deserunt error? Sapiente facilis minus aut necessitatibus soluta. Nulla nesciunt, doloremque obcaecati voluptas quam itaque. Impedit voluptatum aperiam nostrum non laudantium molestias, repellat ipsum consequatur commodi?</p>
-    <div class="add-test-form">
-        <div><h2>Add New Test</h2></div>
-        <div>
-            <select id="select-Department">
-                <option>select Department</option>
-            </select>
-          </div>
+   
+  <input type="file" id="zipFileInput" />
 
-          <div>
-           <p>New Page</p>
-          <input class="new-test-page" type="checkbox" checked>
-          </div>
-
-          <div class="testdeatelparent">
-        <div class="testdeatel1"> <div>
-            <p>Test Name*</p>
-            <input class="new-test-name" type="text">
-          </div>
-          <div>
-              <p>Value*</p>
-              <input class="new-test-value" type="text">
-            </div>
-            <div>
-              <p>Unit*</p>
-              <input class="new-test-unit" type="text">
-            </div></div>
-
-        <div class="testdeatel2"> <div>
-            <p>Normal Range*</p>
-            <input class="new-test-NormalRange" type="text">
-          </div>
-          <div>
-            <p>Specimen*</p>
-            <input class="new-test-Specimen" type="text">
-          </div></div>
-        </div>
-          <div>
-            <p>Comment*</p>
-           <textarea id="test-Comment" cols="40" rows="10"></textarea>
-          </div>
-        <div class="client-submit-new-test"><button class="client-submit-button">Submit</button></div>
-              </div>
-
+  <script src="../client/client/zip.js"></script>
     <script>
-function updateValue(val) {
-    
-  document.getElementById('value').innerHTML = val;
+
+function handleZipFileSelect() {
+  const zipFile = document.getElementById("zipFileInput").files[0];
+  const reader = new FileReader();
+  reader.onload = function (event) {
+    const zipContent = event.target.result;
+    const zip = new JSZip();
+    zip.loadAsync(zipContent).then(function (zip) {
+      const json1Promise = zip.file("file1.json").async("string");
+      const json2Promise = zip.file("file2.json").async("string");
+      const json3Promise = zip.file("file3.json").async("string");
+      const json4Promise = zip.file("file4.json").async("string");
+      const json5Promise = zip.file("file5.json").async("string");
+      const json6Promise = zip.file("file6.json").async("string");
+      Promise.all([json1Promise, json2Promise, json3Promise, json4Promise, json5Promise, json6Promise]).then(function ([json1, json2, json3, json4, json5, json6]) {
+        const js1 = JSON.parse(json1);
+        const js2 = JSON.parse(json2);
+        const js3 = JSON.parse(json3);
+        const js4 = JSON.parse(json4);
+        const js5 = JSON.parse(json5);
+        const js6 = JSON.parse(json6);
+        
+        // Log the parsed JSON objects to the console
+        console.log(typeof js1);
+      });
+    });
+  };
+  reader.readAsArrayBuffer(zipFile);
 }
+document.getElementById("zipFileInput").addEventListener("change", handleZipFileSelect);
 
     </script>
 </body>

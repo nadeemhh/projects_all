@@ -120,7 +120,7 @@ function patientdatabase(clients) {
         let insertPatient=[];
         for (let i = 0; i < document.querySelectorAll(`#select-patient`).length; i++) {
         let checkbox=document.querySelectorAll(`#select-patient`)[i];
-          console.log(checkbox)
+          
 
           if(checkbox.checked){
 
@@ -138,7 +138,6 @@ function patientdatabase(clients) {
           
         }
       }
-      console.log(insertPatient)
 
       let discount=`${insertPatient[0].patientDeatels.commission}%`;
         /////////////////////////////////////////////////////////////////////
@@ -176,20 +175,22 @@ function patientdatabase(clients) {
       checkbox1.checked = true;
       value=`${document.querySelector('.discountbypersentage>input[type="text"]').value}%`;
       
-      checkbox1.addEventListener('change', function() {
-        if (this.checked) {
-          checkbox2.checked = false;
-        }
-      
+      document.querySelector('.discountbypersentage>input[type="text"]').addEventListener('input', function() {
+        
+        document.querySelector('.discountbyrupee>input[type="checkbox"]').checked = false;
+        document.querySelector('.discountbyrupee>input[type="text"]').value='';
+
+        document.querySelector('.discountbypersentage>input[type="checkbox"]').checked = true;
          value=`${document.querySelector('.discountbypersentage>input[type="text"]').value}%`;
          discount=value;
       });
       
-      checkbox2.addEventListener('change', function() {
-        if (this.checked) {
-          checkbox1.checked = false;
-        }
-      
+      document.querySelector('.discountbyrupee>input[type="text"]').addEventListener('input', function() {
+        
+        document.querySelector('.discountbypersentage>input[type="checkbox"]').checked = false;
+        document.querySelector('.discountbypersentage>input[type="text"]').value='';
+
+        document.querySelector('.discountbyrupee>input[type="checkbox"]').checked = true;
          value=`${document.querySelector('.discountbyrupee>input[type="text"]').value}₹`;
          discount=value;
       });
@@ -197,9 +198,9 @@ function patientdatabase(clients) {
       document.querySelector('.generate-receipt>button').addEventListener('click', function() {
         
         if (checkbox1.checked || checkbox2.checked) {
-        console.log(discount)
         sessionStorage.setItem('patientReceipt', JSON.stringify({discount,patients:insertPatient}));
         document.querySelector(".close-modalwindow").click()
+        document.querySelector(`#select-all-patient-table`).checked=false;
         window.open(`${originUrl}/client/client/receipt/receipt.html`, '_blank');
         }
       
