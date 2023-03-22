@@ -200,7 +200,8 @@ let availableTest2={departments:{
                 Partof:'Blood-Group-&-Rh',
                 department:'HAEMATOLOGY',
                 value:"'A'",
-                Specimen:'WB-EDTA'
+                Specimen:'WB-EDTA',
+                show:false
                 },{
                     testName:'Rh Typing *',
                     shortName:'',
@@ -209,7 +210,8 @@ let availableTest2={departments:{
                     Partof:'Blood-Group-&-Rh',
                     department:'HAEMATOLOGY',
                     value:'Positive',
-                    Specimen:'WB-EDTA'
+                    Specimen:'WB-EDTA',
+                    show:false
                     }],
     BIOCHEMISTRY:[{
         testName:'Bilirubin-Total',
@@ -654,7 +656,8 @@ let availableTest2={departments:{
                 department:'CLINICALPATHOLOGY',
                 value:'Pale Yellow',
                 Specimen:'Urine',
-                heading:'Physical Examination'
+                heading:'Physical Examination',
+                show:false
                 },{
                     testName:'Transparency',
                     shortName:'',
@@ -664,7 +667,8 @@ let availableTest2={departments:{
                     department:'CLINICALPATHOLOGY',
                     value:'Clear',
                     Specimen:'Urine',
-                    heading:'Physical Examination'
+                    heading:'Physical Examination',
+                    show:false
                     },{
                         testName:'pH',
                         shortName:'',
@@ -674,7 +678,8 @@ let availableTest2={departments:{
                         department:'CLINICALPATHOLOGY',
                         value:'6.5',
                         Specimen:'Urine',
-                        heading:'Chemical Examination'
+                        heading:'Chemical Examination',
+                        show:false
                         },{
                             testName:'Specific Gravity',
                             shortName:'',
@@ -684,7 +689,8 @@ let availableTest2={departments:{
                             department:'CLINICALPATHOLOGY',
                             value:'1.010',
                             Specimen:'Urine',
-                            heading:'Chemical Examination'
+                            heading:'Chemical Examination',
+                            show:false
                             }, {
                                 testName:'Urine Sugar',
                                 shortName:'',
@@ -694,7 +700,8 @@ let availableTest2={departments:{
                                 department:'CLINICALPATHOLOGY',
                                 value:'Not Detected',
                                 Specimen:'Urine',
-                                heading:'Chemical Examination'
+                                heading:'Chemical Examination',
+                                show:false
                                 },{
                  testName:'Urine Protein',
                  shortName:'',
@@ -704,7 +711,8 @@ let availableTest2={departments:{
                  department:'CLINICALPATHOLOGY',
                  value:'Not Detected',
                  Specimen:'Urine',
-                 heading:'Chemical Examination'
+                 heading:'Chemical Examination',
+                 show:false
                  },{
                      testName:'Urine Bilirubin',
                      shortName:'',
@@ -714,7 +722,8 @@ let availableTest2={departments:{
                      department:'CLINICALPATHOLOGY',
                      value:'Not Detected',
                      Specimen:'Urine',
-                     heading:'Chemical Examination'
+                     heading:'Chemical Examination',
+                     show:false
                      },{
                          testName:'Ketones',
                          shortName:'',
@@ -724,7 +733,8 @@ let availableTest2={departments:{
                          department:'CLINICALPATHOLOGY',
                          value:'Not Detected',
                          Specimen:'Urine',
-                         heading:'Chemical Examination'
+                         heading:'Chemical Examination',
+                         show:false
                          },{
                              testName:'Urobilinogen',
                              shortName:'',
@@ -734,7 +744,8 @@ let availableTest2={departments:{
                              department:'CLINICALPATHOLOGY',
                              value:'Normal',
                              Specimen:'Urine',
-                             heading:'Chemical Examination'
+                             heading:'Chemical Examination',
+                             show:false
                              },{
                                  testName:'Nitrite',
                                  shortName:'',
@@ -744,7 +755,8 @@ let availableTest2={departments:{
                                  department:'CLINICALPATHOLOGY',
                                  value:'Not Detected',
                                  Specimen:'Urine',
-                                 heading:'Chemical Examination'
+                                 heading:'Chemical Examination',
+                                 show:false
                                  },{
                   testName:'Pus Cells',
                   shortName:'',
@@ -754,7 +766,8 @@ let availableTest2={departments:{
                   department:'CLINICALPATHOLOGY',
                   value:'1-2',
                   Specimen:'Urine',
-                  heading:'Microscopy Examination'
+                  heading:'Microscopy Examination',
+                  show:false
                   },{
                       testName:'Epithelial Cells',
                       shortName:'',
@@ -764,7 +777,8 @@ let availableTest2={departments:{
                       department:'CLINICALPATHOLOGY',
                       value:'3-4',
                       Specimen:'Urine',
-                      heading:'Microscopy Examination'
+                      heading:'Microscopy Examination',
+                      show:false
                       }, {
                           testName:"RBC's",
                           shortName:'',
@@ -774,7 +788,8 @@ let availableTest2={departments:{
                           department:'CLINICALPATHOLOGY',
                           value:'Nil',
                           Specimen:'Urine',
-                          heading:'Microscopy Examination'
+                          heading:'Microscopy Examination',
+                          show:false
                           },{
                               testName:'Casts',
                               shortName:'',
@@ -784,7 +799,8 @@ let availableTest2={departments:{
                               department:'CLINICALPATHOLOGY',
                               value:'Nil',
                               Specimen:'Urine',
-                              heading:'Microscopy Examination'
+                              heading:'Microscopy Examination',
+                              show:false
                               },{
                testName:'Crystals',
                shortName:'',
@@ -794,7 +810,8 @@ let availableTest2={departments:{
                department:'CLINICALPATHOLOGY',
                value:'Nil',
                Specimen:'Urine',
-               heading:'Microscopy Examination'
+               heading:'Microscopy Examination',
+               show:false
                },{
                    testName:'Amorphous Sediments * ',
                    shortName:'',
@@ -804,7 +821,8 @@ let availableTest2={departments:{
                    department:'CLINICALPATHOLOGY',
                    value:'Nil',
                    Specimen:'Urine',
-                   heading:'Microscopy Examination'
+                   heading:'Microscopy Examination',
+                   show:false
                    },{
  testName:'Yeast Cells',
  shortName:'',
@@ -814,7 +832,8 @@ let availableTest2={departments:{
  department:'CLINICALPATHOLOGY',
  value:'Nil',
  Specimen:'Urine',
- heading:'Microscopy Examination'
+ heading:'Microscopy Examination',
+ show:false
  },{
      testName:'Bacteria',
      shortName:'',
@@ -824,7 +843,8 @@ let availableTest2={departments:{
      department:'CLINICALPATHOLOGY',
      value:'Not Seen',
      Specimen:'Urine',
-     heading:'Microscopy Examination'
+     heading:'Microscopy Examination',
+show:false
      },]
 
 }}

@@ -74,7 +74,7 @@ let totalReportCounter = ` <div class="Patientreportcount">
 <a target="_blank" href="https://web.whatsapp.com/">
 <img class='printreport' src="./svg images/whatsapp-svgrepo-com.svg" width="25px" alt="">
 </a>
-<img class='pointer hide-and-show' src="./svg images/hide-svgrepo-com.svg" width="25px" alt="">
+<img class='pointer hide-and-show' src="./svg images/hide-svgrepo-com (1).svg" width="25px" alt="">
 <button class="Savebuttonfornormalrange">Save</button>
 </div>
 
@@ -143,10 +143,10 @@ let ReportTemplate =`<div  style="height:29.7cm;width:21cm; margin-bottom: 15px;
 <p class="p-patient-details5 mp">Specimen</p>
 </div>
 <div class="patient-details1-2">
-<p style="z-index: 1;" contenteditable="true" class="pp-patient-details1 mp">${patientInfo.Patientname !== ''?patientInfo.Patientname:'dummyName'}</p>
-<p contenteditable="true" class="pp-patient-details2 mp"><span>${patientInfo.Patientage !== ''?patientInfo.Patientage:'55'} </span><span>YRS </span><span>${patientInfo.gender}</span></p>
-<p contenteditable="true" class="pp-patient-details3 mp">none</p>
-<p contenteditable="true" class="pp-patient-details5 mp">WB-EDTA</p>
+<p style="z-index: 1;" class="pp-patient-details1 mp">${patientInfo.Patientname !== ''?patientInfo.Patientname:'dummyName'}</p>
+<p class="pp-patient-details2 mp"><span>${patientInfo.Patientage !== ''?patientInfo.Patientage:'55'} </span><span>YRS </span><span>${patientInfo.gender}</span></p>
+<p class="pp-patient-details3 mp">none</p>
+<p class="pp-patient-details5 mp">WB-EDTA</p>
 </div>
 
 </div>
@@ -159,9 +159,9 @@ let ReportTemplate =`<div  style="height:29.7cm;width:21cm; margin-bottom: 15px;
 
 </div>
 <div class="patient-details2-2">
-<p contenteditable="true" class="pp-patient-details1 mp">${patientInfo.refby}</p>
-<p contenteditable="true" class="pp-patient-details1 mp">${patientInfo.patientId}</p>
-<p contenteditable="true" class="pp-patient-details2 mp">${patientInfo.registrationDate}</p>
+<p class="pp-patient-details1 mp">${patientInfo.refby}</p>
+<p class="pp-patient-details1 mp">${patientInfo.patientId}</p>
+<p class="pp-patient-details2 mp">${patientInfo.registrationDate}</p>
 
 </div>
 
@@ -291,6 +291,7 @@ function alignMaker(fclassname,sclassname) {
 function alltests() {
   
 for (let i = 0; i < choosetest.length; i++) {
+
   choosetest[i].addEventListener('click',function() {
   console.log(choosetest[i].textContent)
   console.log( choosetest[i].classList.contains('secleted'))
@@ -650,7 +651,7 @@ function testAddToTemplate(arr,className,ii,deparmentPrintValue,testNameForFew,g
 console.log(deparmentPrintValue)
 if(deparmentPrintValue == 0){
 let divdep = document.querySelector(`.all-test-container${className}`);  
-let deparment =`<div class="deparment"><p>${arr[ii].department}</p></div>`;
+let deparment =`<div class="deparment"><p contenteditable="true">${arr[ii].department}</p></div>`;
 divdep.insertAdjacentHTML('beforeend', deparment);}
 ////////////////
 
@@ -661,7 +662,7 @@ if(testNameForFew !== undefined){
   if(testnameaddonlyonetime==0){
     
 let divtestname = document.querySelector(`.all-test-container${className}`);  
-let testname =`<div class="testname22"><p>${testNameForFew}</p></div>`;
+let testname =`<div class="testname22"><p contenteditable="true">${testNameForFew}</p></div>`;
 divtestname.insertAdjacentHTML('beforeend', testname);
 testnameaddonlyonetime=1;
 }
@@ -671,7 +672,7 @@ if(arr[ii].heading!=undefined && anotherHeading.includes(arr[ii].heading)==false
   let testdiv = document.querySelector(`.all-test-container${className}`);  
   console.log(arr[ii],arr[ii].heading)
 let html =`<div class="another-heading">
-<p>${arr[ii].heading}</p>
+<p contenteditable="true">${arr[ii].heading}</p>
 </div>`
   testdiv.insertAdjacentHTML('beforeend', html);
   anotherHeading.push(arr[ii].heading)
@@ -1319,19 +1320,24 @@ const testToPrint2 = [...testToPrint].sort((a, b) => {
 });
 
 
+console.log(testToPrint2)
 
 for(let ii = 0; ii < testToPrint2.length; ii++){
 
-
+  if (testToPrint2[ii].show === false) {
+    testToPrint2.splice(ii, 1);
+    ii--; 
+    continue;
+  }
   let div = document.querySelector(`.available-tests${i}`);
 
-  let html = ` <button class="but" departments=${testToPrint2[ii].department}>${testToPrint2[ii].testName}</button>`;
+  let html = `<button class="but" departments=${testToPrint2[ii].department}>${testToPrint2[ii].testName}</button>`;
 
   div.insertAdjacentHTML("beforeend", html);
-
+  
   choosetest.push(document.querySelector(`.available-tests${i}`).children[ii+Partof.length])
 
-}
+} 
 
 
 }
