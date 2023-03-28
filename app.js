@@ -20,9 +20,8 @@ const axios = require('axios');
 app.get('/apdata', (req, res) => {
 async function re() {
 const response = await axios.get(`https://api.nasdaq.com/api/analyst/AAPL/peg-ratio`);
-  const response2 = await axios.get(`https://api.nasdaq.com/api/quote/aap/summary?assetclass=stocks`);
-  let obj={response:response.data,response2:response2.data};
-res.send(obj)
+  
+res.send(response.data)
 }
 
 re()
