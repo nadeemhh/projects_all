@@ -8,6 +8,14 @@ let store7 = createStore('headertextdb', 'headertext');
 
 
 
+async function prisit() {
+
+  if (navigator.storage && navigator.storage.persist) {
+    const isPersisted = await navigator.storage.persisted();
+    console.log(`Persisted storage: ${isPersisted}`);
+  }
+}
+prisit()
 let originUrl=location.origin;
 
 console.log('hello')
@@ -808,42 +816,10 @@ if(e.target==target){
       document.querySelector(`.Patienttest${classPatienttest}`).children[1].children[0].textContent=text;
 
      
-///////////save report in database
+///////////save report in database in future
 console.log(patientReportToSave)
 let patientReportDataToSave = JSON.parse(sessionStorage[patientRefferance]);
-console.log(patientReportDataToSave)
 
-
-
-console.log(tn)
-
-for (let i = 0; i < 1; i++) {
-let found=0;
-
-  for (let ii = 0; ii < patientReportDataToSave.createReport.length; ii++){
-
-    if(patientReportDataToSave.createReport[ii].testName==tn){
-      console.log('it is')
-      patientReportDataToSave.createReport[ii].value=text;
-      found=1;
-      break;
-    }
-  } 
-
-  if(found==0){
-  for (let ii = 0; ii < patientReportDataToSave.repo.sepratePageReport.length; ii++){
-
-    if(patientReportDataToSave.repo.sepratePageReport[ii].testName==tn){
-      console.log('it is')
-      patientReportDataToSave.repo.sepratePageReport[ii].value=text;
-      break;
-    }
-  }
-}
-// console.log(patientReportToSave)
-
-}
-sessionStorage.setItem(patientRefferance, JSON.stringify(patientReportDataToSave));
 ////////////////////////////////////
 
 
@@ -970,12 +946,21 @@ console.log(text)
     let text=document.querySelector(`.resultvalue${classresultvalue}`).children[1].value;
     document.querySelector(`.resultvalue${classresultvalue}`).children[0].textContent=text;
 
-    
-    let nextclassfirstcher=document.querySelector(`.resultvalue${classresultvalue}`).children[1].classList[0][0];
+    console.log(document.querySelector(`.resultvalue${classresultvalue}`).children[1])
 
-    let nextclasssecondcher=parseFloat(document.querySelector(`.resultvalue${classresultvalue}`).children[1].classList[0].substring(1))+1;
+    let nextclasssecondcher;
+
+    let nextclassfirstcher=document.querySelector(`.resultvalue${classresultvalue}`).children[1].classList[0][0];
+    
+    if(document.querySelector(`.resultvalue${classresultvalue}`).children[1].hasAttribute('jump')==false){
+     nextclasssecondcher=parseFloat(document.querySelector(`.resultvalue${classresultvalue}`).children[1].classList[0].substring(1))+1;
+    }else{
+      let jump =Number(document.querySelector(`.resultvalue${classresultvalue}`).children[1].getAttribute('jump'))
+      nextclasssecondcher=parseFloat(document.querySelector(`.resultvalue${classresultvalue}`).children[1].classList[0].substring(1))+jump;
+    }
 
     let nextclass=nextclassfirstcher+nextclasssecondcher
+  
     
     
     console.log(nextclassfirstcher,'  ',nextclasssecondcher,'  ',nextclass,'  ')
@@ -990,42 +975,10 @@ try{
     }
    
 
-///////////save report in database
+///////////save report in database in future
 console.log(patientReportToSave)
 let patientReportDataToSave = JSON.parse(sessionStorage[patientRefferance]);
-console.log(patientReportDataToSave)
 
-
-
-console.log(tn)
-
-for (let i = 0; i < 1; i++) {
-let found=0;
-
-  for (let ii = 0; ii < patientReportDataToSave.createReport.length; ii++){
-
-    if(patientReportDataToSave.createReport[ii].testName==tn){
-      console.log('it is')
-      patientReportDataToSave.createReport[ii].value=text;
-      found=1;
-      break;
-    }
-  } 
-
-  if(found==0){
-  for (let ii = 0; ii < patientReportDataToSave.repo.sepratePageReport.length; ii++){
-
-    if(patientReportDataToSave.repo.sepratePageReport[ii].testName==tn){
-      console.log('it is')
-      patientReportDataToSave.repo.sepratePageReport[ii].value=text;
-      break;
-    }
-  }
-}
-// console.log(patientReportToSave)
-
-}
-sessionStorage.setItem(patientRefferance, JSON.stringify(patientReportDataToSave));
 ////////////////////////////////////
 
 
@@ -1692,3 +1645,4 @@ function saveNormalRange() {
 })
   console.log('inside')
 }
+

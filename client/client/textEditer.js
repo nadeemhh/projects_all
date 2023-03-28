@@ -8,7 +8,7 @@ let html = `<div class="basic-test-editar">
 </div>
 <div class="bold-and-others">
   <img bold="900" width="20px" src="./svg images/bold-strong-bold-format-editor-tool-toolbar-svgrepo-com.svg" alt="">
-  <img class='pointer bgyellow hide-tests' src="./svg images/hide-svgrepo-com (1).svg" width="25px" alt="">
+  <img class='pointer bgyellow hide-tests' src="./svg images/trash-svgrepo-com.svg" width="25px" alt="">
 </div>
 <div bold="text"><p>colors :-</p></div>
 <div class="colors"><div class="addcolor" colorName="red"></div><div class="addcolor" colorName="black"></div></div>
@@ -20,8 +20,37 @@ document.querySelector(`.basic-test-editar`).style.transition='0.2s';
 document.querySelector(`.basic-test-editar`).style.transform= 'scale(1)';
 
 document.querySelector(`.hide-tests`).addEventListener('click',function () {
-   console.log(element.parentElement.parentElement)
-   element.parentElement.parentElement.classList.toggle("hide-display");
+
+try{
+  if(element.parentElement.parentElement.previousElementSibling.classList[0]=='testname22'){
+    element.parentElement.parentElement.remove()
+    document.querySelector(`.basic-test-editar`).remove()
+  }
+  else if(element.parentElement.parentElement.previousElementSibling.classList[0]=='another-heading'){
+  
+    let jump= Number(element.parentElement.parentElement.nextElementSibling.children[1].children[1].classList[0].substring(1))-Number(element.parentElement.parentElement.previousElementSibling.previousElementSibling.children[1].children[1].classList[0].substring(1))
+
+    element.parentElement.parentElement.previousElementSibling.previousElementSibling.children[1].children[1].setAttribute('jump',`${jump}`)
+    element.parentElement.parentElement.remove()
+    document.querySelector(`.basic-test-editar`).remove()
+ 
+  }
+  else if(element.parentElement.parentElement.nextElementSibling.classList[0]=='another-heading'){
+    let jump= Number(element.parentElement.parentElement.nextElementSibling.nextElementSibling.children[1].children[1].classList[0].substring(1))-Number(element.parentElement.parentElement.previousElementSibling.children[1].children[1].classList[0].substring(1))
+
+    element.parentElement.parentElement.previousElementSibling.children[1].children[1].setAttribute('jump',`${jump}`)
+    element.parentElement.parentElement.remove()
+    document.querySelector(`.basic-test-editar`).remove()
+  }
+  else{ let jump= Number(element.parentElement.parentElement.nextElementSibling.children[1].children[1].classList[0].substring(1))-Number(element.parentElement.parentElement.previousElementSibling.children[1].children[1].classList[0].substring(1))
+
+    element.parentElement.parentElement.previousElementSibling.children[1].children[1].setAttribute('jump',`${jump}`)
+   element.parentElement.parentElement.remove()
+   document.querySelector(`.basic-test-editar`).remove()}
+ 
+  }catch(err){element.parentElement.parentElement.remove()
+    document.querySelector(`.basic-test-editar`).remove()}
+
 })
 
 document.querySelector(`.close-image-container>img`).addEventListener('click',function () {

@@ -6,45 +6,35 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
 	<style>
-*{margin: 0;padding: 0;box-sizing: border-box;}
-body{height: 100vh; display: flex;justify-content: center;align-items: center;}
-.reconfirm{height: 100px;width: 250px;background-color: blueviolet;display: flex;flex-direction: column;justify-content: center;gap: 20px;box-shadow: 0 1px 8px 0 black;border-radius: 2px;}
-.reconfirm>div{display: flex;justify-content: center;gap: 30px;color: rgb(255, 255, 255);font-size: 18px;}
-.reconfirm>div>button{padding: 3px 10px 3px 10px;cursor: pointer;border: none;border-radius: 2px;}
-.reconfirm>div>button:hover{background-color: rgb(9, 199, 9);}
+body{display: flex;justify-content: center;}
+.dipa{position: relative;width: 500px;background-color: aqua;}
+.dipa>div{width: 200px;height: 200px;background-color: blueviolet;margin-bottom: 10px;}
+
+.d2{position: absolute;}
 	</style>
 </head>
 <body>
-
-<div class="reconfirm">
-	<div>
-<p>are you sure you want to delete?</p>
+	
+<div class="dipa">
+<div class="d1">d1</div>
+<div class="d2">d2</div>
+<div class="d3">d3</div>
+<div class="d4">d4</div>
 </div>
-<div>
-	<button class="terminate-program">No</button>
-	<button class="execute-program">Yes</button>
-</div>
-</div>
-
 
 	<script>
-// 		function generateRandomString() {
-//   let alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-//   let result = "";
-//   for (let i = 0; i < 8; i++) {
-//     result += alphabet.charAt(Math.floor(Math.random() * alphabet.length));
-//   }
-//   return result;
-// }
-// console.log( generateRandomString())
-let obj = {name: 'john'};
-
-console.log(navigator)
 
 
 
+  
+fetch('http://localhost:3600/apdata')
+  .then(response => response.json())
+  .then(data => {
+console.log(data)
 
+  })
 
+  
 	</script>
 </body>
 </html>

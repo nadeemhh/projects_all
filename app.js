@@ -13,7 +13,21 @@ const publicDirectoryPath = path.join(__dirname, './client')
 app.use(express.static(publicDirectoryPath))
 const port = process.env.PORT || 3600
 
+const jsdom = require("jsdom");
+const { JSDOM } = jsdom;
+const axios = require('axios');
 
+app.get('/apdata', (req, res) => {
+async function re() {
+const response = await axios.get(`https://api.nasdaq.com/api/analyst/AAPL/peg-ratio`);
+  const response2 = await axios.get(`https://api.nasdaq.com/api/quote/aap/summary?assetclass=stocks`);
+  let obj={response:response.data,response2:response2.data};
+res.send(obj)
+}
+
+re()
+
+})
 
 app.get('/jsond', (req, res) => {
   const jdata = fs.readFileSync('file2.json', 'utf-8');
