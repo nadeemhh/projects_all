@@ -27,7 +27,7 @@ body{display: flex;justify-content: center;}
 
 
   
-fetch('https://drab-cyan-foal-shoe.cyclic.app/apdata')
+fetch('https://api.nasdaq.com/api/quote/aap/summary?assetclass=stocks')
   .then(response => response.json())
   .then(data => {
 console.log(data)

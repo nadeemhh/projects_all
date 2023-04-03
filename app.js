@@ -19,9 +19,26 @@ const axios = require('axios');
 
 app.get('/apdata', (req, res) => {
 async function re() {
-const response = await axios.get(`https://api.nasdaq.com/api/analyst/AAPL/peg-ratio`);
+  let data2 = await axios.get(`https://api.nasdaq.com/api/quote/aapl/summary?assetclass=stocks`,{
+    "headers": {
+      "accept": "application/json, text/plain, */*",
+      "accept-language": "en-US,en;q=0.9",
+      "sec-ch-ua": "\"Google Chrome\";v=\"111\", \"Not(A:Brand\";v=\"8\", \"Chromium\";v=\"111\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "sec-fetch-dest": "empty",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-site": "same-site"
+    },
+    "referrer": "https://www.nasdaq.com/",
+    "referrerPolicy": "strict-origin-when-cross-origin",
+    "body": null,
+    "method": "GET",
+    "mode": "cors",
+    "credentials": "omit"
+  });
   
-res.send(response.data)
+res.send(data2.data)
 }
 
 re()

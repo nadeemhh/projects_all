@@ -1095,6 +1095,7 @@ function checkNormalRange(value,normalRangeForTest) {
 
 
 document.querySelector(".add-patient-container").addEventListener('click',function () {
+  if(document.querySelector(`#RefByList`).children.length>0){
 document.querySelector(".form").style.display='flex';
 document.querySelector(".makereport").style.display='block';
 document.querySelector(".add-patient-container").style.display='none';
@@ -1105,7 +1106,8 @@ document.querySelector(".date").value=sampleCollectionDate;
 
 let alphabetId=alphabet[randomNumBetween(0,25)];
 document.querySelector(".patientID").value=`${alphabetId}${randomNumBetween(1000,10000)}${randomNumBetween(1000,10000)}`;
-
+}
+else{alert('add client')}
 })
 
 

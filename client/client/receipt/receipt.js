@@ -1,5 +1,9 @@
 let store7 = createStore('headertextdb', 'headertext');
 
+function randomNumBetween(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
 function printReceipt(data) {
   let checkIvalue=0;
     let receiptData = JSON.parse(sessionStorage.patientReceipt);
@@ -138,7 +142,10 @@ document.querySelector(`#table-Total+td`).textContent=`${addOn-Number(discount).
 
 
   document.querySelector(`.printreport`).addEventListener('click',function () {
- print()
+    document.title=`Receipt-${randomNumBetween(1, 1000)}${randomNumBetween(1, 1000)}`;
+window.print()
+document.title='Receipt';
+
       })
 
 
