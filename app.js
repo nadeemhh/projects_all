@@ -2,7 +2,6 @@ const express = require('express')
 const path = require('path')
 const xlsx = require('xlsx');
 const  fs = require('fs');
-const net = require('net');
 const archiver = require('archiver');
 const app = express()
 app.use(express.json())
@@ -18,13 +17,7 @@ const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
 const axios = require('axios');
 
-app.get('/apdata', (req, res) => {
-  const ip = req.ip;
-  
-res.send(ip)
 
-
-})
 
 app.get('/jsond', (req, res) => {
   const jdata = fs.readFileSync('file2.json', 'utf-8');
