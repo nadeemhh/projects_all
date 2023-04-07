@@ -14,25 +14,31 @@ body{display: flex;justify-content: center;}
 	</style>
 </head>
 <body>
-	
-<div class="dipa">
-<div class="d1">d1</div>
-<div class="d2">d2</div>
-<div class="d3">d3</div>
-<div class="d4">d4</div>
-</div>
+
+	<iframe id="my-iframe" src="https://api.nasdaq.com/api/quote/aap/summary?assetclass=stocks"   title="description"></iframe>
+
 
 	<script>
+var iframe = document.getElementById('my-iframe');
+iframe.addEventListener('load', function() {
+	var iframeWindow = iframe.contentWindow;
+    var preElements = iframeWindow.document.getElementsByTagName('pre');
+    for (var i = 0; i < preElements.length; i++) {
+      var preElement = preElements[i];
+      // Do something with the preElement
+      console.log(preElement.textContent);
+    }
+  });
 
 
 
-  
-fetch('https://api.nasdaq.com/api/quote/aap/summary?assetclass=stocks')
-  .then(response => response.json())
-  .then(data => {
-console.log(data)
 
-  })
+// fetch('https://api.nasdaq.com/api/quote/aap/summary?assetclass=stocks')
+//   .then(response => response.json())
+//   .then(data => {
+// console.log(data)
+
+//   })
 
   
 	</script>
