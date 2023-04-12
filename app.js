@@ -18,7 +18,6 @@ const { JSDOM } = jsdom;
 const axios = require('axios');
 
 
-
 app.get("/etfdata", async (req, res) => {
   console.log(req.query.etfName);
 
@@ -48,7 +47,18 @@ app.get("/etfdata", async (req, res) => {
 
  const dom = new JSDOM(data1.data);
 
- let lastPrice = dom.window.document.querySelectorAll('[data-field="regularMarketPrice"]')[6].textContent.replace(",", "");
+ let lastPrice = undefined;
+
+ try{
+   lastPrice=dom.window.document.querySelector('[data-field="preMarketPrice"]').textContent.replace(',','');
+   }catch(err){
+    
+    try{
+    lastPrice=dom.window.document.querySelector('[data-field="postMarketPrice"]').textContent.replace(',','');
+    }catch(error){
+     lastPrice=dom.window.document.querySelectorAll('[data-field="regularMarketPrice"]')[6].textContent.replace(',','');
+    }
+   }
 
  let yield = dom.window.document.querySelector('[data-test="TD_YIELD-value"]').textContent;
 
@@ -100,7 +110,18 @@ app.get("/pennystocks", async (req, res) => {
 
  const dom = new JSDOM(data1.data);
 
- let lastPrice = dom.window.document.querySelectorAll('[data-field="regularMarketPrice"]')[6].textContent.replace(",", "");
+ let lastPrice = undefined;
+
+ try{
+   lastPrice=dom.window.document.querySelector('[data-field="preMarketPrice"]').textContent.replace(',','');
+   }catch(err){
+    
+    try{
+    lastPrice=dom.window.document.querySelector('[data-field="postMarketPrice"]').textContent.replace(',','');
+    }catch(error){
+     lastPrice=dom.window.document.querySelectorAll('[data-field="regularMarketPrice"]')[6].textContent.replace(',','');
+    }
+   }
 
  let pe=dom.window.document.querySelectorAll('[data-test="PE_RATIO-value"]')[0].textContent;
 
@@ -181,6 +202,83 @@ res.send(JSON.stringify({lastPrice,pe,eps,exdividend,vol,avgvol,pegratio,pennySt
   );
 }
 
+})
+
+
+app.get("/otherdataapi", async (req, res) => {
+
+try{
+  let otherdata = [];
+  let data3 = await axios.get(
+    `https://finance.yahoo.com/quote/${req.query.stockName}/key-statistics?p=${req.query.stockName}`,{
+      "headers": {
+        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+        "accept-language": "en-US,en;q=0.9",
+        "cache-control": "max-age=0",
+        "sec-ch-ua": "\"Google Chrome\";v=\"111\", \"Not(A:Brand\";v=\"8\", \"Chromium\";v=\"111\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-ch-ua-platform": "\"Windows\"",
+        "sec-fetch-dest": "document",
+        "sec-fetch-mode": "navigate",
+        "sec-fetch-site": "same-origin",
+        "sec-fetch-user": "?1",
+        "upgrade-insecure-requests": "1",
+        "user-agent": `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36`
+      },
+      "referrerPolicy": "no-referrer-when-downgrade",
+      "body": null,
+      "method": "GET",
+      "mode": "cors",
+      "credentials": "include"
+    }
+  );
+
+  const dom = new JSDOM(data3.data);
+
+  let lastPrice = undefined;
+
+    try{
+      lastPrice=dom.window.document.querySelector('[data-field="preMarketPrice"]').textContent.replace(',','');
+      }catch(err){
+       
+       try{
+       lastPrice=dom.window.document.querySelector('[data-field="postMarketPrice"]').textContent.replace(',','');
+       }catch(error){
+        lastPrice=dom.window.document.querySelectorAll('[data-field="regularMarketPrice"]')[6].textContent.replace(',','');
+       }
+      }
+
+
+  otherdata.push(
+    dom.window.document.querySelectorAll(".BdB")[17].children[1].textContent
+  ); // Float
+
+  otherdata.push(
+    dom.window.document.querySelectorAll(".BdB")[18].children[1].textContent
+  ); // Held by Insiders
+
+  otherdata.push(
+    dom.window.document.querySelectorAll(".BdB")[19].children[1].textContent
+  ); // Held by Institutions
+
+  otherdata.push(
+    dom.window.document.querySelectorAll(".BdB")[45].children[1].textContent
+  ); // Total Debt (mrq)
+
+  otherdata.push(
+    dom.window.document.querySelectorAll(".BdY")[8].children[1].textContent
+  ); //  Total Cash (mrq)
+
+  otherdata.push(
+    dom.window.document.querySelectorAll(".BdB")[41].children[1].textContent
+  ); //Net Income Avi to Common (ttm)
+
+  otherdata.push(
+    dom.window.document.querySelectorAll(".BdB")[47].children[1].textContent
+  ); // Current Ratio (mrq)
+
+  res.send(JSON.stringify({otherdata,lastprice:lastPrice}))
+}catch(error){console.log(error)}
 })
 
 
